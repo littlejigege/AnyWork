@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:background="@drawable/bg">
+
+    <ImageView
+        android:id="@+id/icon"
+        style="@style/AnyWork.Theme.Icon.Medium"
+        android:layout_marginTop="@dimen/spacing_huge"
+        android:layout_gravity="center"
+        android:src="@mipmap/icon"/>
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/AnyWork.Theme.Text.Body"
+        android:layout_marginTop="@dimen/spacing_big"
+        android:text="@string/login"
+        android:textSize="@dimen/size_text" />
+
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/email"
+        style="@style/AnyWork.Theme.EditText.Body"
+        android:text="abc@qq.com"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/password"
+            style="@style/AnyWork.Theme.EditText.Body"
+            android:text="111111"
+            android:layout_weight="10"
+            android:hint="@string/password"
+            android:inputType="textPassword"/>
+
+        <ImageView
+            android:id="@+id/eye"
+            style="@style/AnyWork.Theme.Icon.Small"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:src="@drawable/eye"/>
+
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/login"
+        style="@style/AnyWork.Theme.Button"
+        android:layout_marginTop="@dimen/spacing_big"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        android:background="@drawable/bg_btn_rectangle"/>
+
+</LinearLayout>

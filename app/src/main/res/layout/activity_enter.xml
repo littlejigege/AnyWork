@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".floginandsign.EnterActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/register"
+        style="@style/AnyWork.Theme.Icon.Medium"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="@dimen/spacing_huge"
+        android:elevation="@dimen/elevation_fab"
+        android:src="@drawable/ic_add" />
+
+</FrameLayout>
