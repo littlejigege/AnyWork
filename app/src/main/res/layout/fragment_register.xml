@@ -66,7 +66,7 @@
         android:id="@+id/register"
         style="@style/AnyWork.Theme.Button"
         android:layout_marginTop="@dimen/spacing_big"
-        android:background="@drawable/bg_btn_rectangle"
+        android:background="@drawable/bg_btn_yellow"
         android:text="@string/create_account" />
 
 </LinearLayout>

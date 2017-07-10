@@ -2,20 +2,42 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_dark"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".floginandsign.EnterActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <ImageView
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="120dp"
+        android:background="@color/colorAccent"/>
+
+    <TextView
         android:id="@+id/register"
-        style="@style/AnyWork.Theme.Icon.Medium"
-        android:layout_gravity="end|bottom"
-        android:layout_marginBottom="@dimen/spacing_huge"
-        android:elevation="@dimen/elevation_fab"
-        android:src="@drawable/ic_add" />
+        android:layout_marginTop="240dp"
+        android:text="@string/create_account"
+        style="@style/AnyWork.Theme.TextView1"
+        android:background="@drawable/bg_btn_yellow"/>
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_marginTop="330dp"
+        android:text="@string/login"
+        style="@style/AnyWork.Theme.TextView1"
+        android:background="@drawable/bg_btn_yellow" />
+
+    <TextView
+        android:id="@+id/others"
+        android:layout_marginTop="420dp"
+        android:text="@string/login_others"
+        style="@style/AnyWork.Theme.TextView1"
+        android:background="@drawable/bg_btn_green"/>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"/>
 
 </FrameLayout>

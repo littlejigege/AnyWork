@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#414143</color>
+    <color name="colorPrimaryDark">#262627</color>
+    <color name="colorAccent">#fea733</color>
 
     <color name="touch_effect">#9ccc</color>
 
-    <color name="AnyWork_primary">#039BE5</color>
-    <color name="AnyWork_primary_dark">#0277BD</color>
+    <color name="AnyWork_primary">#414143</color>
+    <color name="AnyWork_primary_dark">#262627</color>
     <color name="AnyWork_blank">#424242</color>
-    <color name="AnyWork_accent">#3F51B5</color>
+    <color name="AnyWork_light">@android:color/white</color>
+    <color name="AnyWork_accent">#fea733</color>
 
     <color name="text_light">@android:color/white</color>
     <color name="text_dark">#616161</color>
 
     <color name="sample_red">#ff4444</color>
     <color name="sample_blue">#33b5e5</color>
-    <color name="sample_green">#669900</color>
-    <color name="sample_yellow">#ff8800</color>
+    <color name="sample_green">#7aca86</color>
+    <color name="sample_yellow">#fea733</color>
 
+    <color name="background_dark">#262627</color>
 
     <!-- theme colors -->
     <color name="theme_blue_background">#84ffff</color>

@@ -1,22 +1,23 @@
 package com.qgstudio.anywork.floginandsign;
 
-import android.animation.Animator;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
+import android.widget.FrameLayout;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.floginandsign.login.LoginFragment;
 import com.qgstudio.anywork.floginandsign.register.RegisterFragment;
+import com.qgstudio.anywork.utils.ActivityUtil;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,40 +30,51 @@ import butterknife.OnClick;
 
 public class EnterActivity extends AppCompatActivity {
 
-    public static final int ANIMATE_OUT = 0;
-
-    public static final int ANIMATE_IN = 1;
-
-    @BindView(R.id.register) ImageView register;
+    @BindView(R.id.container) FrameLayout container;
 
     @OnClick(R.id.register)
-    public void startRegister() {
-        animateOutandIn(register, ANIMATE_OUT);
-        addNextFragment();
+    public void intoRegister() {
+        container.setVisibility(View.VISIBLE);
+        // 根据 tag 从 FragmentManager 中将 fragment 取出
+        RegisterFragment registerFragment =
+                (RegisterFragment) getSupportFragmentManager().findFragmentByTag(RegisterFragment.ARGUMENT_REGISTER_ID);
+        if (registerFragment == null) {
+            // 如果当前没有该 fragment ，创建该 fragment 并通过 FragmentManager 进行管理
+            registerFragment = RegisterFragment.newInstance();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                setTransition(registerFragment);
+            }
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), registerFragment,
+                                            R.id.container, RegisterFragment.ARGUMENT_REGISTER_ID);
+        }
     }
 
+    @OnClick(R.id.login)
+    public void intoLogin() {
+        container.setVisibility(View.VISIBLE);
+        LoginFragment loginFragment =
+                (LoginFragment) getSupportFragmentManager().findFragmentByTag(LoginFragment.ARGUMENT_LOGIN_ID);
+        if (loginFragment == null) {
+            loginFragment = LoginFragment.newInstance();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                setTransition(loginFragment);
+            }
+            ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), loginFragment,
+                                            R.id.container, LoginFragment.ARGUMENT_LOGIN_ID);
+        }
+    }
+
+    @OnClick(R.id.others)
+    public void intoOthers() {
+        ToastUtil.showToast("暂未开放游客模式。");
+        // TODO:通过游客模式进入 2017/7/10
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
         ButterKnife.bind(this);
-
-        // 添加 Fragment
-        LoginFragment loginFragment = (LoginFragment) getSupportFragmentManager().findFragmentByTag(LoginFragment.ARGUMENT_LOGIN_ID);
-        if (loginFragment == null) {
-            loginFragment = LoginFragment.newInstance();
-            //将新建 Fragment 加入到布局中
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.fragment, loginFragment, LoginFragment.ARGUMENT_LOGIN_ID)
-                    .commit();
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -72,92 +84,18 @@ public class EnterActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        animateOutandIn(register, ANIMATE_IN);
         super.onBackPressed();
     }
 
-    //  view 的隐藏和显示动画
-    private void animateOutandIn(final View view, int tag) {
-        ViewPropertyAnimator animator = view.animate()
-                    .setStartDelay(500)
-                    .setInterpolator(AnimationUtils.loadInterpolator(this, android.R.interpolator.linear_out_slow_in));
-        if (tag == ANIMATE_IN) {
-            animator.alpha(1)
-                    .scaleX(1.0f)
-                    .scaleY(1.0f)
-                    .setListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-                    view.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-
-        } else {
-            animator.alpha(0)
-                    .scaleX(0f)
-                    .scaleY(0f)
-                    .setListener(new Animator.AnimatorListener() {
-                @Override
-                public void onAnimationStart(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animator animation) {
-
-                }
-
-                @Override
-                public void onAnimationCancel(Animator animation) {
-                    view.setVisibility(View.INVISIBLE);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animator animation) {
-
-                }
-            });
-        }
-    }
-
-    private void addNextFragment() {
-
-        //切换到注册的 Fragment 中
-        RegisterFragment registerFragment =
-                (RegisterFragment) getSupportFragmentManager().findFragmentByTag(RegisterFragment.ARGUMENT_REGISTER_ID);
-        if (registerFragment == null) {
-            registerFragment = RegisterFragment.newInstance();
-            setTransition(registerFragment);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.fragment, registerFragment, RegisterFragment.ARGUMENT_REGISTER_ID)
-                    .addToBackStack(RegisterFragment.ARGUMENT_REGISTER_ID)
-                    .commit();
-        }
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void setTransition(Fragment fragment) {
-        Slide slideTransition = new Slide(Gravity.RIGHT);
+        Slide slideTransition = new Slide(Gravity.END);
         slideTransition.setDuration(300);
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(300);
 
+        // 为 fragment 设置进出场的动画
         fragment.setEnterTransition(slideTransition);
         fragment.setAllowEnterTransitionOverlap(true);
         fragment.setAllowReturnTransitionOverlap(true);

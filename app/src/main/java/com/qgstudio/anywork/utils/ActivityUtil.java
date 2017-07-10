@@ -11,10 +11,11 @@ import android.support.v4.app.FragmentTransaction;
  */
 
 public class ActivityUtil {
-    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager,
-                                             @NonNull Fragment fragment, int frameId) {
+    public static void addFragmentToActivity(@NonNull FragmentManager fragmentManager, @NonNull Fragment fragment,
+                                             int frameId, String fragmentTag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId, fragment);
-        transaction.commit();
+        transaction.replace(frameId, fragment, fragmentTag)
+                .addToBackStack(fragmentTag)
+                .commit();
     }
 }

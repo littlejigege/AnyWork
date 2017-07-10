@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">在线掌上学习平台</string>
-    <string name="login">登录</string>
+    <string name="login">登录帐号</string>
     <string name="email">邮箱</string>
     <string name="password">密码</string>
     <string name="forget_password">forget  Password?</string>
     <string name="register">注册</string>
     <string name="name">名字</string>
     <string name="phone">电话</string>
-    <string name="create_account">创建帐号</string>
+    <string name="create_account">注册帐号</string>
     <string name="info">个人信息</string>
     <string name="paper">试卷</string>
     <string name="inform">公告</string>
@@ -19,6 +19,7 @@
     <string name="open">打开</string>
     <string name="close">关闭</string>
     <string name="paper_header_name">Yason</string>
-    <string name="paper_header_url">913904049@qq.com</string>>
+    <string name="paper_header_url">913904049@qq.com</string>
+    <string name="login_others">游客模式</string>>
 
 </resources>

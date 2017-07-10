@@ -9,8 +9,7 @@
         android:top="10dp" />
     <!-- corners设置圆角，只适用于rectangle -->
     <corners android:radius="5dp" />
-    <!-- stroke设置描边 -->
-    <stroke
-        android:width="2dp"
-        android:color="@android:color/white"/>
+
+    <solid
+        android:color="@color/sample_yellow"/>
 </shape>

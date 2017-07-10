@@ -60,6 +60,6 @@
         android:layout_marginTop="@dimen/spacing_big"
         android:text="@string/login"
         android:textColor="@android:color/white"
-        android:background="@drawable/bg_btn_rectangle"/>
+        android:background="@drawable/bg_btn_yellow"/>
 
 </LinearLayout>
