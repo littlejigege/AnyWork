@@ -5,8 +5,8 @@ import com.qgstudio.anywork.mvp.BasePresenter;
 import com.qgstudio.anywork.mvp.BaseView;
 
 /**
- * MVPPlugin
- *  邮箱 784787081@qq.com
+ *  登录界面的接口
+ *  Created by chenyi on 2017/3/28.
  */
 
 public class LoginContract {
@@ -18,6 +18,7 @@ public class LoginContract {
     }
 
     interface  Presenter extends BasePresenter<View> {
+
         void login(String account, String password);
     }
 }

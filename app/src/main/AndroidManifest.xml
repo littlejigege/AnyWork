@@ -25,6 +25,7 @@
 
         <activity android:name=".MainActivity"/>
         <activity android:name=".fexam.ExamActivity"/>
+        <activity android:name=".fgrade.GradeActivity" />
     </application>
 
 </manifest>

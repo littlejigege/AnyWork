@@ -3,63 +3,50 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin"
     android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:background="@drawable/bg">
-
-    <ImageView
-        android:id="@+id/icon"
-        style="@style/AnyWork.Theme.Icon.Medium"
-        android:layout_marginTop="@dimen/spacing_huge"
-        android:layout_gravity="center"
-        android:src="@mipmap/icon"/>
+    android:background="@color/colorPrimaryDark">
 
     <TextView
-        android:id="@+id/textView"
-        style="@style/AnyWork.Theme.Text.Body"
+        android:id="@+id/textView2"
         android:layout_marginTop="@dimen/spacing_big"
-        android:text="@string/login"
-        android:textSize="@dimen/size_text" />
-
+        android:text="@string/sign_in"
+        style="@style/AnyWork.Theme.TextView2" />
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/email"
-        style="@style/AnyWork.Theme.EditText.Body"
-        android:text="abc@qq.com"
+        android:id="@+id/account"
+        style="@style/AnyWork.Theme.EditText1"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"/>
+        android:hint="@string/account"/>
 
-    <LinearLayout
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/password"
+        style="@style/AnyWork.Theme.EditText1"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:hint="@string/password"/>
+
+    <TextView
+        android:id="@+id/forget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:orientation="horizontal">
+        android:gravity="end"
+        android:textColor="@color/sample_blue"
+        android:text="@string/forget_password"/>
 
-        <android.support.v7.widget.AppCompatEditText
-            android:id="@+id/password"
-            style="@style/AnyWork.Theme.EditText.Body"
-            android:text="111111"
-            android:layout_weight="10"
-            android:hint="@string/password"
-            android:inputType="textPassword"/>
-
-        <ImageView
-            android:id="@+id/eye"
-            style="@style/AnyWork.Theme.Icon.Small"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/eye"/>
-
-    </LinearLayout>
 
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/sign_in"
         style="@style/AnyWork.Theme.Button"
         android:layout_marginTop="@dimen/spacing_big"
-        android:text="@string/login"
-        android:textColor="@android:color/white"
-        android:background="@drawable/bg_btn_yellow"/>
+        android:background="@drawable/bg_btn_yellow"
+        android:text="@string/sign_in" />
+
+    <ImageView
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher"/>
 
 </LinearLayout>

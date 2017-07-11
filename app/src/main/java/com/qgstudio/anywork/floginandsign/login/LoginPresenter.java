@@ -1,7 +1,5 @@
 package com.qgstudio.anywork.floginandsign.login;
 
-import android.util.Log;
-
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.model.User;
@@ -14,11 +12,9 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static android.content.ContentValues.TAG;
-
 /**
- * MVPPlugin
- *  邮箱 784787081@qq.com
+ *  登录界面的 presenter ，处理网络请求的逻辑功能
+ *  Created by chenyi on 2017/3/28.
  */
 
 public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implements LoginContract.Presenter{

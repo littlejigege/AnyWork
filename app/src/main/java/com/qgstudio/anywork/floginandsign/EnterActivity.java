@@ -51,6 +51,7 @@ public class EnterActivity extends AppCompatActivity {
 
     @OnClick(R.id.login)
     public void intoLogin() {
+        // 跳转到登录界面
         container.setVisibility(View.VISIBLE);
         LoginFragment loginFragment =
                 (LoginFragment) getSupportFragmentManager().findFragmentByTag(LoginFragment.ARGUMENT_LOGIN_ID);

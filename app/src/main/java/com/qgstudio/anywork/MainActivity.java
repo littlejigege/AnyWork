@@ -14,7 +14,6 @@ import android.view.MenuItem;
 
 import com.qgstudio.anywork.finform.InformFragment;
 import com.qgstudio.anywork.fpaper.FPaperFragment;
-import com.qgstudio.anywork.fuser.UserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.addFragment(InformFragment.newInstance());
         adapter.addFragment(FPaperFragment.newInstance());
-        adapter.addFragment(UserFragment.newInstance());
+//        adapter.addFragment(UserFragment.newInstance());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(mOnPageChangeListener);
     }

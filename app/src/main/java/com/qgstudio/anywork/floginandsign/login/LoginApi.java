@@ -9,6 +9,7 @@ import retrofit2.http.POST;
 import rx.Observable;
 
 /**
+ * 登录的网络请求接口
  * Created by chenyi on 2017/3/31.
  */
 
