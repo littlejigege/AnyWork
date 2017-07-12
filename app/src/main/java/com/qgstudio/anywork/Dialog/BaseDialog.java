@@ -40,6 +40,7 @@ public class BaseDialog extends Dialog {
         width = builder.width;
         cancelTouchout = builder.cancelTouchout;
         view = builder.view;
+
     }
 
     @Override
