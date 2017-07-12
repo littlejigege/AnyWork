@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.Organization;
 import com.qgstudio.anywork.fpaper.PaperFragment;
 import com.qgstudio.anywork.mvp.BaseFragment;
 
@@ -16,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class OrganFragment extends BaseFragment {
+public class OrganizationFragment extends BaseFragment {
 
     @BindView(R.id.recycler_all)
     RecyclerView mRecyclerView;
@@ -28,11 +29,11 @@ public class OrganFragment extends BaseFragment {
 
     private Unbinder mUnbinder;
 
-    private OrganAdapter mOrganAdapter;
+    private OrganizationAdapter mOrganizationAdapter;
     private LinearLayoutManager mLinearLayoutManager;
 
-    public static OrganFragment newInstance() {
-        OrganFragment fragment = new OrganFragment();
+    public static OrganizationFragment newInstance() {
+        OrganizationFragment fragment = new OrganizationFragment();
         return fragment;
     }
 
@@ -52,15 +53,15 @@ public class OrganFragment extends BaseFragment {
 
     @Override
     public int getRootId() {
-        return R.layout.fragment_organ;
+        return R.layout.fragment_organization;
     }
 
     @Override
     public void initView() {
         mUnbinder = ButterKnife.bind(this, mRoot);
 
-        mOrganAdapter = new OrganAdapter(new ArrayList<Organ>());
-        mRecyclerView.setAdapter(mOrganAdapter);
+        mOrganizationAdapter = new OrganizationAdapter(new ArrayList<Organization>());
+        mRecyclerView.setAdapter(mOrganizationAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
         mRecyclerView.setLayoutManager(mLinearLayoutManager);

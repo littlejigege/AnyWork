@@ -1,4 +1,4 @@
-package com.qgstudio.anywork.floginandsign.register;
+package com.qgstudio.anywork.fenter.register;
 
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
@@ -24,7 +24,7 @@ class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> impleme
             registerApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(RegisterApi.class);
         }
 
-        final User user = new User(-1,name, account, password, phone, 0);
+        final User user = new User(-1, name, account, password, phone, 0);
 
 //        Map<String, String> info = new HashMap<>();
 //        info.put("email", account);

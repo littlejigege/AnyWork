@@ -2,6 +2,7 @@ package com.qgstudio.anywork.fpaper.data;
 
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.LoadDataCallback;
+import com.qgstudio.anywork.data.model.Testpaper;
 
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class PaperRepository {
         return mPaperRepository;
     }
 
-    public void getExaminationPaper(long time, int organId,LoadDataCallback<List<Textpaper>> LoadDataCallback) {
+    public void getExaminationPaper(long time, int organId,LoadDataCallback<List<Testpaper>> LoadDataCallback) {
 //        mPaperApi.getExaminationPaper(time, organId)
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
@@ -44,7 +45,7 @@ public class PaperRepository {
 //                });
     }
 
-    public void getPracticePaper(LoadDataCallback<List<Textpaper>> LoadDataCallback) {
+    public void getPracticePaper(LoadDataCallback<List<Testpaper>> LoadDataCallback) {
 //        mPaperApi.getPracticePaper()
 //                .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())

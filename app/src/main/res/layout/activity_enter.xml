@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:background="@color/AnyWork_primary_dark"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".floginandsign.EnterActivity">
+    tools:context=".fenter.EnterActivity">
 
     <ImageView
         android:layout_width="100dp"

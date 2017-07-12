@@ -39,7 +39,7 @@
                     android:id="@+id/card_choice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_topic_choice" />
+                    android:background="#000000" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -52,7 +52,7 @@
                     android:id="@+id/card_filling"
                     android:layout_width = "match_parent"
                     android:layout_height = "match_parent"
-                    android:background = "@drawable/bg_topic_judge" />
+                    android:background = "#000000" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -65,7 +65,7 @@
                     android:id="@+id/card_judge"
                     android:layout_width = "match_parent"
                     android:layout_height = "match_parent"
-                    android:background = "@drawable/bg_topic_filling"/>
+                    android:background = "#000000"/>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -78,7 +78,7 @@
                     android:id="@+id/card_code"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/bg_topic_asking" />
+                    android:background="#000000" />
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -91,7 +91,7 @@
                     android:id="@+id/card_asking"
                     android:layout_width = "match_parent"
                     android:layout_height = "match_parent"
-                    android:background = "@drawable/bg_topic_code"/>
+                    android:background = "#000000"/>
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -104,7 +104,7 @@
                     android:id="@+id/card_comprehensive"
                     android:layout_width = "match_parent"
                     android:layout_height = "match_parent"
-                    android:background = "@drawable/bg_topic_comprehensive"/>
+                    android:background = "#000000"/>
             </android.support.v7.widget.CardView>
 
         </LinearLayout>

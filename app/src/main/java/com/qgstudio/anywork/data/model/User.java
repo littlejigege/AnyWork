@@ -14,8 +14,21 @@ public class User {
     private String phone;       //手机
     private int mark;           //标志，区分是学生还是教师, 0学生，1老师
 
-    public User(){
+    public User(int id, String name, String email, String password, String phone, int mark) {
+        this.userId = id;
+        this.userName = (name == null ? "" : name);
+        this.email = (email == null ? "" : email);
+        this.password = (password == null ? "" : password);
+        this.phone = (phone == null ? "" : phone);
+        this.mark = mark;
+    }
 
+    public User(String name, String email, String password, String phone, int mark) {
+        new User(-1, name, email, password, phone, mark);
+    }
+
+    public User() {
+        new User(-1, "", "", "", "", -1);
     }
 
     //get & set

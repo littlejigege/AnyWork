@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.qgstudio.anywork.floginandsign.EnterActivity;
+import com.qgstudio.anywork.fenter.EnterActivity;
 
 /**
  * Created by chenyi on 2017/7/11.

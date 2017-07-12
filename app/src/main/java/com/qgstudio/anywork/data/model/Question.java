@@ -7,7 +7,9 @@ import java.io.Serializable;
  * Created by FunriLy on 2017/7/10.
  * From small beginnings comes great things.
  */
-public class Question implements Serializable{
+public class Question implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int questionId;     //问题id
     private int type;           //题目类型  1-选择题 2-判断题 3-填空题 4-问答题 5-编程题 6-综合题
@@ -21,9 +23,8 @@ public class Question implements Serializable{
     private int testpaperId;    //试卷id
     private int other;          //填空题个数
 
-    private static final long serialVersionUID = 1L;
-
-    public Question(){}
+    public Question() {
+    }
 
     // get & set
 

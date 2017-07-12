@@ -1,4 +1,4 @@
-package com.qgstudio.anywork.floginandsign;
+package com.qgstudio.anywork.fenter;
 
 import android.content.res.Configuration;
 import android.os.Build;
@@ -13,8 +13,8 @@ import android.view.Gravity;
 import android.widget.FrameLayout;
 
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.floginandsign.login.LoginFragment;
-import com.qgstudio.anywork.floginandsign.register.RegisterFragment;
+import com.qgstudio.anywork.fenter.login.LoginFragment;
+import com.qgstudio.anywork.fenter.register.RegisterFragment;
 import com.qgstudio.anywork.utils.ActivityUtil;
 import com.qgstudio.anywork.utils.ToastUtil;
 

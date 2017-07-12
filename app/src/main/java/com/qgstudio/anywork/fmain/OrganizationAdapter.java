@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.Organization;
 
 import java.util.List;
 
@@ -14,24 +15,24 @@ import java.util.List;
  * Created by Yason on 2017/7/10.
  */
 
-public class OrganAdapter extends RecyclerView.Adapter<OrganAdapter.Holder> {
+public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.Holder> {
 
-    private List<Organ> mOrgans;
+    private List<Organization> mOrgans;
 
-    public OrganAdapter(List<Organ> organs) {
+    public OrganizationAdapter(List<Organization> organs) {
         mOrgans = organs;
     }
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_organ, parent, false);
+                .inflate(R.layout.item_organization, parent, false);
         return new Holder(v);
     }
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        Organ organ = mOrgans.get(position);
+        Organization Organization = mOrgans.get(position);
         //// TODO: 2017/7/10 绑定数据
 
     }
@@ -42,12 +43,12 @@ public class OrganAdapter extends RecyclerView.Adapter<OrganAdapter.Holder> {
     }
 
 
-    public void add(Organ group) {
+    public void add(Organization group) {
         mOrgans.add(group);
         notifyItemInserted(mOrgans.size());
     }
 
-    public void addAll(List<Organ> groups) {
+    public void addAll(List<Organization> groups) {
         int start = mOrgans.size() + 1;
         int count = groups.size();
         mOrgans.addAll(groups);

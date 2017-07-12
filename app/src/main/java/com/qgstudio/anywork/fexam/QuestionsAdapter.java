@@ -1,15 +1,11 @@
 package com.qgstudio.anywork.fexam;
 
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.LayoutInflater;
 
 import com.qgstudio.anywork.data.model.Question;
-import com.qgstudio.anywork.fpaper.PaperFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsAdapter extends FragmentStatePagerAdapter {

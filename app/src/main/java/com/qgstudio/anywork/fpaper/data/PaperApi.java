@@ -1,6 +1,7 @@
 package com.qgstudio.anywork.fpaper.data;
 
 import com.qgstudio.anywork.data.ResponseResult;
+import com.qgstudio.anywork.data.model.Testpaper;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ import rx.Observable;
 public interface PaperApi {
 
     @GET("timeline/{time}/timeline/{organId}")
-    Observable<ResponseResult<List<Textpaper>>> getPracticePaper(@Path("time") long time, @Path("organId") int organId);
+    Observable<ResponseResult<List<Testpaper>>> getPracticePaper(@Path("time") long time, @Path("organId") int organId);
 
     @GET("relation/allorgan")
-    Observable<ResponseResult<List<Textpaper>>> getExaminationPaper();
+    Observable<ResponseResult<List<Testpaper>>> getExaminationPaper();
 
 }

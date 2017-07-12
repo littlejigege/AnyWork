@@ -1,7 +1,8 @@
-package com.qgstudio.anywork.floginandsign.login;
+package com.qgstudio.anywork.fenter.login;
 
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
+import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 
 import java.util.HashMap;

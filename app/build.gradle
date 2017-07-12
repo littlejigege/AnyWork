@@ -6,7 +6,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion '25.0.0'
     defaultConfig {
-        applicationId "com.qgstudio.Anywork"
+        applicationId "com.qgstudio.anywork"
         minSdkVersion 23
         targetSdkVersion 23
         versionCode 1

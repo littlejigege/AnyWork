@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         mFragmentMap = new HashMap<>();
-        mFragmentMap.put("ALL", OrganFragment.newInstance());
+        mFragmentMap.put("ALL", OrganizationFragment.newInstance());
 //        mFragmentMap.put("JOIN", OrganJoinFragment.newInstance());
 
         mFragmentManager = getSupportFragmentManager();

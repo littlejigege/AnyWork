@@ -5,6 +5,8 @@ import android.support.annotation.NonNull;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.LoadDataCallback;
+import com.qgstudio.anywork.data.model.StudentAnswer;
+import com.qgstudio.anywork.data.model.Testpaper;
 
 import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
@@ -36,11 +38,11 @@ public class ExamRepository {
     }
 
 
-    public void getTextpaper(int textpaperId,@NonNull LoadDataCallback<Textpaper> loadDataCallback) {
+    public void getTextpaper(int textpaperId,@NonNull LoadDataCallback<Testpaper> loadDataCallback) {
         mExamApi.getTextpaper(textpaperId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitSubscriber<Textpaper>(loadDataCallback) {
+                .subscribe(new RetrofitSubscriber<Testpaper>(loadDataCallback) {
                     @Override
                     protected int getSuccessState() {
                         return 401;

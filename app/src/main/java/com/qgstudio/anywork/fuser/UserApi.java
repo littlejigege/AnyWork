@@ -2,6 +2,7 @@ package com.qgstudio.anywork.fuser;
 
 
 import com.qgstudio.anywork.data.ResponseResult;
+import com.qgstudio.anywork.data.model.User;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;

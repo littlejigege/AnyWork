@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,7 +13,6 @@ import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.ui.ExamPagerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +33,7 @@ public class QuestionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_exam);
         ButterKnife.bind(this);
 
-        mQuestionsAdapter = new QuestionsAdapter(getSupportFragmentManager(), this, mQuestions);
+        mQuestionsAdapter = new QuestionsAdapter(getSupportFragmentManager(), mQuestions);
         mExamPagerView.setViewPagerAdapter(mQuestionsAdapter);
 
     }

@@ -1,5 +1,6 @@
-package com.qgstudio.anywork.floginandsign.login;
+package com.qgstudio.anywork.fenter.login;
 
+import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenter;
 import com.qgstudio.anywork.mvp.BaseView;
 

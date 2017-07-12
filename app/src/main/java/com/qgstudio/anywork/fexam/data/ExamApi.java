@@ -1,6 +1,8 @@
 package com.qgstudio.anywork.fexam.data;
 
 import com.qgstudio.anywork.data.ResponseResult;
+import com.qgstudio.anywork.data.model.StudentAnswer;
+import com.qgstudio.anywork.data.model.Testpaper;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -15,8 +17,8 @@ import rx.Observable;
 
 public interface ExamApi {
 
-    @GET("test/textpaper/{textpaperId}")
-    Observable<ResponseResult<Textpaper>> getTextpaper(@Path("textpaperId") int textpaperId);
+    @GET("test/Testpaper/{textpaperId}")
+    Observable<ResponseResult<Testpaper>> getTextpaper(@Path("textpaperId") int textpaperId);
 
     @POST("studentAnswer/add")
     @Headers("Content-Type:application/json")

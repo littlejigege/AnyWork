@@ -78,7 +78,7 @@
     </style>
 
     <style name="WelcomeStyle" parent="AnyWork.Theme">
-        <item name="android:windowBackground">@drawable/welcome_bg</item>
+        <item name="android:windowBackground">@drawable/bg_welcome</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
     </style>

@@ -22,14 +22,4 @@
         <attr name="sRightBottomAlpha" format="float"/>
     </declare-styleable>
 
-
-    <declare-styleable name="BaseDialog">
-        <attr name="title" format="string"/>
-        <attr name="titleSize" format="dimension"/>
-        <attr name="titleColor" format="color"/>
-        <attr name="cancle" format="boolean"/>
-        <attr name="titleBackground" format="color|reference"/>
-        <attr name="lineColor" format="color"/>
-    </declare-styleable>
-
 </resources>

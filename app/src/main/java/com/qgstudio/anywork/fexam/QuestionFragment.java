@@ -9,10 +9,7 @@ import android.widget.TextView;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Question;
-import com.qgstudio.anywork.fpaper.PaperAdapter;
 import com.qgstudio.anywork.mvp.BaseFragment;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

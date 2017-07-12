@@ -1,4 +1,4 @@
-package com.qgstudio.anywork.Dialog;
+package com.qgstudio.anywork.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

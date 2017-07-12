@@ -1,14 +1,11 @@
 package com.qgstudio.anywork.fexam;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.data.model.Question;
 
-import java.util.List;
+import com.qgstudio.anywork.R;
 
 import butterknife.OnClick;
 
@@ -30,6 +27,7 @@ public class ExamActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_exam);
         // TODO: 2017/7/11 获取试卷的全部内容
     }
 
