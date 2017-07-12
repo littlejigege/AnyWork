@@ -63,6 +63,7 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     @Override
     public void initView() {
         ButterKnife.bind(this, mRoot);
+
     }
 
     @Override
