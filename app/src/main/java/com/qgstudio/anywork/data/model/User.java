@@ -1,22 +1,24 @@
 package com.qgstudio.anywork.data.model;
 
-import java.util.Set;
-
 /**
- * Created by hunger on 2016/11/5.
+ * 用户实体
+ * Created by FunriLy on 2017/7/10.
+ * From small beginnings comes great things.
  */
 public class User {
-    private int userId;//用户id
-    private String userName;//昵称
-    private String email;//邮箱
-    private String password;//密码
-    private String phone;//电话
-    private String school;//学校
-    private int isWeChat;//是否关联微信
-    private String openid;//微信凭证
-    private long createTime;//创建时间
-    private Set<Organization> organs;//组织列表
-    private String picture;//头像
+
+    private int userId;         //id
+    private String userName;    //昵称
+    private String email;       //邮箱
+    private String password;    //密码
+    private String phone;       //手机
+    private int mark;           //标志，区分是学生还是教师, 0学生，1老师
+
+    public User(){
+
+    }
+
+    //get & set
 
     public int getUserId() {
         return userId;
@@ -58,53 +60,15 @@ public class User {
         this.phone = phone;
     }
 
-    public String getSchool() {
-        return school;
+    public int getMark() {
+        return mark;
     }
 
-    public void setSchool(String school) {
-        this.school = school;
+    public void setMark(int mark) {
+        this.mark = mark;
     }
 
-    public int getIsWeChat() {
-        return isWeChat;
-    }
-
-    public void setIsWeChat(int isWeChat) {
-        this.isWeChat = isWeChat;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
-
-    public Set<Organization> getOrgans() {
-        return organs;
-    }
-
-    public void setOrgans(Set<Organization> organs) {
-        this.organs = organs;
-    }
-
-    public String getPicture() {
-        return picture;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
+    // toString
 
     @Override
     public String toString() {
@@ -114,12 +78,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
-                ", school='" + school + '\'' +
-                ", isWeChat=" + isWeChat +
-                ", openid='" + openid + '\'' +
-                ", createTime=" + createTime +
-                ", organs=" + organs +
-                ", picture='" + picture + '\'' +
+                ", mark=" + mark +
                 '}';
     }
 }

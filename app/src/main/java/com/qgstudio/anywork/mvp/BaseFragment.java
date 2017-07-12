@@ -22,9 +22,9 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
-    public View mRoot;
+    protected View mRoot;
 
-    public Activity mActivity;
+    protected Activity mActivity;
 
     public abstract int getRootId();
     public abstract void initView();
@@ -35,9 +35,6 @@ public abstract class BaseFragment extends Fragment {
         if (context instanceof Activity) {
             mActivity = (Activity) context;
         }
-    }
-    public Activity getParent() {
-        return mActivity;
     }
 
     @Nullable

@@ -1,29 +1,22 @@
 package com.qgstudio.anywork.floginandsign.login;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.qgstudio.anywork.App;
-import com.qgstudio.anywork.MainActivity;
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.MVPBaseFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import static android.content.ContentValues.TAG;
 
 
 /**
@@ -103,9 +96,9 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
 
     @Override
     public void showSuccess(User user) {
-        ((App)mActivity.getApplication()).setUser(user);
-        Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(mActivity, MainActivity.class);
-        mActivity.startActivity(intent);
+//        ((App)mActivity.getApplication()).setUser(user);
+//        Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(mActivity, HomeActivity.class);
+//        mActivity.startActivity(intent);
     }
 }

@@ -12,19 +12,13 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AnyWork.Theme">
+        android:theme="@style/AppTheme">
         <activity android:name=".floginandsign.EnterActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".fmain.HomeActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".fexam.ExamActivity"/>
+        <activity android:name=".fexam.QuestionsActivity"/>
     </application>
 
 </manifest>

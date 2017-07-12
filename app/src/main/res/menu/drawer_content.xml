@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_all"
+        android:title="所有组织" />
+    <item
+        android:id="@+id/nav_join"
+        android:title="组织信息" />
+    <item
+        android:id="@+id/nav_inform"
+        android:title="消息" />
+    <item
+        android:id="@+id/nav_exit"
+        android:title="退出" />
+</menu>

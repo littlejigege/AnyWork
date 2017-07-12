@@ -1,95 +1,136 @@
 package com.qgstudio.anywork.data.model;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * Created by hunger on 2016/11/5.
+ * 问题实体
+ * Created by FunriLy on 2017/7/10.
+ * From small beginnings comes great things.
  */
-public class Question {
+public class Question implements Serializable{
 
-    private int questId;//请求id
-    private String name="question";//对象名字
-    private int organId;//组织id
-    private String questTitle;//请求标题
-    private String mark;//内容
-    private User author;//发布者
-    private Date createTime;//发布时间
-    private QAnswer qAnswer;//最佳答案
+    private int questionId;     //问题id
+    private int type;           //题目类型  1-选择题 2-判断题 3-填空题 4-问答题 5-编程题 6-综合题
+    private String A;
+    private String B;
+    private String C;
+    private String D;
+    private String key;         //答案
+    private String content;     //题目内容
+    private int socre;          //分数
+    private int testpaperId;    //试卷id
+    private int other;          //填空题个数
 
-    public int getQuestId() {
-        return questId;
+    private static final long serialVersionUID = 1L;
+
+    public Question(){}
+
+    // get & set
+
+    public int getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestId(int questId) {
-        this.questId = questId;
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
-    public String getName() {
-        return name;
+    public int getType() {
+        return type;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public int getOrganId() {
-        return organId;
+    public void setType(int type) {
+        this.type = type;
     }
 
-    public void setOrganId(int organId) {
-        this.organId = organId;
+    public String getA() {
+        return A;
     }
 
-    public String getQuestTitle() {
-        return questTitle;
+    public void setA(String a) {
+        A = a;
     }
 
-    public void setQuestTitle(String questTitle) {
-        this.questTitle = questTitle;
+    public String getB() {
+        return B;
     }
 
-    public String getMark() {
-        return mark;
+    public void setB(String b) {
+        B = b;
     }
 
-    public void setMark(String mark) {
-        this.mark = mark;
+    public String getC() {
+        return C;
     }
 
-    public User getAuthor() {
-        return author;
+    public void setC(String c) {
+        C = c;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public String getD() {
+        return D;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public void setD(String d) {
+        D = d;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public String getKey() {
+        return key;
     }
 
-    public QAnswer getqAnswer() {
-        return qAnswer;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    public void setqAnswer(QAnswer qAnswer) {
-        this.qAnswer = qAnswer;
+    public String getContent() {
+        return content;
     }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public int getSocre() {
+        return socre;
+    }
+
+    public void setSocre(int socre) {
+        this.socre = socre;
+    }
+
+    public int gettestpaperId() {
+        return testpaperId;
+    }
+
+    public void settestpaperId(int testpaperId) {
+        this.testpaperId = testpaperId;
+    }
+
+    public int getOther() {
+        return other;
+    }
+
+    public void setOther(int other) {
+        this.other = other;
+    }
+
+    //toString
 
     @Override
     public String toString() {
         return "Question{" +
-                "questId=" + questId +
-                ", name='" + name + '\'' +
-                ", organId=" + organId +
-                ", questTitle='" + questTitle + '\'' +
-                ", mark='" + mark + '\'' +
-                ", author=" + author +
-                ", createTime=" + createTime +
-                ", qAnswer=" + qAnswer +
+                "questionId=" + questionId +
+                ", type=" + type +
+                ", A='" + A + '\'' +
+                ", B='" + B + '\'' +
+                ", C='" + C + '\'' +
+                ", D='" + D + '\'' +
+                ", key='" + key + '\'' +
+                ", content='" + content + '\'' +
+                ", socre=" + socre +
+                ", testpaperId=" + testpaperId +
+                ", other=" + other +
                 '}';
     }
 }

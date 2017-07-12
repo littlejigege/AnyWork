@@ -1,10 +1,7 @@
 package com.qgstudio.anywork.floginandsign.login;
 
-import android.util.Log;
-
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
-import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 
 import java.util.HashMap;
@@ -13,8 +10,6 @@ import java.util.Map;
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * MVPPlugin

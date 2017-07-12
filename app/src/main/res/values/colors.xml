@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--color used by ExamPagerView-->
+    <color name="status_dark" >#212121</color>
+    <color name="toolbar_dark" >#262626</color>
+    <color name="text_green">#3bbf95</color>
+
     <color name="touch_effect">#9ccc</color>
 
     <color name="AnyWork_primary">#039BE5</color>
