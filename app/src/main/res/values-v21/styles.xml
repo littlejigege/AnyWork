@@ -28,12 +28,12 @@
     </style>
 
     <style name="AnyWork.Theme.TextView1" parent="Base.Widget.AppCompat.AutoCompleteTextView">
-        <item name="android:layout_width">250dp</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">230dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:layout_gravity">center_horizontal</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:focusableInTouchMode">false</item>
     </style>
 
@@ -45,12 +45,18 @@
     </style>
 
     <style name="AnyWork.Theme.EditText1" parent="Theme.AppCompat.Light">
-        <item name="android:layout_width">250dp</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">60dp</item>
-        <item name="colorControlNormal">@android:color/darker_gray</item>
-        <item name="colorControlActivated">@color/AnyWork_accent</item>
+        <item name="android:theme">@style/AnyWork.Theme.EditText.Theme</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:textColor">@color/AnyWork_light</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="AnyWork.Theme.EditText.Theme" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@android:color/darker_gray</item>
+        <item name="colorControlActivated">@color/AnyWork_accent</item>
     </style>
 
     <style name="AnyWork.Theme.EditText2" parent="Theme.AppCompat.Light">
@@ -64,10 +70,21 @@
     </style>
 
     <style name="AnyWork.Theme.Button" parent="Base.Widget.AppCompat.Button">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/spacing_big</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="WelcomeStyle" parent="AnyWork.Theme">
+        <item name="android:windowBackground">@drawable/welcome_bg</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style
+        name="Appwelcome"
+        parent="android:Theme.Translucent.NoTitleBar.Fullscreen">
     </style>
 
     <style name="AnyWork.Theme.TextAppearance.Title" parent="android:TextAppearance.Material.Title">

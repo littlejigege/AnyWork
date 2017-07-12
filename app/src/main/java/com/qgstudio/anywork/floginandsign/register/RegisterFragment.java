@@ -39,12 +39,13 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
         String pass1 = password.getText().toString();
         String pass2 = password.getText().toString();
 
-        if (!pass1.equals(pass2)) {
+        if (pass1.equals("")) {
+            ToastUtil.showToast("请输入密码！");
+        } else if (!pass1.equals(pass2)) {
             ToastUtil.showToast("请输入相同的密码！");
-            return;
+        } else {
+            mPresenter.register(a, pass1, n, p);
         }
-
-        mPresenter.register(a, pass1, n, p);
 
 //        if (!n.matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}")) {
 //            name.setError("请输入1-15个字符的姓名");
@@ -58,6 +59,12 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
 //            mPresenter.register(e, password.getText().toString(), n, p);
 //        }
     }
+
+    @OnClick(R.id.cancel)
+    public void cancel() {
+        mActivity.onBackPressed();
+    }
+
     public static RegisterFragment newInstance() {
         //通过 newInstance 保证 Fragment 不被重复构造，造成 fragment 重叠
         return new RegisterFragment();
@@ -80,6 +87,8 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
     @Override
     public void showError(String errorInfo) {
         ToastUtil.showToast(errorInfo);
+        password.setText("");
+        password2.setText("");
     }
 
     @Override

@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.qgstudio.anywork.R;
@@ -34,7 +33,6 @@ public class EnterActivity extends AppCompatActivity {
 
     @OnClick(R.id.register)
     public void intoRegister() {
-        container.setVisibility(View.VISIBLE);
         // 根据 tag 从 FragmentManager 中将 fragment 取出
         RegisterFragment registerFragment =
                 (RegisterFragment) getSupportFragmentManager().findFragmentByTag(RegisterFragment.ARGUMENT_REGISTER_ID);
@@ -52,7 +50,6 @@ public class EnterActivity extends AppCompatActivity {
     @OnClick(R.id.login)
     public void intoLogin() {
         // 跳转到登录界面
-        container.setVisibility(View.VISIBLE);
         LoginFragment loginFragment =
                 (LoginFragment) getSupportFragmentManager().findFragmentByTag(LoginFragment.ARGUMENT_LOGIN_ID);
         if (loginFragment == null) {

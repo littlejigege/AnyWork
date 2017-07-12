@@ -62,8 +62,8 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                             mUser = result.getData();
                             mView.setEmail(mUser.getEmail());
                             mView.setPhone(mUser.getPhone());
-                            mView.setSchool(mUser.getSchool());
-                            mView.setImg(mUser.getPicture());
+//                            mView.setSchool(mUser.getSchool());
+//                            mView.setImg(mUser.getPicture());
                             mView.setUserName(mUser.getUserName());
 //                            Log.i(TAG, "onNext: "+result.getStateInfo()+result.getData());
                         } else {
@@ -82,7 +82,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
         Map<String, String> info = new HashMap<>();
         info.put("userName", mUser.getUserName());
         info.put("phone", mUser.getPhone());
-        info.put("school", mUser.getSchool()==null?" ":mUser.getSchool());
+//        info.put("school", mUser.getSchool()==null?" ":mUser.getSchool());
         info.put(title, string);
 
         Log.i(TAG, "changeInfo: "+ GsonUtil.GsonString(info));
@@ -114,11 +114,11 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                                     mUser.setUserName(string);
                                     break;
                                 case "school":
-                                    mUser.setSchool(string);
+//                                    mUser.setSchool(string);
                                     break;
                             }
                             mView.setPhone(mUser.getPhone());
-                            mView.setSchool(mUser.getSchool());
+//                            mView.setSchool(mUser.getSchool());
                             mView.setUserName(mUser.getUserName());
                             mView.hidProgressDialog();
                         } else {

@@ -11,9 +11,9 @@ import rx.Observable;
  * Created by chenyi on 2017/4/11.
  */
 
-public interface RegisterApi {
+interface RegisterApi {
 
-    @POST("user/chenyibug/register")
+    @POST("user/register")
     @Headers("Content-Type:application/json")
-    Observable<ResponseResult<Object>> register(@Body Object object);
+    Observable<ResponseResult<Integer>> register(@Body Object object);
 }

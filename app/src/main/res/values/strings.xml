@@ -6,7 +6,7 @@
     <string name="create_account">注册帐号</string>
     <string name="login">登录帐号</string>
     <string name="login_others">游客模式</string>
-
+    <string name="sign_up">注册</string>
     <string name="register">帐号注册</string>
     <string name="name">请输入名字</string>
     <string name="phone">请输入常用手机电话</string>

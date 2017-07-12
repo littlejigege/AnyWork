@@ -29,8 +29,19 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
 
     @OnClick(R.id.sign_in)
     public void login() {
-        // 通过网络进行登录
-        mPresenter.login(account.getText().toString(), password.getText().toString());
+        String acc = account.getText().toString();
+        String pass = password.getText().toString();
+        if (acc.equals("") || pass.equals("")) {
+            ToastUtil.showToast("请输入帐号和密码");
+        } else {
+            // 通过网络进行登录
+            mPresenter.login(acc, pass);
+        }
+    }
+
+    @OnClick(R.id.cancel)
+    public void cancel() {
+        mActivity.onBackPressed();
     }
 
     public static LoginFragment newInstance() {
@@ -41,6 +52,8 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     public LoginFragment() {
         //防止无参构造器被外部调用
     }
+
+
 
     @Override
     public int getRootId() {

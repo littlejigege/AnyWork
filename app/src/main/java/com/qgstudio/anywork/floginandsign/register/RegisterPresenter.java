@@ -2,10 +2,8 @@ package com.qgstudio.anywork.floginandsign.register;
 
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
+import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
@@ -16,29 +14,29 @@ import rx.schedulers.Schedulers;
  *  邮箱 784787081@qq.com
  */
 
-public class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> implements RegisterContract.Presenter{
+class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> implements RegisterContract.Presenter{
 
     private RegisterApi registerApi;
 
     @Override
-    public void register(String email, String password, String name, String phone) {
+    public void register(String account, String password, String name, String phone) {
         if (registerApi == null) {
             registerApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(RegisterApi.class);
         }
 
-        Map<String, String> info = new HashMap<>();
-        info.put("valcode", "0");
-        info.put("email", email);
-        info.put("password", password);
-        info.put("userName", name);
-        info.put("isWechat", "0");
-        info.put("phone", phone);
-//        Log.i(TAG, "register: "+GsonUtil.GsonString(info));
+        final User user = new User(-1,name, account, password, phone, 0);
 
-        registerApi.register(info)
+//        Map<String, String> info = new HashMap<>();
+//        info.put("email", account);
+//        info.put("password", password);
+//        info.put("userName", name);
+//        info.put("phone", phone);
+//        info.put("mark", 0+"");
+
+        registerApi.register(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseResult<Object>>() {
+                .subscribe(new Observer<ResponseResult<Integer>>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -50,10 +48,10 @@ public class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> 
                     }
 
                     @Override
-                    public void onNext(ResponseResult<Object> result) {
+                    public void onNext(ResponseResult<Integer> result) {
 
 //                        Log.i(TAG, "onNext: "+result.getStateInfo()+result.getData());
-                        if (result.getState() == 111) {
+                        if (result.getState() == 1001) {
                             mView.showSuccess();
                         } else {
                             mView.showError(result.getStateInfo());
