@@ -12,6 +12,11 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".floginandsign.EnterActivity"
+            android:configChanges="orientation|screenSize"/>
+        <activity android:name=".fmain.HomeActivity">
+
         android:theme="@style/AnyWork.Theme">
         <activity
             android:name=".StartActivity"
@@ -29,6 +34,7 @@
         <activity android:name=".MainActivity"/>
         <activity android:name=".fexam.ExamActivity"/>
         <activity android:name=".fgrade.GradeActivity" />
+        <activity android:name=".fexam.QuestionsActivity"/>
     </application>
 
 </manifest>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.allen.library.SuperTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/stv"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    stv:sLeftIconRes="@mipmap/ic_launcher"
+    stv:sLeftIconHeight="50dp"
+    stv:sLeftIconWidth="50dp"
+    stv:sLeftTopTextString="ACM程序设计"
+    stv:sLeftBottomTextString="教师"
+    stv:sLeftBottomTextString2="简介"
+    />

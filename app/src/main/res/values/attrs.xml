@@ -7,6 +7,22 @@
         <attr name="titlePic" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="ExamPagerView">
+        <attr name="sTitleCenterTextString" format="string"/>
+        <attr name="sTitleCenterTextColor" format="color"/>
+        <attr name="sTitleBackgroundColor" format="color"/>
+        <attr name="sTitleRightIconResId" format="integer"/>
+        <attr name="sLeftBottomTextString" format="string"/>
+        <attr name="sLeftBottomTextColor" format="color"/>
+        <attr name="sLeftBottomBackgroundColor" format="color"/>
+        <attr name="sLeftBottomAlpha" format="float"/>
+        <attr name="sRightBottomTextString" format="string"/>
+        <attr name="sRightBottomTextColor" format="color"/>
+        <attr name="sRightBottomBackgroundColor" format="color"/>
+        <attr name="sRightBottomAlpha" format="float"/>
+    </declare-styleable>
+
+
     <declare-styleable name="BaseDialog">
         <attr name="title" format="string"/>
         <attr name="titleSize" format="dimension"/>

@@ -1,17 +1,18 @@
 package com.qgstudio.anywork.data.model;
 
-import java.util.Date;
-
 /**
- * Created by hunger on 2016/11/5.
+ * Created by FunriLy on 2017/7/10.
+ * From small beginnings comes great things.
  */
 public class Relation {
-    private int relationId;//id
-    private User user;//用户对象
-    private int organId;//组织id
-    private String openid;//微信凭证
-    private int role;//角色
-    private Date createTime;//加入时间
+
+    private int relationId;     //ID
+    private int organizationId;        //组织ID
+    private int userId;         //用户ID
+    private int role;           //角色，预留字段
+
+    public Relation() {
+    }
 
     public int getRelationId() {
         return relationId;
@@ -21,28 +22,20 @@ public class Relation {
         this.relationId = relationId;
     }
 
-    public User getUser() {
-        return user;
+    public int getOrganizationId() {
+        return organizationId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setOrganizationId(int organizationId) {
+        this.organizationId = organizationId;
     }
 
-    public int getOrganId() {
-        return organId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setOrganId(int organId) {
-        this.organId = organId;
-    }
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getRole() {
@@ -51,25 +44,5 @@ public class Relation {
 
     public void setRole(int role) {
         this.role = role;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    @Override
-    public String toString() {
-        return "Relation{" +
-                "relationId=" + relationId +
-                ", user=" + user +
-                ", organId=" + organId +
-                ", openid='" + openid + '\'' +
-                ", role=" + role +
-                ", createTime=" + createTime +
-                '}';
     }
 }

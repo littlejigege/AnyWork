@@ -1,11 +1,8 @@
 package com.qgstudio.anywork.floginandsign.login;
 
-import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
-import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
-import com.qgstudio.anywork.utils.DataBaseUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +12,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- *  登录界面的 presenter ，处理网络请求的逻辑功能
- *  Created by chenyi on 2017/3/28.
+ * MVPPlugin
+ *  邮箱 784787081@qq.com
  */
 
 public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implements LoginContract.Presenter{
@@ -30,9 +27,9 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
         }
 
         Map<String, String> loginInfo = new HashMap<>();
+        loginInfo.put("valcode", "0");
         loginInfo.put("email", account);
         loginInfo.put("password", password);
-        loginInfo.put("valcode", "0");
 
         loginApi.login(loginInfo)
                 .subscribeOn(Schedulers.io())
@@ -51,11 +48,8 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                     @Override
                     public void onNext(ResponseResult<User> result) {
 
-                        if (result.getState() == 2001) {
-                            User user = result.getData();
-                            mView.showSuccess(user);
-                            App.getInstance().setUser(user);
-                            DataBaseUtil.getHelper().save(user);
+                        if (result.getState() == 121) {
+                            mView.showSuccess(result.getData());
 //                            Log.i(TAG, "onNext: "+result.getStateInfo()+result.getData());
                         } else {
                             mView.showError(result.getStateInfo());

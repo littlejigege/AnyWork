@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.qgstudio.anywork.ui.ExamPagerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:epv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/epv"
+    epv:sTitleCenterTextString="3/7"
+    epv:sTitleCenterTextColor="@color/text_green"
+    epv:sTitleBackgroundColor="@color/status_dark"
+    epv:sTitleRightIconResId="@drawable/ic_quit"
+    epv:sLeftBottomTextColor="@color/text_green"
+    epv:sLeftBottomTextString="上一题"
+    epv:sRightBottomBackgroundColor="@color/status_dark"
+    epv:sRightBottomTextColor="@color/text_green"
+    epv:sRightBottomTextString="下一题"
+    epv:sLeftBottomBackgroundColor="@color/status_dark"
+    />
+

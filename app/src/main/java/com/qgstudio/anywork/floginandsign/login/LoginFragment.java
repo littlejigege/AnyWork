@@ -1,47 +1,58 @@
 package com.qgstudio.anywork.floginandsign.login;
 
-import android.content.Intent;
-import android.widget.EditText;
 
-import com.qgstudio.anywork.App;
-import com.qgstudio.anywork.MainActivity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.MVPBaseFragment;
-import com.qgstudio.anywork.utils.ToastUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+
 /**
- *  登录界面的 fragment
- *  Created by chenyi on 2017/3/28.
+ * MVPPlugin
+ *  邮箱 784787081@qq.com
  */
 
 public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPresenter> implements LoginContract.View {
 
     public static final String ARGUMENT_LOGIN_ID = "LOGIN_ID";
 
-    @BindView(R.id.account) EditText account;
+    private boolean hidePass = true;
 
-    @BindView(R.id.password) EditText password;
+    @BindView(R.id.email)
+    EditText email;
+    @BindView(R.id.password)
+    EditText password;
 
-    @OnClick(R.id.sign_in)
-    public void login() {
-        String acc = account.getText().toString();
-        String pass = password.getText().toString();
-        if (acc.equals("") || pass.equals("")) {
-            ToastUtil.showToast("请输入帐号和密码");
+    @OnClick(R.id.eye)
+    public void see() {
+//        Log.i(TAG, "see: aaaa");
+        if (hidePass) {
+            password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
         } else {
-            // 通过网络进行登录
-            mPresenter.login(acc, pass);
+            password.setTransformationMethod(PasswordTransformationMethod.getInstance());
         }
+        hidePass = !hidePass;
     }
 
-    @OnClick(R.id.cancel)
-    public void cancel() {
-        mActivity.onBackPressed();
+    @OnClick(R.id.login)
+    public void login() {
+        if (!email.getText().toString().matches("\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}")) {
+            email.setError("请输入正确的邮箱地址");
+        } else {
+            mPresenter.login(email.getText().toString(), password.getText().toString());
+        }
     }
 
     public static LoginFragment newInstance() {
@@ -53,28 +64,41 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
         //防止无参构造器被外部调用
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     @Override
     public int getRootId() {
-        return R.layout.fragment_login;
+        return 0;
     }
 
     @Override
     public void initView() {
-        ButterKnife.bind(this, mRoot);
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+        ButterKnife.bind(this, view);
+
+        return view;
     }
 
     @Override
     public void showError(String errorInfo) {
-        ToastUtil.showToast(errorInfo);
+        Toast.makeText(mActivity, errorInfo, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showSuccess(User user) {
-        ((App)mActivity.getApplication()).setUser(user);
-        ToastUtil.showToast("登录成功");
-        Intent intent = new Intent(mActivity, MainActivity.class);
-        mActivity.startActivity(intent);
+//        ((App)mActivity.getApplication()).setUser(user);
+//        Toast.makeText(mActivity, "登录成功", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(mActivity, HomeActivity.class);
+//        mActivity.startActivity(intent);
     }
 }

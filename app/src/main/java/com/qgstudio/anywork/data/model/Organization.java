@@ -1,24 +1,48 @@
 package com.qgstudio.anywork.data.model;
 
-import java.util.Set;
-
 /**
- * Created by hunger on 2016/11/5.
+ * 组织实体
+ * Created by FunriLy on 2017/7/10.
+ * From small beginnings comes great things.
  */
 public class Organization {
-    private int organId;//组织ID
-    private String organName;//组织名
-    private long createTime;//创建时间
-    private String description;//描述
-    private int organCount;//组织人数
-    private Set<User> users;//用户列表
 
-    public int getOrganId() {
-        return organId;
+    private int organizationId;            //ID
+    private int teacherId;               //教师ID
+    private String teacherName;          //教师名称
+    private String organName;       //组织名
+    private String description;     //描述
+    private long token;             //口令
+    private int count;              //组织人数
+    private int isJoin;             //判断字段，标志学生是否是该组织成员
+
+    //TODO:考虑老师登录后是否要带上学生列表或者试卷列表
+
+    public Organization() {
     }
 
-    public void setOrganId(int organId) {
-        this.organId = organId;
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
+    }
+
+    public int getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(int organizationId) {
+        this.organizationId = organizationId;
+    }
+
+    public int getTeacherId() {
+        return teacherId;
+    }
+
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
     public String getOrganName() {
@@ -29,14 +53,6 @@ public class Organization {
         this.organName = organName;
     }
 
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(long createTime) {
-        this.createTime = createTime;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -45,31 +61,27 @@ public class Organization {
         this.description = description;
     }
 
-    public int getOrganCount() {
-        return organCount;
+    public long getToken() {
+        return token;
     }
 
-    public void setOrganCount(int organCount) {
-        this.organCount = organCount;
+    public void setToken(long token) {
+        this.token = token;
     }
 
-    public Set<User> getUsers() {
-        return users;
+    public int getCount() {
+        return count;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    @Override
-    public String toString() {
-        return "Organization{" +
-                "organId=" + organId +
-                ", organName='" + organName + '\'' +
-                ", createTime=" + createTime +
-                ", description='" + description + '\'' +
-                ", organCount=" + organCount +
-                ", users=" + users +
-                '}';
+    public int getIsJoin() {
+        return isJoin;
+    }
+
+    public void setIsJoin(int isJoin) {
+        this.isJoin = isJoin;
     }
 }
