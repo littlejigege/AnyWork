@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.Organization;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.mvp.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,7 +20,7 @@ import butterknife.Unbinder;
 
 public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemClickListener{
 
-    @BindView(R.id.recycler_all)
+    @BindView(R.id.recycler_paper)
     RecyclerView mRecyclerView;
 
     public static final int TYPE_PRACTICE = 0;
@@ -70,10 +72,28 @@ public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemCl
         super.onResume();
         switch (mType) {
             case TYPE_EXMINATION:{
-                break;
                 //// TODO: 2017/7/10 调用接口返回试卷信息,根据mType调用不同
+                //假数据
+                List<Testpaper> list = new ArrayList<>();
+                for (int i=0;i<5;i++) {
+                    Testpaper t =new Testpaper();
+                    t.setTestpaperTitle("第一章");
+                    t.setTestpaperType(0);
+                    t.setChapterId(1);
+                    list.add(t);
+                }
+                break;
             }
             case TYPE_PRACTICE:{
+                //假数据
+                List<Testpaper> list = new ArrayList<>();
+                for (int i=0;i<5;i++) {
+                    Testpaper t =new Testpaper();
+                    t.setTestpaperTitle("第一章");
+                    t.setTestpaperType(2);
+                    t.setChapterId(1);
+                    list.add(t);
+                }
                 break;
             }
             default:{}

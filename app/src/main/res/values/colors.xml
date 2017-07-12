@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#262626</color>
+    <color name="colorPrimary">#262626</color>
+    <color name="colorPrimaryDark">#212121</color>
     <color name="colorAccent">#fd8f01</color>
 
-    <!--color used by ExamPagerView-->
-    <color name="status_dark" >#212121</color>
-    <color name="toolbar_dark" >#262626</color>
-    <color name="text_green">#3bbf95</color>
+    <!--color used by yason-->
+    <color name="dark_grey_toolbar" >#212121</color>
+    <color name="dark_grey_status" >#262626</color>
+    <color name="dark_green_text">#3bbf95</color>
+    <color name="dark_blue_text">#5aa8e4</color>
+    <color name="dark_orange_text">#fd8f01</color>
+    <color name="dark_grey_background">#272727</color>
 
 
     <color name="touch_effect">#9ccc</color>

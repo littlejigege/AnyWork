@@ -1,12 +1,16 @@
 package com.qgstudio.anywork.fmain;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.allen.library.SuperTextView;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
+import com.qgstudio.anywork.fexam.ExamActivity;
+import com.qgstudio.anywork.fpaper.PaperActivity;
 
 import java.util.List;
 
@@ -17,10 +21,10 @@ import java.util.List;
 
 public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.Holder> {
 
-    private List<Organization> mOrgans;
+    private List<Organization> mOrganizations;
 
-    public OrganizationAdapter(List<Organization> organs) {
-        mOrgans = organs;
+    public OrganizationAdapter(List<Organization> organizations) {
+        mOrganizations = organizations;
     }
 
     @Override
@@ -32,35 +36,45 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        Organization Organization = mOrgans.get(position);
+        final Organization organization = mOrganizations.get(position);
         //// TODO: 2017/7/10 绑定数据
-
+        SuperTextView v = holder.stv;
+        v.setLeftTopString(organization.getOrganName());
+        v.setLeftBottomString(organization.getTeacherName());
+        v.setLeftBottomString2(organization.getDescription());
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PaperActivity.startToActivity(v.getContext(), organization.getOrganizationId());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return mOrgans.size();
+        return mOrganizations.size();
     }
 
 
-    public void add(Organization group) {
-        mOrgans.add(group);
-        notifyItemInserted(mOrgans.size());
+    public void add(Organization organization) {
+        mOrganizations.add(organization);
+        notifyItemInserted(mOrganizations.size());
     }
 
-    public void addAll(List<Organization> groups) {
-        int start = mOrgans.size() + 1;
-        int count = groups.size();
-        mOrgans.addAll(groups);
+    public void addAll(List<Organization> organizations) {
+        int start = mOrganizations.size() + 1;
+        int count = organizations.size();
+        mOrganizations.addAll(organizations);
         notifyItemRangeInserted(start, count);
     }
 
     class Holder extends RecyclerView.ViewHolder {
 
-
+        SuperTextView stv ;
 
         public Holder(View itemView) {
             super(itemView);
+            stv = (SuperTextView) itemView;
         }
     }
 

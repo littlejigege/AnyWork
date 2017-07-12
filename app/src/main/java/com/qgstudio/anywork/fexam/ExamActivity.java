@@ -1,11 +1,14 @@
 package com.qgstudio.anywork.fexam;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.fpaper.PaperActivity;
 
 import butterknife.OnClick;
 
@@ -15,20 +18,23 @@ import butterknife.OnClick;
 
 public class ExamActivity extends AppCompatActivity {
 
-
 //    private List<Question> mChoiceQuestions;
 //    private List<Question> mJudgeQuestions;
 //    private List<Question> mFillingQuestions;
 //    private List<Question> mCodeQuestions;
 //    private List<Question> mComprehensives;
 
-
+    private int mTestpaperId;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
-        // TODO: 2017/7/11 获取试卷的全部内容
+
+        //获取试卷id
+        mTestpaperId = getIntent().getIntExtra("TESTPAPER_ID", -1);
+
+        // TODO: 2017/7/11 根据id请求试卷的全部内容
     }
 
     @OnClick(R.id.card_choice)
@@ -60,5 +66,10 @@ public class ExamActivity extends AppCompatActivity {
 
     }
 
+    public static void startToActivity(Context context, int testpaperId) {
+        Intent intent = new Intent(context, PaperActivity.class);
+        intent.putExtra("TESTPAPER_ID", testpaperId);
+        context.startActivity(intent);
+    }
 
 }

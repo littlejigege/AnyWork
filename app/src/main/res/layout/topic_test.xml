@@ -75,7 +75,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:alpha="0.8"
-            android:background="@color/status_dark"
+            android:background="@color/dark_grey_status"
             android:text="上一题"
             android:textColor="#3bbf95" />
 
@@ -85,7 +85,7 @@
             android:layout_weight="1"
             android:text="下一题"
             android:textColor="#3bbf95"
-            android:background="@color/status_dark"
+            android:background="@color/dark_grey_status"
             android:alpha="0.8"
             />
     </LinearLayout>

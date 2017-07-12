@@ -2,6 +2,7 @@ package com.qgstudio.anywork.fmain;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import com.qgstudio.anywork.fpaper.PaperFragment;
 import com.qgstudio.anywork.mvp.BaseFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,19 +34,14 @@ public class OrganizationFragment extends BaseFragment {
     private OrganizationAdapter mOrganizationAdapter;
     private LinearLayoutManager mLinearLayoutManager;
 
-    public static OrganizationFragment newInstance() {
-        OrganizationFragment fragment = new OrganizationFragment();
-        return fragment;
-    }
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mType = (int) getArguments().get("TYPE");
     }
 
-    public static PaperFragment newInstance(int type) {
-        PaperFragment fragment = new PaperFragment();
+    public static OrganizationFragment newInstance(int type) {
+        OrganizationFragment fragment = new OrganizationFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("TYPE", type);
         fragment.setArguments(bundle);
@@ -74,6 +71,35 @@ public class OrganizationFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         //// TODO: 2017/7/10 调用接口返回全部的组织数据
+        switch (mType) {
+            case TYPE_ALL:{
+                //假数据
+                List<Organization> list = new ArrayList<>();
+                for (int i=0;i<10;i++) {
+                    Organization o =new Organization();
+                    o.setOrganName("C语言");
+                    o.setTeacherName("梨廉洁");
+                    o.setDescription("C语言是一门综合性学科，能很好考察学生计算机专业素养...");
+                    list.add(o);
+                }
+                mOrganizationAdapter.addAll(list);
+                break;
+            }
+            case TYPE_JOIN:{
+                //假数据
+                List<Organization> list = new ArrayList<>();
+                for (int i=0;i<5;i++) {
+                    Organization o =new Organization();
+                    o.setOrganName("数据结构");
+                    o.setTeacherName("皇飞虹");
+                    o.setDescription("数据结构是一门综合性学科，能很好考察学生计算机专业素养...");
+                    list.add(o);
+                }
+                mOrganizationAdapter.addAll(list);
+                break;
+            }
+            default:{}
+        }
     }
 
 
