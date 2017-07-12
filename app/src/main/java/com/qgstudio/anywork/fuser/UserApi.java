@@ -15,6 +15,7 @@ import retrofit2.http.Part;
 import rx.Observable;
 
 /**
+ * 用户模块的网络接口
  * Created by chenyi on 2017/4/13.
  */
 
@@ -24,7 +25,7 @@ public interface UserApi {
     @Headers("Content-Type:application/json;charset=UTF-8")
     Observable<ResponseResult<User>> getUserInfo();
 
-    @POST("user/update/info")
+    @POST("user/update")
     @Headers("Content-Type:application/json;charset=UTF-8")
     Observable<ResponseResult<User>> changeInfo(@Body Object o);
 

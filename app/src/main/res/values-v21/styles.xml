@@ -39,14 +39,14 @@
 
     <style name="AnyWork.Theme.TextView2" parent="Base.Widget.AppCompat.ActionBar">
         <item name="android:layout_width">250dp</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:textColor">@color/AnyWork_accent</item>
         <item name="android:textSize">24sp</item>
     </style>
 
     <style name="AnyWork.Theme.EditText1" parent="Theme.AppCompat.Light">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:theme">@style/AnyWork.Theme.EditText.Theme</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:textColor">@color/AnyWork_light</item>
@@ -61,24 +61,45 @@
 
     <style name="AnyWork.Theme.EditText2" parent="Theme.AppCompat.Light">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">50dp</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:layout_marginTop">12dp</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:maxLines">1</item>
         <item name="android:textColor">@color/text_dark</item>
     </style>
 
+    <style name="AnyWork.Theme.TextView3" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
     <style name="AnyWork.Theme.Button" parent="Base.Widget.AppCompat.Button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_height">42dp</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AnyWork.Theme.Button.Dialog" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
 
     <style name="WelcomeStyle" parent="AnyWork.Theme">
         <item name="android:windowBackground">@drawable/bg_welcome</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="AnyWork.Theme.Dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
 

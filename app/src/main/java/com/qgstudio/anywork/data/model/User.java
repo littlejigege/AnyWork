@@ -1,11 +1,14 @@
 package com.qgstudio.anywork.data.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * 用户实体
  * Created by FunriLy on 2017/7/10.
  * From small beginnings comes great things.
  */
-public class User {
+public class User implements Parcelable {
 
     private int userId;         //id
     private String userName;    //昵称
@@ -32,6 +35,27 @@ public class User {
     }
 
     //get & set
+
+    protected User(Parcel in) {
+        userId = in.readInt();
+        userName = in.readString();
+        email = in.readString();
+        password = in.readString();
+        phone = in.readString();
+        mark = in.readInt();
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 
     public int getUserId() {
         return userId;
@@ -93,5 +117,20 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", mark=" + mark +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(userId);
+        dest.writeString(userName);
+        dest.writeString(email);
+        dest.writeString(password);
+        dest.writeString(phone);
+        dest.writeInt(mark);
     }
 }

@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="InfoItem">
-        <attr name="title" format="string"/>
-        <attr name="info" format="string"/>
-        <attr name="titlePic" format="reference"/>
-    </declare-styleable>
-
     <declare-styleable name="ExamPagerView">
         <attr name="sTitleCenterTextString" format="string"/>
         <attr name="sTitleCenterTextColor" format="color"/>
