@@ -1,6 +1,5 @@
 package com.qgstudio.anywork.fuser;
 
-import android.net.Uri;
 import android.util.Log;
 
 import com.qgstudio.anywork.data.ResponseResult;
@@ -60,12 +59,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
 
                         if (result.getState() == 161) {
                             mUser = result.getData();
-                            mView.setEmail(mUser.getEmail());
-                            mView.setPhone(mUser.getPhone());
-//                            mView.setSchool(mUser.getSchool());
-//                            mView.setImg(mUser.getPicture());
-                            mView.setUserName(mUser.getUserName());
-//                            Log.i(TAG, "onNext: "+result.getStateInfo()+result.getData());
+
                         } else {
                             mView.showError("信息修改格式错误");
                         }
@@ -74,16 +68,15 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
     }
 
     @Override
-    public void changeInfo(final String title, final String string) {
+    public void changeInfo(User user) {
         if (userApi == null) {
             userApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(UserApi.class);
         }
 
         Map<String, String> info = new HashMap<>();
-        info.put("userName", mUser.getUserName());
-        info.put("phone", mUser.getPhone());
-//        info.put("school", mUser.getSchool()==null?" ":mUser.getSchool());
-        info.put(title, string);
+        info.put("userName", user.getUserName());
+        info.put("phone", user.getPhone());
+        info.put("email", user.getEmail());
 
         Log.i(TAG, "changeInfo: "+ GsonUtil.GsonString(info));
         userApi.changeInfo(info)
@@ -98,28 +91,13 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         mView.hidProgressDialog();
-//                        Log.i(TAG, "onError: 网络连接错误");
                     }
 
                     @Override
                     public void onNext(ResponseResult<User> result) {
                         assert result != null;
 
-                        if (result.getState() == 141) {
-                            switch (title) {
-                                case "phone":
-                                    mUser.setPhone(string);
-                                    break;
-                                case "userName":
-                                    mUser.setUserName(string);
-                                    break;
-                                case "school":
-//                                    mUser.setSchool(string);
-                                    break;
-                            }
-                            mView.setPhone(mUser.getPhone());
-//                            mView.setSchool(mUser.getSchool());
-                            mView.setUserName(mUser.getUserName());
+                        if (result.getState() == 3001) {
                             mView.hidProgressDialog();
                         } else {
 
@@ -131,9 +109,9 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
     public static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     @Override
-    public void changePic(final Uri picUri) {
+    public void changePic(final String path) {
         RequestBody pictureNameBody = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "picture");
-        File picture = new File(mView.uri2Path(picUri));
+        File picture = new File(path);
         final RequestBody requestFile = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), picture);
         // MultipartBody.Part 借助文件名上传
         MultipartBody.Part picturePart = MultipartBody.Part.createFormData("file", picture.getName(), requestFile);
@@ -160,7 +138,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     @Override
                     public void onNext(ResponseResult responseResult) {
                         if (responseResult.getState() == 151) {
-                            mView.changeImg(picUri);
+                            mView.changeImg();
                         }
                         mView.hidProgressDialog();
                     }

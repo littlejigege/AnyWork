@@ -25,6 +25,9 @@ public class App extends Application {
     private User user;
 
     public User getUser() {
+        if (user == null) {
+            user = new User();
+        }
         return user;
     }
 
