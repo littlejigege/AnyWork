@@ -14,10 +14,12 @@ public class LoginContract {
 
         void showError(String errorInfo);
 
-        void showSuccess(User user);
+        void showSuccess();
     }
 
     interface  Presenter extends BasePresenter<View> {
+
+        User getUser();
 
         void login(String account, String password);
     }

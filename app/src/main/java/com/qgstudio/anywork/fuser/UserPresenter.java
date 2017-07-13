@@ -29,43 +29,7 @@ import static android.content.ContentValues.TAG;
 public class UserPresenter extends BasePresenterImpl<UserContract.View> implements UserContract.Presenter{
 
     private UserApi userApi;
-    private User mUser;
 
-    @Override
-    public void getInfo() {
-        if (userApi == null) {
-            userApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(UserApi.class);
-        }
-
-        userApi.getUserInfo()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ResponseResult<User>>() {
-                    @Override
-                    public void onCompleted() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-//                        Log.i(TAG, "onError: 网络连接错误");
-                        mView.showError("网络连接错误");
-                    }
-
-                    @Override
-                    public void onNext(ResponseResult<User> result) {
-
-                        assert result != null;
-
-                        if (result.getState() == 161) {
-                            mUser = result.getData();
-
-                        } else {
-                            mView.showError("信息修改格式错误");
-                        }
-                    }
-                });
-    }
 
     @Override
     public void changeInfo(User user) {
@@ -98,6 +62,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                         assert result != null;
 
                         if (result.getState() == 3001) {
+                            mView.showSuccess();
                             mView.hidProgressDialog();
                         } else {
 

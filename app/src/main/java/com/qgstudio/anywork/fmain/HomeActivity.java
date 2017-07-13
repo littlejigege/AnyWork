@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.fmain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.fuser.UserActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -114,7 +116,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             }
             case R.id.nav_inform:{
-                // TODO: 2017/7/12  启动通知aty
+                Intent intent = new Intent(this, UserActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             }
             case R.id.nav_exit:{
@@ -127,6 +130,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         mDrawerLayout.closeDrawers();
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case 1:
+                if (resultCode == RESULT_OK) {
+                    // TODO: 修改主界面的个人信息 2017/7/13
+                }
+                break;
+        }
     }
 
     private void showFragment(String type) {

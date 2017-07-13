@@ -3,9 +3,7 @@ package com.qgstudio.anywork.fenter.login;
 import android.content.Intent;
 import android.widget.EditText;
 
-import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.fmain.HomeActivity;
 import com.qgstudio.anywork.mvp.MVPBaseFragment;
 import com.qgstudio.anywork.utils.ToastUtil;
@@ -71,8 +69,7 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     }
 
     @Override
-    public void showSuccess(User user) {
-        ((App)mActivity.getApplication()).setUser(user);
+    public void showSuccess() {
         ToastUtil.showToast("登录成功");
         Intent intent = new Intent(mActivity, HomeActivity.class);
         mActivity.startActivity(intent);

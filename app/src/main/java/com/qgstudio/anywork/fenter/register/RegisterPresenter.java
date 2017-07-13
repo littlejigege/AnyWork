@@ -26,13 +26,6 @@ class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> impleme
 
         final User user = new User(-1, name, account, password, phone, 0);
 
-//        Map<String, String> info = new HashMap<>();
-//        info.put("email", account);
-//        info.put("password", password);
-//        info.put("userName", name);
-//        info.put("phone", phone);
-//        info.put("mark", 0+"");
-
         registerApi.register(user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -50,7 +43,6 @@ class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> impleme
                     @Override
                     public void onNext(ResponseResult<Integer> result) {
 
-//                        Log.i(TAG, "onNext: "+result.getStateInfo()+result.getData());
                         if (result.getState() == 1001) {
                             mView.showSuccess();
                         } else {

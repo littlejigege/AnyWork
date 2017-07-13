@@ -52,7 +52,7 @@ public enum RetrofitClient {
             synchronized (Retrofit.class) {
                 if (retrofit == null) {
                     retrofit = new Retrofit.Builder()
-                            .baseUrl("http://118.89.54.17/anywork/")
+                            .baseUrl("http://10.21.48.11:8080/anywork/")
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(client)
                             .addConverterFactory(GsonConverterFactory.create())

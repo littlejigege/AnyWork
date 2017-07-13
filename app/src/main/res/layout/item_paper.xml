@@ -10,11 +10,3 @@
 
 </RelativeLayout>
 
-    <!--stv:sLeftIconRes="@mipmap/ic_launcher"-->
-    <!--stv:sLeftIconHeight="50dp"-->
-    <!--stv:sLeftIconWidth="50dp"-->
-    <!--stv:sLeftTopTextString="第五章：数组"-->
-    <!--stv:sLeftTextString="教师："-->
-    <!--stv:sLeftBottomTextString="开始时间："-->
-    <!--stv:sLeftBottomTextString2="结束时间："-->
-

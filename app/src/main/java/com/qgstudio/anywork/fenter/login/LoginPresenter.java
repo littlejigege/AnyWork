@@ -1,11 +1,17 @@
 package com.qgstudio.anywork.fenter.login;
 
+import android.util.Log;
+
+import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
+import com.qgstudio.anywork.utils.DataBaseUtil;
+import com.qgstudio.anywork.utils.GsonUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Observer;
@@ -20,6 +26,12 @@ import rx.schedulers.Schedulers;
 public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implements LoginContract.Presenter{
 
     private LoginApi loginApi;
+
+    @Override
+    public User getUser() {
+
+        return null;
+    }
 
     @Override
     public void login(String account, String password) {
@@ -49,9 +61,17 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                     @Override
                     public void onNext(ResponseResult<User> result) {
 
-                        if (result.getState() == 121) {
-                            mView.showSuccess(result.getData());
-//                            Log.i(TAG, "onNext: "+result.getStateInfo()+result.getData());
+                        if (result.getState() == 2001) {
+                            User user = result.getData();
+                            App.getInstance().setUser(user);
+
+                            mView.showSuccess();
+
+                            DataBaseUtil.getHelper().save(user);
+                            List<User> list = DataBaseUtil.getHelper().queryAll(User.class);
+                            for (User u : list) {
+                                Log.d("tag", "onNext: "+ GsonUtil.GsonString(u));
+                            }
                         } else {
                             mView.showError(result.getStateInfo());
                         }

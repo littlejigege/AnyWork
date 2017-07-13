@@ -20,7 +20,6 @@ public class UserContract {
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getInfo();
         void changeInfo(User newUser);
         void changePic(String path);
     }
