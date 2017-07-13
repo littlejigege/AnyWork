@@ -6,9 +6,9 @@ package com.qgstudio.anywork.data;
  */
 
 public class ResponseResult<T> {
-    private int state;
-    private String stateInfo;
-    private T data;
+    private int state;//状态
+    private String stateInfo;//提示
+    private T data;//数据
 
     public int getState() {
         return state;

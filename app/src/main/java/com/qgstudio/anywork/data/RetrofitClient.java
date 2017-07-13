@@ -13,6 +13,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.qgstudio.anywork.data.ApiStores.API_DEFAULT_URL;
+
 /**
  * Retrofit客户端
  * Created by chenyi on 2017/4/10.
@@ -47,12 +49,13 @@ public enum RetrofitClient {
 
     private Retrofit retrofit;
 
-    public Retrofit getRetrofit() {
+    public Retrofit getRetrofit(String url) {
         if(retrofit == null) {
             synchronized (Retrofit.class) {
                 if (retrofit == null) {
+                    boolean isUseDefaultUrl = (url == null || url.equals(""));
                     retrofit = new Retrofit.Builder()
-                            .baseUrl("http://118.89.54.17/anywork/")
+                            .baseUrl(isUseDefaultUrl ? API_DEFAULT_URL : url)
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(client)
                             .addConverterFactory(GsonConverterFactory.create())

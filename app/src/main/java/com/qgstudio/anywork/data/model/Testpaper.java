@@ -14,15 +14,33 @@ public class Testpaper {
     private String testpaperTitle;          //试卷标题
     private int authorId;                   //教师ID
     private int organizationId;             //组织ID        
-    private Date createTime;                //开始时间
-    private Date endingTime;                //结束时间
-    private int chapterId;                    //章节，为练习卷添加章节
+    private long createTime;                //开始时间
+    private long endingTime;                //结束时间
+    private int chapterId;                    //章节id，为练习卷添加章节
+    private String chapterName;               //章节名称，为练习卷添加章节
     private int testpaperScore;             //试卷分数
     private int testpaperType;              //试卷类型，0为练习、1为考试，若将来扩展可在这个字段上实现
 
     public Testpaper(){}
 
     //get & set
+
+
+    @Override
+    public String toString() {
+        return "Testpaper{" +
+                "testpaperId=" + testpaperId +
+                ", testpaperTitle='" + testpaperTitle + '\'' +
+                ", authorId=" + authorId +
+                ", organizationId=" + organizationId +
+                ", createTime=" + createTime +
+                ", endingTime=" + endingTime +
+                ", chapterId=" + chapterId +
+                ", chapterName='" + chapterName + '\'' +
+                ", testpaperScore=" + testpaperScore +
+                ", testpaperType=" + testpaperType +
+                '}';
+    }
 
     public int getTestpaperId() {
         return testpaperId;
@@ -56,19 +74,19 @@ public class Testpaper {
         this.organizationId = organizationId;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
-    public Date getEndingTime() {
+    public long getEndingTime() {
         return endingTime;
     }
 
-    public void setEndingTime(Date endingTime) {
+    public void setEndingTime(long endingTime) {
         this.endingTime = endingTime;
     }
 
@@ -78,6 +96,14 @@ public class Testpaper {
 
     public void setChapterId(int chapterId) {
         this.chapterId = chapterId;
+    }
+
+    public String getChapterName() {
+        return chapterName;
+    }
+
+    public void setChapterName(String chapterName) {
+        this.chapterName = chapterName;
     }
 
     public int getTestpaperScore() {

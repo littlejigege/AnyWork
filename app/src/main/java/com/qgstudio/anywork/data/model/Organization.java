@@ -10,7 +10,7 @@ public class Organization {
     private int organizationId;            //ID
     private int teacherId;               //教师ID
     private String teacherName;          //教师名称
-    private String organName;       //组织名
+    private String organizationName;       //组织名
     private String description;     //描述
     private long token;             //口令
     private int count;              //组织人数
@@ -45,12 +45,12 @@ public class Organization {
         this.teacherId = teacherId;
     }
 
-    public String getOrganName() {
-        return organName;
+    public String getOrganizationName() {
+        return organizationName;
     }
 
-    public void setOrganName(String organName) {
-        this.organName = organName;
+    public void setOrganizationName(String organName) {
+        this.organizationName = organName;
     }
 
     public String getDescription() {

@@ -11,42 +11,28 @@ import rx.Subscriber;
 
 public abstract class RetrofitSubscriber<T> extends Subscriber<ResponseResult<T>> {
 
-//    class ApiException extends Exception {
-//        public ApiException(String message) {
-//            super(message);
-//        }
-//    }
+    protected abstract void onSuccess(T data);//服务器返回成功
+    protected abstract void onFailure(String info);//服务器返回失败
+    protected abstract void onMistake(Throwable t);//网络库请求数据失败
 
-    protected abstract int getSuccessState();
-
-    protected LoadDataCallback<T> mLoadDataCallback;
-
-    public RetrofitSubscriber(@NonNull LoadDataCallback<T> LoadDataCallback){
-        mLoadDataCallback = LoadDataCallback;
-    }
+    public static final int mSuccessState = 1;
 
     @Override
     public void onCompleted() {
-        unsubscribeCallback();
     }
 
     @Override
     public void onError(Throwable t) {
-        mLoadDataCallback.onFailure(t);
-        unsubscribeCallback();
+        onMistake(t);
     }
 
     @Override
     public void onNext(ResponseResult<T> tResponseResult) {
-        if (tResponseResult.getState() == getSuccessState()) {
-            mLoadDataCallback.onSuccess(tResponseResult.getData());
+        if (tResponseResult.getState() == mSuccessState) {
+            onSuccess(tResponseResult.getData());
         } else {
-//            onError(new ApiException(tResponseResult.getStateInfo()));
+            onFailure(tResponseResult.getStateInfo());
         }
-    }
-
-    public void unsubscribeCallback() {
-        mLoadDataCallback = null;
     }
 
 }
