@@ -85,6 +85,11 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
     }
 
     @Override
+    public void loadData() {
+
+    }
+
+    @Override
     public void showError(String errorInfo) {
         ToastUtil.showToast(errorInfo);
         password.setText("");

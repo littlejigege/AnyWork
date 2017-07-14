@@ -25,14 +25,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
     @BindView(R.id.drawer)
     DrawerLayout mDrawerLayout;
-
     @BindView(R.id.navigation)
     NavigationView mNavigationView;
 
-    private Map<String,Fragment> mFragmentMap;
+    private Map<String, Fragment> mFragmentMap;
     private FragmentManager mFragmentManager;
 
     @Override
@@ -41,6 +39,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        //1.View初始化
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -54,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         mFragmentMap = new HashMap<>();
         mFragmentManager = getSupportFragmentManager();
 
-        //添加fragment
+        //2.添加fragment
         Fragment fragAll = OrganizationFragment.newInstance(OrganizationFragment.TYPE_ALL);
         Fragment fragJoin = OrganizationFragment.newInstance(OrganizationFragment.TYPE_JOIN);
 
@@ -82,8 +81,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
+//    @Override
+//    public void onBackPressed() {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //        builder.setTitle("是否退出登录");
 //        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
@@ -100,28 +99,28 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 //            }
 //        });
 //        builder.create().show();
-    }
+//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_all:{
+            case R.id.nav_all: {
                 showFragment("ALL");
                 break;
             }
-            case R.id.nav_join:{
+            case R.id.nav_join: {
                 showFragment("JOIN");
                 break;
             }
-            case R.id.nav_inform:{
+            case R.id.nav_inform: {
                 // TODO: 2017/7/12  启动通知aty
                 break;
             }
-            case R.id.nav_exit:{
+            case R.id.nav_exit: {
                 // TODO: 2017/7/12  弹出退出窗口
                 break;
             }
-            default:{
+            default: {
                 return false;
             }
         }

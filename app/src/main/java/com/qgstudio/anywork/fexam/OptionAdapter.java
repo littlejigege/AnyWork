@@ -25,6 +25,17 @@ public class OptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private Question mQuestion;
 
+    private OnChoiceOptionClickListener mOnChoiceOptionClickListener;
+
+    interface OnChoiceOptionClickListener {
+        void onChoiceOptionClickListener();
+    }
+
+    public void setOnChoiceOptionClickListener(OnChoiceOptionClickListener onChoiceOptionClickListener) {
+        mOnChoiceOptionClickListener = onChoiceOptionClickListener;
+    }
+
+
     public OptionAdapter(Question question) {
         mQuestion = question;
     }
@@ -131,12 +142,14 @@ public class OptionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public ChoiceHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO: 2017/7/11 下一页
-                }
-            });
+            if (mOnChoiceOptionClickListener != null) {
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mOnChoiceOptionClickListener.onChoiceOptionClickListener();
+                    }
+                });
+            }
         }
 
     }

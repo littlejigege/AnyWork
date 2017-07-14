@@ -3,6 +3,7 @@ package com.qgstudio.anywork.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import com.qgstudio.anywork.R;
 
+import static android.R.attr.id;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
@@ -59,6 +61,10 @@ public class ExamPagerView extends LinearLayout {
     private int mDefaultTitleBackgroundColor;
     private int mDefaultBottomBackgroundColor;
 
+    @IdRes
+    int ID_VIEWPAGER = 1000;
+
+
 //    private OnTitleRightIconClickListener mOnTitleRightIconClickListener;
 //    private OnLeftBottomBtnClickListener mOnLeftBottomBtnClickListener;
 //    private OnRightBottomBtnClickListener mOnRightBottomBtnClickListener;
@@ -86,6 +92,20 @@ public class ExamPagerView extends LinearLayout {
 //    public void setOnRightBottomBtnClickListener(OnRightBottomBtnClickListener onRightBottomBtnClickListener) {
 //        mOnRightBottomBtnClickListener = onRightBottomBtnClickListener;
 //    }
+
+    public void setViewPagerNextItem() {
+        int cp = mViewPager.getCurrentItem();
+        if (cp < mViewPager.getChildCount()) {
+            mViewPager.setCurrentItem(cp + 1);
+        }
+    }
+
+    public void setViewPagerLastItem() {
+        int cp = mViewPager.getCurrentItem();
+        if (cp > 0) {
+            mViewPager.setCurrentItem(cp - 1);
+        }
+    }
 
     public void setTitleCenterTextString(String text) {
         if (mTitleCenterTV != null) {
@@ -164,6 +184,8 @@ public class ExamPagerView extends LinearLayout {
         params.weight = 1;
         mViewPager.setLayoutParams(params);
 
+        mViewPager.setId(ID_VIEWPAGER);
+
         addView(mViewPager);
 
     }
@@ -186,10 +208,7 @@ public class ExamPagerView extends LinearLayout {
         mLeftBottomBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                int cp = mViewPager.getCurrentItem();
-                if (cp > 0) {
-                    mViewPager.setCurrentItem(cp - 1);
-                }
+                setViewPagerLastItem();
             }
         });
         mBottomLinear.addView(mLeftBottomBtn);
@@ -205,10 +224,7 @@ public class ExamPagerView extends LinearLayout {
         mRightBottomBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                int cp = mViewPager.getCurrentItem();
-                if (cp < mViewPager.getChildCount()) {
-                    mViewPager.setCurrentItem(cp + 1);
-                }
+                setViewPagerNextItem();
             }
         });
         mBottomLinear.addView(mRightBottomBtn);

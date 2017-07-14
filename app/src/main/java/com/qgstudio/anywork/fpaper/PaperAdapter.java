@@ -4,11 +4,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Testpaper;
+import com.qgstudio.anywork.fexam.ExamActivity;
+import com.qgstudio.anywork.ui.RoundedImageView;
 
 import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 /**
@@ -23,12 +29,6 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
         mPapers = papers;
     }
 
-    interface OnItemClickListener {
-        void onItemClick();
-    }
-
-    private OnItemClickListener mOnItemClickListener;
-
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -40,6 +40,9 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
     public void onBindViewHolder(Holder holder, int position) {
         Testpaper paper = mPapers.get(position);
         //// TODO: 2017/7/10 绑定数据
+        holder.tv_title.setText(mPapers.get(position).getTestpaperTitle());
+        holder.tv_chapter.setText(mPapers.get(position).getChapterName());
+
     }
 
     @Override
@@ -60,20 +63,32 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
         notifyItemRangeInserted(start, count);
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.mOnItemClickListener = onItemClickListener;
-    }
 
     class Holder extends RecyclerView.ViewHolder {
-        
+
+        @BindView(R.id.roundedImageView)
+        RoundedImageView img;
+
+        @BindView(R.id.textView5)
+        TextView tv_title;
+
+        @BindView(R.id.textView6)
+        TextView tv_chapter;
+
+        @BindView(R.id.textView7)
+        TextView tv_type;
+
+        @BindView(R.id.textView8)
+        TextView tv_date;
+
         public Holder(View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mOnItemClickListener != null) {
-                        mOnItemClickListener.onItemClick();
-                    }
+                    int pos = getAdapterPosition();
+                    ExamActivity.startToActivity(v.getContext(), mPapers.get(pos).getTestpaperId());
                 }
             });
         }

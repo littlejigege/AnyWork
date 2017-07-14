@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class QuestionFragment extends BaseFragment {
+public class QuestionFragment extends BaseFragment implements OptionAdapter.OnChoiceOptionClickListener {
 
     @BindView(R.id.tv_type)
     TextView mTVType;
@@ -74,6 +74,7 @@ public class QuestionFragment extends BaseFragment {
 
         //设置题目选项
         mOptionAdapter = new OptionAdapter(mQuestion);
+        mOptionAdapter.setOnChoiceOptionClickListener(this);
         mRecyclerView.setAdapter(mOptionAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
@@ -83,6 +84,15 @@ public class QuestionFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void loadData() {
+        //no need
+    }
+
+    @Override
+    public void onChoiceOptionClickListener() {
+        ((ExamActivity) mActivity).setNextPage();
+    }
 
     @Override
     public void onDestroyView() {

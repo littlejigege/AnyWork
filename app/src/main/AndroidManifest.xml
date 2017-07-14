@@ -30,7 +30,7 @@
         </activity>
         <activity android:name=".fexam.ExamActivity" />
         <activity android:name=".fpaper.PaperActivity" />
-        <activity android:name=".fexam.QuestionsActivity" />
+        <activity android:name=".fexam.ExamActivity" />
     </application>
 
 </manifest>

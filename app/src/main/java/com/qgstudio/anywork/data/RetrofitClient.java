@@ -49,13 +49,12 @@ public enum RetrofitClient {
 
     private Retrofit retrofit;
 
-    public Retrofit getRetrofit(String url) {
+    public Retrofit getRetrofit() {
         if(retrofit == null) {
             synchronized (Retrofit.class) {
                 if (retrofit == null) {
-                    boolean isUseDefaultUrl = (url == null || url.equals(""));
                     retrofit = new Retrofit.Builder()
-                            .baseUrl(isUseDefaultUrl ? API_DEFAULT_URL : url)
+                            .baseUrl(API_DEFAULT_URL)
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(client)
                             .addConverterFactory(GsonConverterFactory.create())

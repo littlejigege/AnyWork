@@ -34,18 +34,21 @@ public class PaperActivity extends AppCompatActivity {
     private int mOrganizationId;
     private PaperFragAdapter mPaperFragAdapter;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_paper);
 
+        //1.获取组织id
+        mOrganizationId = getIntent().getIntExtra("ORGANIZATION_ID", -1);
+
+        //2.View初始化
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        mPaperFragAdapter = new PaperFragAdapter(getSupportFragmentManager());
+        mPaperFragAdapter = new PaperFragAdapter(getSupportFragmentManager(), mOrganizationId);
         mViewPager.setAdapter(mPaperFragAdapter);
         mViewPager.setOffscreenPageLimit(mPaperFragAdapter.getCount());
 
@@ -54,22 +57,12 @@ public class PaperActivity extends AppCompatActivity {
 
         mTabLayout.setTabTextColors(getColor(R.color.dark_grey_status), getColor(R.color.dark_green_text));
 
-        //获取组织id
-        mOrganizationId = getIntent().getIntExtra("ORGANIZATION_ID", -1);
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //// TODO: 2017/7/12 获取试卷简介信息 
     }
 
     @OnClick(R.id.btn_back)
     public void back() {
         this.finish();
     }
-
 
     public static void startToActivity(Context context, int organizationId) {
         Intent intent = new Intent(context, PaperActivity.class);

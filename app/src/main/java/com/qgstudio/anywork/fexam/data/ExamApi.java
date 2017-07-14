@@ -1,8 +1,13 @@
 package com.qgstudio.anywork.fexam.data;
 
 import com.qgstudio.anywork.data.ResponseResult;
+import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswer;
+import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
 import com.qgstudio.anywork.data.model.Testpaper;
+
+import java.util.List;
+import java.util.Map;
 
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -17,11 +22,11 @@ import rx.Observable;
 
 public interface ExamApi {
 
-    @GET("test/Testpaper/{textpaperId}")
-    Observable<ResponseResult<Testpaper>> getTextpaper(@Path("textpaperId") int textpaperId);
+    @POST("test")
+    Observable<ResponseResult<List<Question>>> getTestpaper(@Body() Map<String, String> testpaperId);
 
-    @POST("studentAnswer/add")
+    @POST("test/submit")
     @Headers("Content-Type:application/json")
-    Observable<ResponseResult<Double>> submitTextpaper(@Body StudentAnswer studentAnswer);
+    Observable<ResponseResult<StudentAnswerAnalysis>> submitTestpaper(@Body StudentAnswer studentAnswer);
 
 }

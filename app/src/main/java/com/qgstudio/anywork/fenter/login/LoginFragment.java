@@ -66,6 +66,11 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     }
 
     @Override
+    public void loadData() {
+
+    }
+
+    @Override
     public void showError(String errorInfo) {
         ToastUtil.showToast(errorInfo);
     }

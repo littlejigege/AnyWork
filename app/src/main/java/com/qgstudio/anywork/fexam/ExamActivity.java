@@ -1,75 +1,93 @@
 package com.qgstudio.anywork.fexam;
 
+
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
-
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.fpaper.PaperActivity;
+import com.qgstudio.anywork.data.model.Question;
+import com.qgstudio.anywork.fexam.data.ExamRepository;
+import com.qgstudio.anywork.mvp.MVPBaseActivity;
+import com.qgstudio.anywork.ui.ExamPagerView;
 
-import butterknife.OnClick;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * Created by Yason on 2017/7/11.
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class ExamActivity extends AppCompatActivity {
 
-//    private List<Question> mChoiceQuestions;
-//    private List<Question> mJudgeQuestions;
-//    private List<Question> mFillingQuestions;
-//    private List<Question> mCodeQuestions;
-//    private List<Question> mComprehensives;
+public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> implements ExamView {
 
-    private int mTestpaperId;
+    @BindView(R.id.epv)
+    ExamPagerView mExamPagerView;//类似ViewPager
+
+    private int mTestPaperId;
+
+    //    private List<Question> mQuestions;//数据源
+    private QuestionFragAdapter mQuestionFragAdapter;//适配器
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam);
+        setContentView(R.layout.activity_question);
 
-        //获取试卷id
-        mTestpaperId = getIntent().getIntExtra("TESTPAPER_ID", -1);
+        //1.获取试卷id
+        mTestPaperId = getIntent().getIntExtra("TESTPAPER_ID", -1);
 
-        // TODO: 2017/7/11 根据id请求试卷的全部内容
-    }
+        //2.View初始化
+        ButterKnife.bind(this);
 
-    @OnClick(R.id.card_choice)
-    public void choice() {
-    }
+        mQuestionFragAdapter = new QuestionFragAdapter(getSupportFragmentManager(), new ArrayList<Question>());
+        mExamPagerView.setViewPagerAdapter(mQuestionFragAdapter);
 
-    @OnClick(R.id.card_judge)
-    public void judge() {
-
-    }
-
-    @OnClick(R.id.card_filling)
-    public void filling() {
+        //3.向服务器申请数据
+        mPresenter.getTestpaper(mTestPaperId);
 
     }
 
-    @OnClick(R.id.card_asking)
-    public void asking() {
+//    @Override
+//    public void onBackPressed() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage("你还未完成选择题，确认返回？");
+//        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                finish();
+//                dialog.dismiss();
+//            }
+//        });
+//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        builder.create().show();
+//    }
 
-    }
-
-    @OnClick(R.id.card_code)
-    public void code() {
-
-    }
-
-    @OnClick(R.id.card_comprehensive)
-    public void comprehensive() {
-
+    public void setNextPage() {
+        mExamPagerView.setViewPagerNextItem();
     }
 
     public static void startToActivity(Context context, int testpaperId) {
-        Intent intent = new Intent(context, PaperActivity.class);
+        Intent intent = new Intent(context, ExamActivity.class);
         intent.putExtra("TESTPAPER_ID", testpaperId);
         context.startActivity(intent);
     }
 
+    @Override
+    public void addQuestion(Question question) {
+        mQuestionFragAdapter.add(question);
+    }
+
+    @Override
+    public void addQuestions(List<Question> questions) {
+        mQuestionFragAdapter.addAll(questions);
+    }
 }

@@ -1,13 +1,9 @@
-package com.qgstudio.anywork.fpaper.data;
+package com.qgstudio.anywork.fmain.data;
 
-
-import android.util.Log;
-
-import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
-import com.qgstudio.anywork.data.model.Testpaper;
-import com.qgstudio.anywork.fpaper.PaperFragView;
+import com.qgstudio.anywork.data.model.Organization;
+import com.qgstudio.anywork.fmain.OrganizationFragView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 
 import java.util.HashMap;
@@ -18,31 +14,31 @@ import retrofit2.Retrofit;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-
 /**
- * Created by Yason on 2017/4/12.
+ * Model+Presenter
+ * 对外提供的接口用public，否则private
+ * Created by Yason on 2017/4/14.
  */
 
-public class PaperRepository extends BasePresenterImpl<PaperFragView> {
+public class OrganizationRepository extends BasePresenterImpl<OrganizationFragView>{
 
-    private PaperApi mPaperApi;
+    private OrganizationApi mOrganizationApi;
 
-    public PaperRepository() {
+    public OrganizationRepository() {
         Retrofit retrofit = RetrofitClient.RETROFIT_CLIENT.getRetrofit();
-        mPaperApi = retrofit.create(PaperApi.class);
+        mOrganizationApi = retrofit.create(OrganizationApi.class);
     }
 
-
-    public void getExaminationPaper(int organizationId) {
+    public void getAllOrganization() {
         Map<String, String> map = new HashMap();
-        map.put("organizationId", organizationId + "");
-        mPaperApi.getExaminationPaper(map)
+        map.put("organizationName", "");
+        mOrganizationApi.getAllOrganization(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitSubscriber<List<Testpaper>>() {
+                .subscribe(new RetrofitSubscriber<List<Organization>>() {
                     @Override
-                    protected void onSuccess(List<Testpaper> data) {
-                        mView.addExaminationPapers(data);
+                    protected void onSuccess(List<Organization> data) {
+                        mView.addOrganizations(data);
                     }
 
                     @Override
@@ -55,26 +51,22 @@ public class PaperRepository extends BasePresenterImpl<PaperFragView> {
                 });
     }
 
-    public void getPracticePaper(int organizationId) {
-        Map<String, String> map = new HashMap();
-        map.put("organizationId", organizationId + "");
-        mPaperApi.getPracticePaper(map)
+    public void getJoinOrganization() {
+        mOrganizationApi.getJoinOrganization()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitSubscriber<List<Testpaper>>() {
+                .subscribe(new RetrofitSubscriber<List<Organization>>() {
                     @Override
-                    protected void onSuccess(List<Testpaper> data) {
-                        mView.addPracticePapers(data);
+                    protected void onSuccess(List<Organization> data) {
+                        mView.addOrganizations(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
-
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-
                     }
                 });
     }

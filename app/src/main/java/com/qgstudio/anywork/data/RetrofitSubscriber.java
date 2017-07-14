@@ -13,7 +13,7 @@ public abstract class RetrofitSubscriber<T> extends Subscriber<ResponseResult<T>
 
     protected abstract void onSuccess(T data);//服务器返回成功
     protected abstract void onFailure(String info);//服务器返回失败
-    protected abstract void onMistake(Throwable t);//网络库请求数据失败
+    protected abstract void onMistake(Throwable t);//网络库发生错误
 
     public static final int mSuccessState = 1;
 
