@@ -22,6 +22,7 @@ public abstract class BaseFragment extends Fragment {
 
     public abstract int getRootId();
     public abstract void initView();
+    public abstract void loadData();
 
     @Override
     public void onAttach(Context context) {
@@ -36,6 +37,7 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRoot = inflater.inflate(getRootId(), container, false);
         initView();
+        loadData();
         return mRoot;
     }
 

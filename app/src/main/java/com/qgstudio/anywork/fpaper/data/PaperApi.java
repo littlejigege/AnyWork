@@ -4,8 +4,11 @@ import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.model.Testpaper;
 
 import java.util.List;
+import java.util.Map;
 
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -15,10 +18,10 @@ import rx.Observable;
 
 public interface PaperApi {
 
-    @GET("timeline/{time}/timeline/{organId}")
-    Observable<ResponseResult<List<Testpaper>>> getPracticePaper(@Path("time") long time, @Path("organId") int organId);
+    @POST("test/practiceList")
+    Observable<ResponseResult<List<Testpaper>>> getPracticePaper(@Body Map<String, String> organizationId);
 
-    @GET("relation/allorgan")
-    Observable<ResponseResult<List<Testpaper>>> getExaminationPaper();
+    @POST("test/testList")
+    Observable<ResponseResult<List<Testpaper>>> getExaminationPaper(@Body Map<String, String> organizationId);
 
 }

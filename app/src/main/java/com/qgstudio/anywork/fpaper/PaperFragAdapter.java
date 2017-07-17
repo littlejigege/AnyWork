@@ -12,11 +12,11 @@ public class PaperFragAdapter extends FragmentStatePagerAdapter {
     private List<Fragment> mFragments;
     private List<String> mTitles;
 
-    public PaperFragAdapter(FragmentManager fm) {
+    public PaperFragAdapter(FragmentManager fm, int organizationId) {
         super(fm);
         mFragments = new ArrayList<>();
-        mFragments.add(PaperFragment.newInstance(PaperFragment.TYPE_EXMINATION));
-        mFragments.add(PaperFragment.newInstance(PaperFragment.TYPE_PRACTICE));
+        mFragments.add(PaperFragment.newInstance(PaperFragment.TYPE_EXMINATION, organizationId));
+        mFragments.add(PaperFragment.newInstance(PaperFragment.TYPE_PRACTICE, organizationId));
 
         mTitles = new ArrayList<>();
         mTitles.add("考试");

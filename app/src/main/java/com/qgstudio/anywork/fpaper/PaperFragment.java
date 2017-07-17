@@ -5,11 +5,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
 import com.qgstudio.anywork.data.model.Testpaper;
+import com.qgstudio.anywork.fpaper.data.PaperRepository;
 import com.qgstudio.anywork.mvp.BaseFragment;
+import com.qgstudio.anywork.mvp.MVPBaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemClickListener{
+public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepository>implements PaperFragView {
 
     @BindView(R.id.recycler_paper)
     RecyclerView mRecyclerView;
@@ -27,6 +30,7 @@ public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemCl
     public static final int TYPE_EXMINATION = 1;
 
     private int mType;
+    private int mOrganizationId;
 
     private Unbinder mUnbinder;
 
@@ -36,13 +40,15 @@ public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemCl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mType = (int) getArguments().get("TYPE");
+        mType = getArguments().getInt("TYPE");
+        mOrganizationId = getArguments().getInt("ORGANIZATION_ID");
     }
 
-    public static PaperFragment newInstance(int type) {
+    public static PaperFragment newInstance(int type, int organizationId) {
         PaperFragment fragment = new PaperFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("TYPE", type);
+        bundle.putInt("ORGANIZATION_ID", organizationId);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -64,39 +70,21 @@ public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemCl
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        mPaperAdapter.setOnItemClickListener(this);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void loadData() {
         switch (mType) {
-            case TYPE_EXMINATION:{
-                //// TODO: 2017/7/10 调用接口返回试卷信息,根据mType调用不同
-                //假数据
-                List<Testpaper> list = new ArrayList<>();
-                for (int i=0;i<5;i++) {
-                    Testpaper t =new Testpaper();
-                    t.setTestpaperTitle("第一章");
-                    t.setTestpaperType(0);
-                    t.setChapterId(1);
-                    list.add(t);
-                }
+            case TYPE_EXMINATION: {
+                mPresenter.getExaminationPaper(mOrganizationId);
                 break;
             }
-            case TYPE_PRACTICE:{
-                //假数据
-                List<Testpaper> list = new ArrayList<>();
-                for (int i=0;i<5;i++) {
-                    Testpaper t =new Testpaper();
-                    t.setTestpaperTitle("第一章");
-                    t.setTestpaperType(2);
-                    t.setChapterId(1);
-                    list.add(t);
-                }
+            case TYPE_PRACTICE: {
+                mPresenter.getPracticePaper(mOrganizationId);
                 break;
             }
-            default:{}
+            default: {
+            }
         }
     }
 
@@ -107,9 +95,14 @@ public class PaperFragment extends BaseFragment implements PaperAdapter.OnItemCl
         mUnbinder.unbind();
     }
 
+
     @Override
-    public void onItemClick() {
-        // TODO: 2017/7/11 跳转到考试页面
+    public void addPracticePapers(List<Testpaper> testpapers) {
+        mPaperAdapter.addAll(testpapers);
     }
 
+    @Override
+    public void addExaminationPapers(List<Testpaper> testpapers) {
+        mPaperAdapter.addAll(testpapers);
+    }
 }

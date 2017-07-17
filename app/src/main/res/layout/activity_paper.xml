@@ -24,7 +24,7 @@
         android:id="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="#ebebeb"
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:tabIndicatorColor="@color/dark_green_text"/>
@@ -32,6 +32,7 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/dark_white_background"/>
     
 </LinearLayout>

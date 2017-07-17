@@ -1,113 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:epv="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <com.qgstudio.anywork.ui.ExamPagerView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/epv"
+    epv:sTitleCenterTextString=""
+    epv:sTitleCenterTextColor="@color/dark_green_text"
+    epv:sTitleBackgroundColor="@color/dark_grey_status"
+    epv:sTitleRightIconResId="@drawable/ic_quit"
+    epv:sLeftBottomTextColor="@color/dark_green_text"
+    epv:sLeftBottomTextString="上一题"
+    epv:sRightBottomBackgroundColor="@color/dark_grey_status"
+    epv:sRightBottomTextColor="@color/dark_green_text"
+    epv:sRightBottomTextString="下一题"
+    epv:sLeftBottomBackgroundColor="@color/dark_grey_status"
+    />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:popupTheme="@style/AppTheme.PopupOverlay">
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/ic_back"/>
-    </android.support.v7.widget.Toolbar>
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="58dp"
+        android:layout_marginEnd="10dp"
+        />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.v7.widget.CardView
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:id="@+id/card_choice"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#000000" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:id="@+id/card_filling"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:background = "#000000" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:id="@+id/card_judge"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:background = "#000000"/>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:id="@+id/card_code"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#000000" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:id="@+id/card_asking"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:background = "#000000"/>
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="10dp">
-                <ImageView
-                    android:id="@+id/card_comprehensive"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "match_parent"
-                    android:background = "#000000"/>
-            </android.support.v7.widget.CardView>
-
-        </LinearLayout>
-    </ScrollView>
-
-</LinearLayout>
+</FrameLayout>

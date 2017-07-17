@@ -5,10 +5,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
-import com.qgstudio.anywork.mvp.BaseFragment;
+import com.qgstudio.anywork.fmain.data.OrganizationRepository;
+import com.qgstudio.anywork.mvp.MVPBaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class OrganizationFragment extends BaseFragment {
+public class OrganizationFragment extends MVPBaseFragment<OrganizationFragView, OrganizationRepository> implements OrganizationFragView {
 
     @BindView(R.id.recycler_all)
     RecyclerView mRecyclerView;
@@ -55,7 +60,7 @@ public class OrganizationFragment extends BaseFragment {
     public void initView() {
         mUnbinder = ButterKnife.bind(this, mRoot);
 
-        mOrganizationAdapter = new OrganizationAdapter(new ArrayList<Organization>());
+        mOrganizationAdapter = new OrganizationAdapter(mActivity, new ArrayList<Organization>());
         mRecyclerView.setAdapter(mOrganizationAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
@@ -66,44 +71,35 @@ public class OrganizationFragment extends BaseFragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        //// TODO: 2017/7/10 调用接口返回全部的组织数据
+    public void loadData() {
         switch (mType) {
-            case TYPE_ALL:{
-                //假数据
-                List<Organization> list = new ArrayList<>();
-                for (int i=0;i<10;i++) {
-                    Organization o =new Organization();
-                    o.setOrganizationName("C语言");
-                    o.setTeacherName("梨廉洁");
-                    o.setDescription("C语言是一门综合性学科，能很好考察学生计算机专业素养...");
-                    list.add(o);
-                }
-                mOrganizationAdapter.addAll(list);
+            case TYPE_ALL: {
+                mPresenter.getAllOrganization();
                 break;
             }
-            case TYPE_JOIN:{
-                //假数据
-                List<Organization> list = new ArrayList<>();
-                for (int i=0;i<5;i++) {
-                    Organization o =new Organization();
-                    o.setOrganizationName("数据结构");
-                    o.setTeacherName("皇飞虹");
-                    o.setDescription("数据结构是一门综合性学科，能很好考察学生计算机专业素养...");
-                    list.add(o);
-                }
-                mOrganizationAdapter.addAll(list);
+            case TYPE_JOIN: {
+                mPresenter.getJoinOrganization();
                 break;
             }
-            default:{}
+            default: {
+            }
         }
     }
-
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
     }
+
+    @Override
+    public void addOrganization(Organization organization) {
+        mOrganizationAdapter.add(organization);
+    }
+
+    @Override
+    public void addOrganizations(List<Organization> organizations) {
+        mOrganizationAdapter.addAll(organizations);
+    }
 }
+
