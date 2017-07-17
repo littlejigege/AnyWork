@@ -5,4 +5,5 @@
     android:layout_height="250dp"
     android:gravity="top|start"
     android:hint="请在此作答"
+    android:background="@color/dark_white_background"
     />

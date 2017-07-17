@@ -1,12 +1,14 @@
 package com.qgstudio.anywork.fexam.data;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswer;
 import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
+import com.qgstudio.anywork.data.model.StudentPaper;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
@@ -47,34 +49,33 @@ public class ExamRepository extends BasePresenterImpl<ExamView>{
 
                     @Override
                     protected void onFailure(String info) {
-
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-
                     }
                 });
     }
 
-    public void submitTestPaper(StudentAnswer studentAnswer) {
-        mExamApi.submitTestpaper(studentAnswer)
+    public void submitTestPaper(StudentPaper studentPaper) {
+        mExamApi.submitTestpaper(studentPaper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RetrofitSubscriber<StudentAnswerAnalysis>() {
                     @Override
                     protected void onSuccess(StudentAnswerAnalysis data) {
-
+                        Log.e("tag", "s");
                     }
 
                     @Override
                     protected void onFailure(String info) {
-
+                        Log.e("tag", info);
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-
+                        Log.e("tag", "t");
+                        t.printStackTrace();
                     }
                 });
     }

@@ -2,24 +2,27 @@ package com.qgstudio.anywork.fexam;
 
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.FloatingActionButton;
 
+import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Question;
+import com.qgstudio.anywork.data.model.StudentAnswer;
+import com.qgstudio.anywork.data.model.StudentPaper;
 import com.qgstudio.anywork.fexam.data.ExamRepository;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
 import com.qgstudio.anywork.ui.ExamPagerView;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> implements ExamView {
@@ -35,7 +38,7 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_question);
+        setContentView(R.layout.activity_exam);
 
         //1.获取试卷id
         mTestPaperId = getIntent().getIntExtra("TESTPAPER_ID", -1);
@@ -89,5 +92,25 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
     @Override
     public void addQuestions(List<Question> questions) {
         mQuestionFragAdapter.addAll(questions);
+        mExamPagerView.setTitleCenterTextString(1 + "/" + questions.size());
     }
+
+    @OnClick(R.id.fab)
+    public void submit() {
+        //获取填写的答案
+        List<StudentAnswer> studentAnswers = new ArrayList<>();
+        for (int pos = 0; pos < mQuestionFragAdapter.getCount(); pos++) {
+            QuestionFragment fragment = (QuestionFragment) mQuestionFragAdapter.getItem(pos);
+            studentAnswers.add(fragment.getStudentAnswer());
+        }
+        //提交
+        StudentPaper studentPaper = new StudentPaper();
+        studentPaper.setStudentId(((App) getApplication()).getUser().getUserId());
+        studentPaper.setTestpaperId(mTestPaperId);
+        studentPaper.setStudentAnswer(studentAnswers);
+        mPresenter.submitTestPaper(studentPaper);
+
+    }
+
+
 }

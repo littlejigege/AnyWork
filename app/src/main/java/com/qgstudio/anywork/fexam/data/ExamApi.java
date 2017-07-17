@@ -4,6 +4,7 @@ import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswer;
 import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
+import com.qgstudio.anywork.data.model.StudentPaper;
 import com.qgstudio.anywork.data.model.Testpaper;
 
 import java.util.List;
@@ -27,6 +28,6 @@ public interface ExamApi {
 
     @POST("test/submit")
     @Headers("Content-Type:application/json")
-    Observable<ResponseResult<StudentAnswerAnalysis>> submitTestpaper(@Body StudentAnswer studentAnswer);
+    Observable<ResponseResult<StudentAnswerAnalysis>> submitTestpaper(@Body StudentPaper studentPaper);
 
 }

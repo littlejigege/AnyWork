@@ -11,6 +11,15 @@
     <color name="dark_blue_text">#5aa8e4</color>
     <color name="dark_orange_text">#fd8f01</color>
     <color name="dark_grey_background">#272727</color>
+    <color name="dark_grey_baseline">#404040</color>
+    <color name="dark_purple_text">#64717f</color>
+    <color name="dark_grey_text">#454545</color>
+    <color name="dark_white_background">#fdfdfe</color>
+
+    <color name="status_join_false_bg">#dfdfdf</color>
+    <color name="status_join_false_text">#797979</color>
+    <color name="status_join_true_bg">#fd8f01</color>
+    <color name="status_join_true_text">#fcfdfd</color>
 
 
     <color name="touch_effect">#9ccc</color>

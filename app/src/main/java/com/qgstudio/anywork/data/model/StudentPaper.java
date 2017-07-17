@@ -1,6 +1,5 @@
 package com.qgstudio.anywork.data.model;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,8 +11,8 @@ public class StudentPaper {
     private String userName;            //答题者名字
     private int studentId;            //答题者Id
     private int testpaperId;            //试卷id
-    private Date startTime;             //开始答题的时间
-    private Date endTime;               //答题结束的时间
+    private long startTime;             //开始答题的时间
+    private long endTime;               //答题结束的时间
 
     public StudentPaper() {
     }
@@ -71,19 +70,19 @@ public class StudentPaper {
         this.testpaperId = testpaperId;
     }
 
-    public Date getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 }

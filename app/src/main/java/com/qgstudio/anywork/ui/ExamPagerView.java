@@ -115,6 +115,27 @@ public class ExamPagerView extends LinearLayout {
 
     public void setViewPagerAdapter(FragmentStatePagerAdapter fragmentStatePagerAdapter) {
         mViewPager.setAdapter(fragmentStatePagerAdapter);
+        mViewPager.setOffscreenPageLimit(fragmentStatePagerAdapter.getCount());
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int total = mViewPager.getAdapter().getCount();
+                int pos = position + 1;
+                mTitleCenterTV.setText(pos + "/" + total);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
     }
 
     public ExamPagerView(Context context) {

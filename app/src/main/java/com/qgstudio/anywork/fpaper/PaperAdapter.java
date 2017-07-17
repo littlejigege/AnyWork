@@ -9,12 +9,12 @@ import android.widget.TextView;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamActivity;
-import com.qgstudio.anywork.ui.RoundedImageView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 /**
@@ -37,11 +37,21 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
     }
 
     @Override
-    public void onBindViewHolder(Holder holder, int position) {
+    public void onBindViewHolder(Holder holder, final int position) {
         Testpaper paper = mPapers.get(position);
-        //// TODO: 2017/7/10 绑定数据
-        holder.tv_title.setText(mPapers.get(position).getTestpaperTitle());
-        holder.tv_chapter.setText(mPapers.get(position).getChapterName());
+        holder.tv_title.setText(paper.getTestpaperTitle());
+        holder.tv_chapter.setText(paper.getChapterName());
+        holder.tv_type.setText(paper.getTestpaperType() + "");
+//        holder.tv_date.setText(mPapers.get(position).);
+
+//        holder.civ
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExamActivity.startToActivity(v.getContext(), mPapers.get(position).getTestpaperId());
+            }
+        });
 
     }
 
@@ -66,8 +76,8 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
 
     class Holder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.roundedImageView)
-        RoundedImageView img;
+        @BindView(R.id.civ_paper)
+        CircleImageView civ;
 
         @BindView(R.id.textView5)
         TextView tv_title;
@@ -84,13 +94,6 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
         public Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int pos = getAdapterPosition();
-                    ExamActivity.startToActivity(v.getContext(), mPapers.get(pos).getTestpaperId());
-                }
-            });
         }
     }
 

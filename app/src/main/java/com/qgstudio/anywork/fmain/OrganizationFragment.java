@@ -60,7 +60,7 @@ public class OrganizationFragment extends MVPBaseFragment<OrganizationFragView, 
     public void initView() {
         mUnbinder = ButterKnife.bind(this, mRoot);
 
-        mOrganizationAdapter = new OrganizationAdapter(new ArrayList<Organization>());
+        mOrganizationAdapter = new OrganizationAdapter(mActivity, new ArrayList<Organization>());
         mRecyclerView.setAdapter(mOrganizationAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);

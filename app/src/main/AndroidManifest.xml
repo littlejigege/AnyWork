@@ -12,7 +12,7 @@
         android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AnyWork.Theme">
         <activity
             android:name=".fenter.EnterActivity"
             android:configChanges="orientation|screenSize" />
@@ -30,7 +30,6 @@
         </activity>
         <activity android:name=".fexam.ExamActivity" />
         <activity android:name=".fpaper.PaperActivity" />
-        <activity android:name=".fexam.ExamActivity" />
     </application>
 
 </manifest>
