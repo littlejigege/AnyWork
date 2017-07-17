@@ -6,6 +6,6 @@ package com.qgstudio.anywork.data;
 
 public interface ApiStores {
 
-    String API_DEFAULT_URL = "http://118.89.54.17:8080/anywork/";
+    String API_DEFAULT_URL = "http://10.21.48.11:8080/anywork/";
 
 }

@@ -61,21 +61,21 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     public void onNext(ResponseResult<User> result) {
                         assert result != null;
 
-                        if (result.getState() == 3001) {
+                        if (result.getState() == 1) {
                             mView.showSuccess();
                             mView.hidProgressDialog();
                         } else {
-
+                            mView.showError(result.getStateInfo());
                         }
                     }
                 });
     }
 
-    public static final String MULTIPART_FORM_DATA = "multipart/form-data";
+    private static final String MULTIPART_FORM_DATA = "multipart/form-data";
 
     @Override
     public void changePic(final String path) {
-        RequestBody pictureNameBody = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "picture");
+        RequestBody pictureNameBody = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "file");
         File picture = new File(path);
         final RequestBody requestFile = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), picture);
         // MultipartBody.Part 借助文件名上传
@@ -102,8 +102,11 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
 
                     @Override
                     public void onNext(ResponseResult responseResult) {
-                        if (responseResult.getState() == 151) {
+                        Log.i(TAG, "onNext: "+responseResult.getState()+responseResult.getStateInfo());
+                        if (responseResult.getState() == 1) {
                             mView.changeImg();
+                        } else {
+                            mView.showError(responseResult.getStateInfo());
                         }
                         mView.hidProgressDialog();
                     }

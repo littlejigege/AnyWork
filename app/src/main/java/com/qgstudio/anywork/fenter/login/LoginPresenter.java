@@ -11,12 +11,13 @@ import com.qgstudio.anywork.utils.DataBaseUtil;
 import com.qgstudio.anywork.utils.GsonUtil;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * MVPPlugin
@@ -29,12 +30,12 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
     @Override
     public User getUser() {
-
-        return null;
+        User user = DataBaseUtil.getHelper().queryById(User.class, 1);
+        return user;
     }
 
     @Override
-    public void login(String account, String password) {
+    public void login(String account, final String password) {
         if (loginApi == null) {
             loginApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(LoginApi.class);
         }
@@ -61,17 +62,14 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                     @Override
                     public void onNext(ResponseResult<User> result) {
 
-                        if (result.getState() == 2001) {
+                        if (result.getState() == 1) {
                             User user = result.getData();
                             App.getInstance().setUser(user);
-
+                            Log.i(TAG, "onNext: login" + GsonUtil.GsonString(user));
                             mView.showSuccess();
 
+                            user.setPassword(password);
                             DataBaseUtil.getHelper().save(user);
-                            List<User> list = DataBaseUtil.getHelper().queryAll(User.class);
-                            for (User u : list) {
-                                Log.d("tag", "onNext: "+ GsonUtil.GsonString(u));
-                            }
                         } else {
                             mView.showError(result.getStateInfo());
                         }

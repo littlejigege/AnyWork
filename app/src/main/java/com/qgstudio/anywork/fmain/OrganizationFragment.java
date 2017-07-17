@@ -2,14 +2,12 @@ package com.qgstudio.anywork.fmain;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
-import com.qgstudio.anywork.fpaper.PaperFragment;
 import com.qgstudio.anywork.mvp.BaseFragment;
 
 import java.util.ArrayList;
@@ -77,7 +75,7 @@ public class OrganizationFragment extends BaseFragment {
                 List<Organization> list = new ArrayList<>();
                 for (int i=0;i<10;i++) {
                     Organization o =new Organization();
-                    o.setOrganName("C语言");
+                    o.setOrganizationName("C语言");
                     o.setTeacherName("梨廉洁");
                     o.setDescription("C语言是一门综合性学科，能很好考察学生计算机专业素养...");
                     list.add(o);
@@ -90,7 +88,7 @@ public class OrganizationFragment extends BaseFragment {
                 List<Organization> list = new ArrayList<>();
                 for (int i=0;i<5;i++) {
                     Organization o =new Organization();
-                    o.setOrganName("数据结构");
+                    o.setOrganizationName("数据结构");
                     o.setTeacherName("皇飞虹");
                     o.setDescription("数据结构是一门综合性学科，能很好考察学生计算机专业素养...");
                     list.add(o);

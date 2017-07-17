@@ -1,6 +1,5 @@
 package com.qgstudio.anywork.fmain;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 import com.allen.library.SuperTextView;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
-import com.qgstudio.anywork.fexam.ExamActivity;
 import com.qgstudio.anywork.fpaper.PaperActivity;
 
 import java.util.List;
@@ -39,7 +37,7 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         final Organization organization = mOrganizations.get(position);
         //// TODO: 2017/7/10 绑定数据
         SuperTextView v = holder.stv;
-        v.setLeftTopString(organization.getOrganName());
+        v.setLeftTopString(organization.getOrganizationName());
         v.setLeftBottomString(organization.getTeacherName());
         v.setLeftBottomString2(organization.getDescription());
         v.setOnClickListener(new View.OnClickListener() {

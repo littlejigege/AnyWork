@@ -2,6 +2,7 @@ package com.qgstudio.anywork.fuser;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,20 +12,28 @@ import android.transition.Fade;
 import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
 import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
 import com.qgstudio.anywork.utils.GlideUtil;
 import com.qgstudio.anywork.utils.ToastUtil;
-import com.qgstudio.anywork.utils.TransformUtil;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.os.Environment.getExternalStorageDirectory;
 import static com.qgstudio.anywork.R.id.mail;
 
 /**
@@ -41,7 +50,7 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
 
     @BindView(R.id.name) EditText name;
 
-    @BindView(mail) EditText email;
+    @BindView(mail) TextView email;
 
     @BindView(R.id.phone) EditText phone;
 
@@ -95,12 +104,16 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
         name.setText(user1.getUserName());
         email.setText(user1.getEmail());
         phone.setText(user1.getPhone());
-        GlideUtil.setPictureWithOutCache(pic, user1.getUserId()+"");
+        GlideUtil.setPictureWithOutCache(pic, user1.getUserId());
     }
 
     private void editFocusable(boolean focusable) {
-        name.setFocusable(focusable);
-        phone.setFocusable(focusable);
+        name.setEnabled(focusable);
+        phone.setEnabled(focusable);
+        if (focusable) {
+            name.requestFocus();
+            phone.requestFocus();
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -148,12 +161,53 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
                 if (resultCode == RESULT_OK) {
                     Uri uri = data.getData();
                     if (uri != null) {
-                        mPresenter.changePic(TransformUtil.uri2Path(uri));
+                        // 将图片设置到头像中
+                        Glide.with(this)
+                                .load(uri)
+                                .asBitmap()
+                                .into(new SimpleTarget<Bitmap>(250, 250) {
+                                    @Override
+                                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
+                                        saveHeadPic(resource);
+                                    }
+                                });
                     }
                 }
                 break;
         }
     }
+
+    /**
+     * 将获取的图片进行压缩并保存
+     */
+    private void saveHeadPic(Bitmap bitmap) {
+        //将bitmap保存到本地，spath :生成图片取个名字和路径包含类型
+        String path = getExternalStorageDirectory()
+                .getAbsolutePath() + "/AnyWork/picture/";
+        File dir = new File(path);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        String filePath = path + user.getUserId() +".jpg";
+        saveImage(bitmap, filePath);
+        mPresenter.changePic(filePath);
+    }
+
+    /**
+     * bitmap后存到对应路径
+     */
+    public void saveImage(Bitmap photo, String spath) {
+        try {
+            BufferedOutputStream bos = new BufferedOutputStream(
+                    new FileOutputStream(spath, false));
+            photo.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            bos.flush();
+            bos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public void showSuccess() {
@@ -163,7 +217,7 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
 
     @Override
     public void showError(String s) {
-
+        ToastUtil.showToast(s);
     }
 
     @Override
@@ -173,7 +227,7 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
 
     @Override
     public void changeImg() {
-        GlideUtil.setPictureWithOutCache(pic, user.getUserId()+"");
+        GlideUtil.setPictureWithOutCache(pic, user.getUserId());
     }
 
     @Override

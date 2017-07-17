@@ -1,14 +1,8 @@
 package com.qgstudio.anywork.fmain.data;
 
-import android.support.annotation.NonNull;
-
-import com.qgstudio.anywork.data.LoadDataCallback;
 import com.qgstudio.anywork.data.RetrofitClient;
-import com.qgstudio.anywork.data.RetrofitSubscriber;
 
 import retrofit2.Retrofit;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Yason on 2017/4/14.

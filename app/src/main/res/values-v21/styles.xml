@@ -59,13 +59,14 @@
         <item name="colorControlActivated">@color/AnyWork_accent</item>
     </style>
 
-    <style name="AnyWork.Theme.EditText2" parent="Theme.AppCompat.Light">
+    <style name="AnyWork.Theme.EditText2" parent="AnyWork.Theme.EditText.Theme">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">50dp</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:layout_marginTop">12dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:maxLines">1</item>
+        <item name="android:maxLength">20</item>
         <item name="android:textColor">@color/text_dark</item>
     </style>
 

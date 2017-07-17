@@ -56,7 +56,7 @@
             android:layout_marginTop="18dp"
             android:text="@string/my_account"/>
 
-        <EditText
+        <TextView
             android:id="@+id/mail"
             style="@style/AnyWork.Theme.EditText2"/>
 

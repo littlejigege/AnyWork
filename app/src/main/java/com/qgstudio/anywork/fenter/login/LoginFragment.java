@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.widget.EditText;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.fmain.HomeActivity;
 import com.qgstudio.anywork.mvp.MVPBaseFragment;
 import com.qgstudio.anywork.utils.ToastUtil;
@@ -51,8 +52,6 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
         //防止无参构造器被外部调用
     }
 
-
-
     @Override
     public int getRootId() {
         return R.layout.fragment_login;
@@ -61,6 +60,11 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     @Override
     public void initView() {
         ButterKnife.bind(this, mRoot);
+        User user = mPresenter.getUser();
+        if (user != null) {
+            account.setText(user.getEmail());
+            password.setText(user.getPassword());
+        }
     }
 
     @Override

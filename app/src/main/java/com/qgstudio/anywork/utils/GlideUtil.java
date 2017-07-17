@@ -6,6 +6,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.ApiStores;
 
 /**
  * Created by chenyi on 2017/7/12.
@@ -22,9 +23,9 @@ public class GlideUtil {
                 .into(img);
     }
 
-    public static void setPictureWithOutCache(ImageView img, String path) {
+    public static void setPictureWithOutCache(ImageView img, int id) {
         Glide.with(App.getInstance())
-                .load(path)
+                .load(ApiStores.API_DEFAULT_URL+"picture/"+id+".jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .error(R.drawable.ic_icon)
