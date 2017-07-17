@@ -191,6 +191,7 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
         String filePath = path + user.getUserId() +".jpg";
         saveImage(bitmap, filePath);
         mPresenter.changePic(filePath);
+
     }
 
     /**
