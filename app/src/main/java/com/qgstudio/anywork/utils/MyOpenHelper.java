@@ -186,6 +186,9 @@ public class MyOpenHelper extends SQLiteOpenHelper implements IOpenHelper {
      */
     @Override
     public <T> T queryById(Class<T> table, Object id) {
+        if (!isTableExists(table)) {
+            return null;
+        }
         Field idField = null;
         //获取属性id
         idField = getFieldId(table);

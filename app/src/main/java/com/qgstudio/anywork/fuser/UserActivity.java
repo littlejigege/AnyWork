@@ -208,7 +208,6 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
         }
     }
 
-
     @Override
     public void showSuccess() {
         App.getInstance().setUser(user);
