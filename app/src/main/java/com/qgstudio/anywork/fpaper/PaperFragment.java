@@ -62,7 +62,7 @@ public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepositor
     public void initView() {
         mUnbinder = ButterKnife.bind(this, mRoot);
 
-        mPaperAdapter = new PaperAdapter(new ArrayList<Testpaper>());
+        mPaperAdapter = new PaperAdapter(mActivity,new ArrayList<Testpaper>());
         mRecyclerView.setAdapter(mPaperAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);

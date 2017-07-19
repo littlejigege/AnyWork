@@ -3,6 +3,7 @@ package com.qgstudio.anywork.fexam.adapter;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,27 +21,16 @@ import butterknife.ButterKnife;
 
 public class ChoiceAdapter extends OptionAdapter {
 
-    private String mAnswer;//填写的答案
+    //填写的答案
+    protected String mAnswer;
+    protected int mAnswerPos;
 
-    private OnChoiceOptionClickListener mOnChoiceOptionClickListener;
-
-    public interface OnChoiceOptionClickListener {
-        void onChoiceOptionClickListener();
-    }
-
-    //选择
+    //选项的内容
     private String[] choice = {"A", "B", "C", "D"};
-    private String[] choice_content = {mQuestion.getA(), mQuestion.getB(), mQuestion.getC(), mQuestion.getD()};
-    //判断
-    private int[] judge = {1, 0};
-    private int[] judge_content = {R.drawable.ic_right_normal, R.drawable.ic_right_selected};
+    private String[] content = {mQuestion.getA(), mQuestion.getB(), mQuestion.getC(), mQuestion.getD()};
 
     public ChoiceAdapter(Context context, Question question) {
         super(context, question);
-    }
-
-    public void setOnChoiceOptionClickListener(OnChoiceOptionClickListener onChoiceOptionClickListener) {
-        mOnChoiceOptionClickListener = onChoiceOptionClickListener;
     }
 
     public String getAnswer() {
@@ -55,51 +45,33 @@ public class ChoiceAdapter extends OptionAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        ChoiceHolder c = (ChoiceHolder) holder;
-        switch (mQuestion.getType()) {
-            case 1:{//选择
-                c.img_choice.setText(choice[position]);
-                c.tv_choice.setText(choice_content[position]);
-                if (mOnChoiceOptionClickListener != null) {
-                    c.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mAnswer = choice[position];
-                            mOnChoiceOptionClickListener.onChoiceOptionClickListener();
-                        }
-                    });
+        final ChoiceHolder c = (ChoiceHolder) holder;
+        //选项内容初始化
+        c.img_choice.setText(choice[position]);
+        c.img_choice.setBackgroundResource(R.drawable.bg_choice_normal);
+        c.img_choice.setTextColor(ContextCompat.getColor(mContext, R.color.dark_grey_text));
+        c.tv_choice.setText(content[position]);
+        //选项点击监听
+        c.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (position != mAnswerPos) {
+                    notifyItemChanged(mAnswerPos);
                 }
-                break;
-            }case 2:{//判断
-                c.img_choice.setText("");
-                c.img_choice.setBackground(ContextCompat.getDrawable(mContext, judge_content[position]));
-                if (mOnChoiceOptionClickListener != null) {
-                    c.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            mAnswer = judge[position] + "";
-                            mOnChoiceOptionClickListener.onChoiceOptionClickListener();
-                        }
-                    });
-                }
-                break;
+
+                mAnswer = choice[position];
+                mAnswerPos = position;
+
+                c.img_choice.setBackgroundResource(R.drawable.bg_choice_selected);
+                c.img_choice.setTextColor(ContextCompat.getColor(mContext, R.color.dark_green_text));
+
             }
-            default:{}
-        }
+        });
     }
 
     @Override
     public int getItemCount() {
-        switch (mQuestion.getType()) {
-            case 1:{
-                return 4;
-            }
-            case 2:{
-                return 2;
-            }
-            default:{}
-        }
-        return 0;
+        return 4;
     }
 
     public class ChoiceHolder extends RecyclerView.ViewHolder {

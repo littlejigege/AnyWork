@@ -1,11 +1,13 @@
 package com.qgstudio.anywork.fpaper;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamActivity;
@@ -16,6 +18,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.qgstudio.anywork.data.ApiStores.API_DEFAULT_URL;
+
 
 /**
  * Created by Yason on 2017/7/10.
@@ -23,9 +27,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
 
+    private Context mContext;
     private List<Testpaper> mPapers;
 
-    public PaperAdapter(List<Testpaper> papers) {
+    public PaperAdapter(Context context, List<Testpaper> papers) {
+        mContext = context;
         mPapers = papers;
     }
 
@@ -44,7 +50,8 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
         holder.tv_type.setText(paper.getTestpaperType() + "");
 //        holder.tv_date.setText(mPapers.get(position).);
 
-//        holder.civ
+        String url = API_DEFAULT_URL + "picture/organization/" + paper.getOrganizationId() + ".jpg";
+        Glide.with(mContext).load(url).into(holder.civ);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

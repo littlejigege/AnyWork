@@ -1,5 +1,7 @@
 package com.qgstudio.anywork.fgrade;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -69,6 +71,12 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
     protected void onResume() {
         super.onResume();
         mPresenter.getGrade();
+    }
+
+    public static void startToActivity(Context context,String grade) {
+        Intent intent = new Intent(context, GradeActivity.class);
+        intent.putExtra("GRADE", grade);
+        context.startActivity(intent);
     }
 
     @Override

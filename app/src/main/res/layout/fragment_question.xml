@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
     android:scrollbars="none">
 
     <LinearLayout
@@ -15,13 +15,19 @@
             android:id="@+id/tv_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="(选择题)" />
+            tools:text="(选择题)"
+            android:layout_marginTop="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            />
 
         <TextView
             android:id="@+id/tv_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="android如何在代码中设置view的Layoutparam属性" />
+            tools:text="android如何在代码中设置view的Layoutparam属性"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_option"
@@ -29,14 +35,18 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:nestedScrollingEnabled="false"
-            android:scrollbars="none"/>
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            />
 
         <TextView
             android:id="@+id/tv_answer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="60dp"
-            tools:text="答案：A"/>
+            tools:text="答案：A"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"/>
 
     </LinearLayout>
 </ScrollView>

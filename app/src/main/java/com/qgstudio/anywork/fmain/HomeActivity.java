@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.dialog.BaseDialog;
 import com.qgstudio.anywork.fuser.UserActivity;
 
 import java.util.HashMap;
@@ -65,8 +66,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         transaction.add(R.id.frame, mFragmentMap.get("ALL"));
         transaction.add(R.id.frame, mFragmentMap.get("JOIN"));
-        transaction.hide(mFragmentMap.get("JOIN"));
-        transaction.show(mFragmentMap.get("ALL"));
+        transaction.hide(mFragmentMap.get("ALL"));
+        transaction.show(mFragmentMap.get("JOIN"));
 
         transaction.commit();
 
@@ -82,26 +83,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setTitle("是否退出登录");
-//        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                finish();
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.create().show();
-//    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

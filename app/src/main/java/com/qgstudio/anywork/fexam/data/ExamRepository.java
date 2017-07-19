@@ -9,6 +9,7 @@ import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswer;
 import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
 import com.qgstudio.anywork.data.model.StudentPaper;
+import com.qgstudio.anywork.data.model.StudentTestResult;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
@@ -61,21 +62,20 @@ public class ExamRepository extends BasePresenterImpl<ExamView>{
         mExamApi.submitTestpaper(studentPaper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitSubscriber<StudentAnswerAnalysis>() {
+                .subscribe(new RetrofitSubscriber<StudentTestResult>() {
                     @Override
-                    protected void onSuccess(StudentAnswerAnalysis data) {
-                        Log.e("tag", "s");
+                    protected void onSuccess(StudentTestResult data) {
+                        mView.skipToGradeAty(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
-                        Log.e("tag", info);
+
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-                        Log.e("tag", "t");
-                        t.printStackTrace();
+
                     }
                 });
     }

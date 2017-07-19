@@ -77,10 +77,12 @@ public class BaseDialog extends Dialog {
         }
         if (builder.positiveListener != null) {
             cancel.setVisibility(View.GONE);
+            confirm.setText(builder.positiveText);
             confirm.setOnClickListener(builder.positiveListener);
         }
         if (builder.negativeListener != null) {
             confirm.setVisibility(View.GONE);
+            cancel.setText(builder.negativeText);
             cancel.setOnClickListener(builder.negativeListener);
         }
 
@@ -105,6 +107,8 @@ public class BaseDialog extends Dialog {
         private View view;
         private View.OnClickListener negativeListener;
         private View.OnClickListener positiveListener;
+        private String negativeText;
+        private String positiveText;
         private int resStyle = -1;
 
         public Builder(Context context1) {
@@ -133,11 +137,18 @@ public class BaseDialog extends Dialog {
             return this;
         }
 
-        public void setNegativeListener(View.OnClickListener negativeListener) {
+        public Builder view(View view1) {
+            view = view1;
+            return this;
+        }
+
+        public void setNegativeListener(String text, View.OnClickListener negativeListener) {
+            this.negativeText = (text == null ? "" : text);
             this.negativeListener = negativeListener;
         }
 
-        public void setPositiveListener(View.OnClickListener positiveListener) {
+        public void setPositiveListener(String text, View.OnClickListener positiveListener) {
+            this.positiveText = (text == null ? "" : text);
             this.positiveListener = positiveListener;
         }
 

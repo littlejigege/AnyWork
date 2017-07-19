@@ -8,8 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
+import com.qgstudio.anywork.dialog.BaseDialog;
+import com.qgstudio.anywork.fexam.QuestionFragment;
 import com.qgstudio.anywork.fpaper.PaperActivity;
 
 import java.util.List;
@@ -18,6 +21,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.qgstudio.anywork.data.ApiStores.API_DEFAULT_URL;
+import static com.qgstudio.anywork.fmain.OrganizationFragment.TYPE_ALL;
+
 
 /**
  * Created by Yason on 2017/7/10.
@@ -25,10 +31,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.Holder> {
 
+    private int mType;
+
     private Context mContext;
     private List<Organization> mOrganizations;
 
-    public OrganizationAdapter(Context context, List<Organization> organizations) {
+    public OrganizationAdapter(int type, Context context, List<Organization> organizations) {
+        mType = type;
         mContext = context;
         mOrganizations = organizations;
     }
@@ -42,23 +51,48 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
-        Organization organization = mOrganizations.get(position);
+        final Organization organization = mOrganizations.get(position);
         holder.tv_name.setText(organization.getOrganizationName());
         holder.tv_teacher.setText(organization.getTeacherName());
         holder.tv_description.setText(organization.getDescription());
-        holder.tv_status.setText(organization.getIsJoin() == 1 ? "已加入" : "未加入");
-        holder.tv_status.setTextColor(organization.getIsJoin() == 1 ?
-                ContextCompat.getColor(mContext,R.color.status_join_true_text) : ContextCompat.getColor(mContext,R.color.status_join_false_text));
-        holder.tv_status.setBackgroundColor(organization.getIsJoin() == 1 ?
-                ContextCompat.getColor(mContext, R.color.status_join_true_bg) : ContextCompat.getColor(mContext, R.color.status_join_false_bg));
 
-//        holder.civ
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PaperActivity.startToActivity(v.getContext(), mOrganizations.get(position).getOrganizationId());
-            }
-        });
+        String url = API_DEFAULT_URL + "picture/organization/" + organization.getOrganizationId() + ".jpg";
+        Glide.with(mContext).load(url).into(holder.civ);
+
+        if (mType == TYPE_ALL) {
+            holder.tv_status.setText(organization.getIsJoin() == 1 ? "已加入" : "未加入");
+            holder.tv_status.setTextColor(organization.getIsJoin() == 1 ?
+                    ContextCompat.getColor(mContext,R.color.status_join_true_text) : ContextCompat.getColor(mContext,R.color.status_join_false_text));
+            holder.tv_status.setBackgroundColor(organization.getIsJoin() == 1 ?
+                    ContextCompat.getColor(mContext, R.color.status_join_true_bg) : ContextCompat.getColor(mContext, R.color.status_join_false_bg));
+        }else {
+
+            holder.tv_status.setVisibility(View.GONE);
+
+        }
+
+        if (mType == TYPE_ALL) {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new BaseDialog.Builder(mContext)
+                            .title(organization.getOrganizationName())
+//                            .view()
+//                            .addViewOnClick()
+
+                            .build()
+                            .show();
+                }
+            });
+        } else {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PaperActivity.startToActivity(v.getContext(), mOrganizations.get(position).getOrganizationId());
+                }
+            });
+        }
+
     }
 
     @Override

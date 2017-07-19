@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 
-public class QuestionFragment extends BaseFragment implements ChoiceAdapter.OnChoiceOptionClickListener {
+public class QuestionFragment extends BaseFragment {
 
     @BindView(R.id.tv_type)
     TextView mTVType;
@@ -118,11 +119,6 @@ public class QuestionFragment extends BaseFragment implements ChoiceAdapter.OnCh
 
         //设置题目选项
         mOptionAdapter = OptionFactory.getAdapter(mQuestion.getType(), mActivity, mQuestion);
-        int type = mQuestion.getType();
-        if (type == 1 || type == 2) {
-            ChoiceAdapter choiceAdapter = (ChoiceAdapter) mOptionAdapter;
-            choiceAdapter.setOnChoiceOptionClickListener(this);
-        }
         mRecyclerView.setAdapter(mOptionAdapter);
 
         mLinearLayoutManager = new LinearLayoutManager(mActivity);
@@ -143,9 +139,4 @@ public class QuestionFragment extends BaseFragment implements ChoiceAdapter.OnCh
         mUnbinder.unbind();
     }
 
-    @Override
-    public void onChoiceOptionClickListener() {
-        ExamActivity ativity = (ExamActivity) mActivity;
-        ativity.setNextPage();
-    }
 }
