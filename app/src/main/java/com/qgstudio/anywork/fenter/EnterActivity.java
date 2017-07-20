@@ -102,7 +102,6 @@ public class EnterActivity extends AppCompatActivity {
 
         ChangeBounds changeBoundsTransition = new ChangeBounds();
         changeBoundsTransition.setDuration(300);
-
         // 为 fragment 设置进出场的动画
         fragment.setEnterTransition(slideTransition);
         fragment.setAllowEnterTransitionOverlap(true);
