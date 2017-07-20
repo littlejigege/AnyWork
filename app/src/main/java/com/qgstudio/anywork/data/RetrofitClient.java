@@ -13,6 +13,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.qgstudio.anywork.data.ApiStores.API_DEFAULT_URL;
+
 /**
  * Retrofit客户端
  * Created by chenyi on 2017/4/10.

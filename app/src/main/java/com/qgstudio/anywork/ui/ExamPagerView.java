@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.IdRes;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
@@ -113,29 +114,13 @@ public class ExamPagerView extends LinearLayout {
         }
     }
 
-    public void setViewPagerAdapter(FragmentStatePagerAdapter fragmentStatePagerAdapter) {
-        mViewPager.setAdapter(fragmentStatePagerAdapter);
-        mViewPager.setOffscreenPageLimit(fragmentStatePagerAdapter.getCount());
+    public void setViewPagerAdapter(FragmentPagerAdapter fragmentPagerAdapter) {
+        mViewPager.setAdapter(fragmentPagerAdapter);
+//        mViewPager.setOffscreenPageLimit(fragmentPagerAdapter.getCount());
+    }
 
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                int total = mViewPager.getAdapter().getCount();
-                int pos = position + 1;
-                mTitleCenterTV.setText(pos + "/" + total);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-
+    public void setViewPagerListener(ViewPager.OnPageChangeListener onPageChangeLitener) {
+        mViewPager.setOnPageChangeListener(onPageChangeLitener);
     }
 
     public ExamPagerView(Context context) {

@@ -5,5 +5,8 @@
     android:layout_height="250dp"
     android:gravity="top|start"
     android:hint="请在此作答"
-    android:background="@color/dark_white_background"
+    android:textColor="#000000"
+    android:background="@drawable/bg_rect_line"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     />

@@ -14,9 +14,13 @@ public class OptionFactory {
         OptionAdapter optionAdapter = null;
         switch (type) {
             case 1://选择
-            case 2://判断
             {
                 optionAdapter = new ChoiceAdapter(context, question);
+                break;
+            }
+            case 2://判断
+            {
+                optionAdapter = new JudgeAdapter(context, question);
                 break;
             }
             case 3://填空
