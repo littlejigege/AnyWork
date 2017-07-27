@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.StudentTestResult;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
+import com.qgstudio.anywork.utils.GsonUtil;
 
 import java.util.List;
 
@@ -30,11 +32,17 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
 
     private GradeAdapter gradeAdapter;
 
+    private StudentTestResult testResult;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grade);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        testResult = GsonUtil.GsonToBean(intent.getStringExtra("GRADE"), StudentTestResult.class);
+        Log.i("tag", "onCreate: " + intent.getStringExtra("GRADE"));
 
         initToolbar();
         initRecyclerView();

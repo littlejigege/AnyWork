@@ -13,8 +13,8 @@ import butterknife.OnClick;
 
 
 /**
- * MVPPlugin
- * 邮箱 784787081@qq.com
+ * 注册的 Fragment 并为其配置需要的 Presenter
+ * Created by chenyi on 2017/3/28.
  */
 
 public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, RegisterPresenter> implements RegisterContract.View {
@@ -39,25 +39,20 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
         String pass1 = password.getText().toString();
         String pass2 = password.getText().toString();
 
-        if (pass1.equals("")) {
-            ToastUtil.showToast("请输入密码！");
+        if (!n.matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}")) {
+            name.setError("请输入1-15个字符的姓名");
+        } else if (!a.matches("\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}")) {
+            account.setError("请输入正确的邮箱地址");
+        } else if (!p.matches("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$")) {
+            phone.setError("请输入正确的电话号码");
+        } else if (!pass1.matches("[a-z0-9A-Z]{6,15}")) {
+            password.setError("请输入6-15位的密码");
         } else if (!pass1.equals(pass2)) {
-            ToastUtil.showToast("请输入相同的密码！");
+            ToastUtil.showToast("请输入相同的确认密码！");
         } else {
             mPresenter.register(a, pass1, n, p);
         }
 
-//        if (!n.matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}")) {
-//            name.setError("请输入1-15个字符的姓名");
-//        } else if (!p.matches("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$")) {
-//            phone.setError("请输入正确的电话号码");
-//        } else if (!e.matches("\\w+@\\w+(\\.\\w{2,3})*\\.\\w{2,3}")) {
-//            email.setError("请输入正确的邮箱地址");
-//        } else if (!password.getText().toString().matches("[a-z0-9A-Z]{6,15}")) {
-//            password.setError("请输入6-15位的密码");
-//        } else {
-//            mPresenter.register(e, password.getText().toString(), n, p);
-//        }
     }
 
     @OnClick(R.id.cancel)
@@ -66,12 +61,8 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
     }
 
     public static RegisterFragment newInstance() {
-        //通过 newInstance 保证 Fragment 不被重复构造，造成 fragment 重叠
+        //可通过 newInstance 为 Fragment 添加参数，保证 Fragment 重建时参数字段不被销毁
         return new RegisterFragment();
-    }
-
-    public RegisterFragment() {
-        //防止无参构造器被外部调用
     }
 
     @Override

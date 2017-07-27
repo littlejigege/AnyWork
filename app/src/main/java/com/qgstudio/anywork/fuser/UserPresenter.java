@@ -30,9 +30,8 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
 
     private UserApi userApi;
 
-
     @Override
-    public void changeInfo(User user) {
+    public void changeInfo(final User user) {
         if (userApi == null) {
             userApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(UserApi.class);
         }
@@ -54,6 +53,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        mView.showError("网络连接错误");
                         mView.hidProgressDialog();
                     }
 
@@ -62,7 +62,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                         assert result != null;
 
                         if (result.getState() == 1) {
-                            mView.showSuccess();
+                            mView.showSuccess(user);
                             mView.hidProgressDialog();
                         } else {
                             mView.showError(result.getStateInfo());
@@ -97,6 +97,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        mView.showError("网络连接错误");
                         mView.hidProgressDialog();
                     }
 

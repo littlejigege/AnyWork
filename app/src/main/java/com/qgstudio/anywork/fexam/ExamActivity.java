@@ -114,7 +114,7 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
 
     @Override
     public void skipToGradeAty(StudentTestResult studentTestResult) {
-        GradeActivity.startToActivity(this,"");
+        GradeActivity.startToActivity(this, GsonUtil.GsonString(studentTestResult));
         finish();
     }
 

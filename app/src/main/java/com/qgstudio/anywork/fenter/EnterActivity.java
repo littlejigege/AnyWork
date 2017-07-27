@@ -65,14 +65,14 @@ public class EnterActivity extends AppCompatActivity {
 
     @OnClick(R.id.others)
     public void intoOthers() {
-        BaseDialog.Builder builder = new BaseDialog.Builder(EnterActivity.this);
-        BaseDialog baseDialog =
-                builder.cancelTouchout(false)
-                .title("提示")
-                //.titleColor(R.color.theme_yellow_background)
-                .view(R.layout.point)
-                .build();
-        baseDialog.show();
+//        BaseDialog.Builder builder = new BaseDialog.Builder(EnterActivity.this);
+//        BaseDialog baseDialog =
+//                builder.cancelTouchout(false)
+//                .title("提示")
+//                //.titleColor(R.color.theme_yellow_background)
+//                .view(R.layout.point)
+//                .build();
+//        baseDialog.show();
 
         ToastUtil.showToast("暂未开放游客模式。");
         // TODO:通过游客模式进入 2017/7/10

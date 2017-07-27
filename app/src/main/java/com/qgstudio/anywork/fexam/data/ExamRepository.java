@@ -13,6 +13,7 @@ import com.qgstudio.anywork.data.model.StudentTestResult;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
+import com.qgstudio.anywork.utils.GsonUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,6 +66,7 @@ public class ExamRepository extends BasePresenterImpl<ExamView>{
                 .subscribe(new RetrofitSubscriber<StudentTestResult>() {
                     @Override
                     protected void onSuccess(StudentTestResult data) {
+                        Log.i("tag", "onSuccess: " + GsonUtil.GsonString(data));
                         mView.skipToGradeAty(data);
                     }
 

@@ -17,12 +17,14 @@
         android:id="@+id/name"
         style="@style/AnyWork.Theme.EditText1"
         android:layout_marginTop="16dp"
-        android:hint="@string/name"/>
+        android:hint="@string/name"
+        android:inputType="text"/>
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/account"
         style="@style/AnyWork.Theme.EditText1"
-        android:hint="@string/account"/>
+        android:hint="@string/account"
+        android:inputType="textEmailAddress"/>
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/phone"

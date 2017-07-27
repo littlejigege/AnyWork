@@ -11,7 +11,7 @@ import com.qgstudio.anywork.mvp.BaseView;
 
 public class UserContract {
     interface View extends BaseView {
-        void showSuccess();
+        void showSuccess(User user);
         void showError(String s);
         void setUser(User user);
         void changeImg();

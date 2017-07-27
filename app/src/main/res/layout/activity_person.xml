@@ -44,21 +44,22 @@
 
         <TextView
             style="@style/AnyWork.Theme.TextView3"
-            android:text="@string/my_name" />
-
-        <EditText
-            android:id="@+id/name"
-            style="@style/AnyWork.Theme.EditText2"
-            android:hint="@string/name" />
-
-        <TextView
-            style="@style/AnyWork.Theme.TextView3"
             android:layout_marginTop="18dp"
             android:text="@string/my_account"/>
 
         <TextView
             android:id="@+id/mail"
             style="@style/AnyWork.Theme.EditText2"/>
+
+        <TextView
+            style="@style/AnyWork.Theme.TextView3"
+            android:text="@string/my_name" />
+
+        <EditText
+            android:id="@+id/name"
+            style="@style/AnyWork.Theme.EditText2"
+            android:hint="@string/name"
+            android:inputType="text" />
 
         <TextView
             style="@style/AnyWork.Theme.TextView3"

@@ -2,9 +2,11 @@ package com.qgstudio.anywork.fpaper;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -55,7 +57,8 @@ public class PaperActivity extends AppCompatActivity {
         //自动和viewpager的title关联
         mTabLayout.setupWithViewPager(mViewPager);
 
-        mTabLayout.setTabTextColors(getColor(R.color.dark_grey_status), getColor(R.color.dark_green_text));
+        mTabLayout.setTabTextColors(ResourcesCompat.getColor(getResources(), R.color.dark_grey_status, null),
+                                    ResourcesCompat.getColor(getResources(), R.color.dark_green_text, null));
 
     }
 

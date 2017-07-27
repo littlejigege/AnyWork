@@ -68,9 +68,21 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
             edit.setText("完成");
             edit.setBackgroundResource(R.drawable.bg_btn_blue);
         } else {
-            user.setUserName(name.getText().toString());
-            user.setPhone(phone.getText().toString());
-            mPresenter.changeInfo(user);
+            String n = name.getText().toString();
+            String p = phone.getText().toString();
+            if (!n.matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}")) {
+                ToastUtil.showToast("请输入1-15个字符的姓名");
+                return ;
+            }
+            if (!p.matches("^((13[0-9])|(15[^4])|(18[0,2,3,5-9])|(17[0-8])|(147))\\d{8}$")) {
+                ToastUtil.showToast("请输入正确的电话号码");
+                return ;
+            }
+
+            User nUser = user.clone();
+            nUser.setUserName(n);
+            nUser.setPhone(p);
+            mPresenter.changeInfo(nUser);
             editFocusable(false);
             edit.setText("编辑");
             edit.setBackgroundResource(R.drawable.bg_btn_yellow);
@@ -209,13 +221,14 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
     }
 
     @Override
-    public void showSuccess() {
+    public void showSuccess(User user) {
         App.getInstance().setUser(user);
         ToastUtil.showToast("信息修改完成");
     }
 
     @Override
     public void showError(String s) {
+        setInfo(user);
         ToastUtil.showToast(s);
     }
 

@@ -16,14 +16,14 @@
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/account"
         style="@style/AnyWork.Theme.EditText1"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:hint="@string/account"/>
+        android:hint="@string/account"
+        android:inputType="textEmailAddress"/>
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/password"
         style="@style/AnyWork.Theme.EditText1"
-        android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:hint="@string/password"/>
+        android:hint="@string/password"
+        android:inputType="textPassword"/>
 
     <TextView
         android:id="@+id/forget"

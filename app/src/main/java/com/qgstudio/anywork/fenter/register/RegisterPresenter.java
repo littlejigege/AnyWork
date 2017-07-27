@@ -43,7 +43,7 @@ class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> impleme
                     @Override
                     public void onNext(ResponseResult<Integer> result) {
 
-                        if (result.getState() == 1001) {
+                        if (result.getState() == 1) {
                             mView.showSuccess();
                         } else {
                             mView.showError(result.getStateInfo());
