@@ -1,5 +1,7 @@
 package com.qgstudio.anywork.fmain.data;
 
+import android.content.Context;
+
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.model.Organization;
@@ -21,6 +23,26 @@ import rx.schedulers.Schedulers;
  */
 
 public class OrganizationRepository extends BasePresenterImpl<OrganizationFragView>{
+
+    @Override
+    public void detachView() {
+        mView = new OrganizationFragView() {
+            @Override
+            public void addOrganization(Organization organization) {
+
+            }
+
+            @Override
+            public void addOrganizations(List<Organization> organizations) {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+    }
 
     private OrganizationApi mOrganizationApi;
 

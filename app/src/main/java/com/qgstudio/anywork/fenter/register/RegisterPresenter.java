@@ -1,5 +1,7 @@
 package com.qgstudio.anywork.fenter.register;
 
+import android.content.Context;
+
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.model.User;
@@ -15,6 +17,27 @@ import rx.schedulers.Schedulers;
  */
 
 class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> implements RegisterContract.Presenter{
+
+    @Override
+    public void detachView() {
+        mView = new RegisterContract.View() {
+
+            @Override
+            public void showError(String errorInfo) {
+
+            }
+
+            @Override
+            public void showSuccess() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+    }
 
     private RegisterApi registerApi;
 

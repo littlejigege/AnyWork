@@ -8,12 +8,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswer;
+import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
+import com.qgstudio.anywork.data.model.StudentAnswerResult;
 import com.qgstudio.anywork.data.model.StudentPaper;
 import com.qgstudio.anywork.data.model.StudentTestResult;
 import com.qgstudio.anywork.fexam.data.ExamRepository;
@@ -113,8 +116,8 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
     }
 
     @Override
-    public void skipToGradeAty(StudentTestResult studentTestResult) {
-        GradeActivity.startToActivity(this, GsonUtil.GsonString(studentTestResult));
+    public void skipToGradeAty(double socre, List<StudentAnswerResult> results) {
+        GradeActivity.startToActivity(this, socre, GsonUtil.GsonString(results));
         finish();
     }
 

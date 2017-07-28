@@ -1,5 +1,7 @@
 package com.qgstudio.anywork.fgrade;
 
+import android.content.Context;
+
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 
 import java.util.ArrayList;
@@ -10,18 +12,29 @@ import java.util.List;
  */
 
 class GradePresenter extends BasePresenterImpl<GradeContract.View> implements GradeContract.Presenter {
+
     @Override
-    public void getGrade() {
-        List<GradeInfo> datas = new ArrayList<>();
-        for (int i=0;i<60;i++) {
-            GradeInfo gradeInfo;
-            if (i % 10 == 0) {
-                gradeInfo = new GradeInfo(GradeInfo.TYPE1, "正确率：14/20");
-            } else {
-                gradeInfo = new GradeInfo(GradeInfo.TYPE2, i+"");
+    public void detachView() {
+        mView = new GradeContract.View() {
+            @Override
+            public void showSuccess() {
+
             }
-            datas.add(gradeInfo);
-        }
-        mView.showGrade(datas);
+
+            @Override
+            public void showError(String s) {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+    }
+
+    @Override
+    public void getDetail(int id) {
+
     }
 }

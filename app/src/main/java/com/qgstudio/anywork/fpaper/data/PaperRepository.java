@@ -1,6 +1,7 @@
 package com.qgstudio.anywork.fpaper.data;
 
 
+import android.content.Context;
 import android.util.Log;
 
 import com.qgstudio.anywork.data.ResponseResult;
@@ -24,6 +25,26 @@ import rx.schedulers.Schedulers;
  */
 
 public class PaperRepository extends BasePresenterImpl<PaperFragView> {
+
+    @Override
+    public void detachView() {
+        mView = new PaperFragView() {
+            @Override
+            public void addPracticePapers(List<Testpaper> testpapers) {
+
+            }
+
+            @Override
+            public void addExaminationPapers(List<Testpaper> testpapers) {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+    }
 
     private PaperApi mPaperApi;
 

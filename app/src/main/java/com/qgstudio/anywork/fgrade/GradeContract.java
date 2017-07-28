@@ -14,12 +14,9 @@ public interface GradeContract {
     interface View extends BaseView {
         void showSuccess();
         void showError(String s);
-        void showGrade(List<GradeInfo> datas);
-        void showProgressDialog();
-        void hidProgressDialog();
     }
 
     interface Presenter extends BasePresenter<View> {
-        void getGrade();
+        void getDetail(int id);
     }
 }

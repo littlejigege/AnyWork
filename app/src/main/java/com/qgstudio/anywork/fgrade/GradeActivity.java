@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
+import com.qgstudio.anywork.data.model.StudentAnswerResult;
 import com.qgstudio.anywork.data.model.StudentTestResult;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
 import com.qgstudio.anywork.utils.GsonUtil;
@@ -32,8 +34,6 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
 
     private GradeAdapter gradeAdapter;
 
-    private StudentTestResult testResult;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +41,11 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        testResult = GsonUtil.GsonToBean(intent.getStringExtra("GRADE"), StudentTestResult.class);
-        Log.i("tag", "onCreate: " + intent.getStringExtra("GRADE"));
-
+        double socre = intent.getDoubleExtra("socre", 0);
+        List<StudentAnswerResult> results = GsonUtil.GsonToList
+                                        (intent.getStringExtra("results"), StudentAnswerResult[].class);
         initToolbar();
-        initRecyclerView();
+        initRecyclerView(results);
     }
 
     private void initToolbar() {
@@ -58,13 +58,19 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
         });
     }
 
-    private void initRecyclerView() {
-        gradeAdapter = new GradeAdapter(this);
+    private void initRecyclerView(List<StudentAnswerResult> results) {
+        gradeAdapter = new GradeAdapter(results, this);
+        gradeAdapter.setrListener(new GradeAdapter.ResultListener() {
+            @Override
+            public void getTestResult(int id) {
+                mPresenter.getDetail(id);
+            }
+        });
         GridLayoutManager manager = new GridLayoutManager(this, 5);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
-                if (gradeAdapter.getDatasType(position) == GradeInfo.TYPE1) {
+                if (gradeAdapter.getDatasType(position) == 0) {
                     return 5;
                 } else {
                     return 1;
@@ -78,12 +84,13 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.getGrade();
+//        mPresenter.getGrade();
     }
 
-    public static void startToActivity(Context context,String grade) {
+    public static void startToActivity(Context context, double socre, String results) {
         Intent intent = new Intent(context, GradeActivity.class);
-        intent.putExtra("GRADE", grade);
+        intent.putExtra("socre", socre);
+        intent.putExtra("results", results);
         context.startActivity(intent);
     }
 
@@ -97,20 +104,4 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
 
     }
 
-    @Override
-    public void showGrade(List<GradeInfo> datas) {
-        Log.i("TAG", "showGrade: "+datas.size());
-        gradeAdapter.setmDatas(datas);
-        gradeAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void showProgressDialog() {
-
-    }
-
-    @Override
-    public void hidProgressDialog() {
-
-    }
 }

@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.fuser;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.qgstudio.anywork.data.ResponseResult;
@@ -23,10 +24,50 @@ import static android.content.ContentValues.TAG;
 
 /**
  * MVPPlugin
- *  邮箱 784787081@qq.com
+ * 邮箱 784787081@qq.com
  */
 
-public class UserPresenter extends BasePresenterImpl<UserContract.View> implements UserContract.Presenter{
+public class UserPresenter extends BasePresenterImpl<UserContract.View> implements UserContract.Presenter {
+
+    @Override
+    public void detachView() {
+        mView = new UserContract.View() {
+            @Override
+            public void showSuccess(User user) {
+
+            }
+
+            @Override
+            public void showError(String s) {
+
+            }
+
+            @Override
+            public void setUser(User user) {
+
+            }
+
+            @Override
+            public void changeImg() {
+
+            }
+
+            @Override
+            public void showProgressDialog() {
+
+            }
+
+            @Override
+            public void hidProgressDialog() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+    }
 
     private UserApi userApi;
 
@@ -41,7 +82,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
         info.put("phone", user.getPhone());
         info.put("email", user.getEmail());
 
-        Log.i(TAG, "changeInfo: "+ GsonUtil.GsonString(info));
+        Log.i(TAG, "changeInfo: " + GsonUtil.GsonString(info));
         userApi.changeInfo(info)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -103,7 +144,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
 
                     @Override
                     public void onNext(ResponseResult responseResult) {
-                        Log.i(TAG, "onNext: "+responseResult.getState()+responseResult.getStateInfo());
+                        Log.i(TAG, "onNext: " + responseResult.getState() + responseResult.getStateInfo());
                         if (responseResult.getState() == 1) {
                             mView.changeImg();
                         } else {
