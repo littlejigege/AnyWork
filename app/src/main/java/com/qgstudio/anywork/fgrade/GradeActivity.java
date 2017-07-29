@@ -2,20 +2,27 @@ package com.qgstudio.anywork.fgrade;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.transition.ChangeBounds;
+import android.transition.Fade;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
+import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswerResult;
-import com.qgstudio.anywork.data.model.StudentTestResult;
+import com.qgstudio.anywork.fexam.QuestionFragment;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
+import com.qgstudio.anywork.utils.ActivityUtil;
 import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import java.util.List;
 
@@ -31,6 +38,8 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
     @BindView(R.id.toolbar) Toolbar toolbar;
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
+
+    @BindView(R.id.container) FrameLayout container;
 
     private GradeAdapter gradeAdapter;
 
@@ -53,7 +62,7 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
     }
@@ -84,7 +93,6 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
     @Override
     protected void onResume() {
         super.onResume();
-//        mPresenter.getGrade();
     }
 
     public static void startToActivity(Context context, double socre, String results) {
@@ -95,13 +103,33 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
     }
 
     @Override
-    public void showSuccess() {
+    public void showSuccess(Question question) {
+        QuestionFragment qFragment = QuestionFragment.newInstance(question);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            setTransition(qFragment);
+        }
+
+        ActivityUtil.addFragmentToActivity(getSupportFragmentManager(), qFragment, R.id.container, "");
 
     }
 
     @Override
     public void showError(String s) {
+        ToastUtil.showToast(s);
+    }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void setTransition(Fragment fragment) {
+        Fade fadeTransition = new Fade();
+        fadeTransition.setDuration(300);
+
+        ChangeBounds changeBoundsTransition = new ChangeBounds();
+        changeBoundsTransition.setDuration(300);
+        // 为 fragment 设置进出场的动画
+        fragment.setEnterTransition(fadeTransition);
+        fragment.setAllowEnterTransitionOverlap(true);
+        fragment.setAllowReturnTransitionOverlap(true);
+        fragment.setSharedElementEnterTransition(changeBoundsTransition);
     }
 
 }

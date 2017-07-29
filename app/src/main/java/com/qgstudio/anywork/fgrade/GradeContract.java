@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.fgrade;
 
+import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.mvp.BasePresenter;
 import com.qgstudio.anywork.mvp.BaseView;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public interface GradeContract {
 
     interface View extends BaseView {
-        void showSuccess();
+        void showSuccess(Question question);
         void showError(String s);
     }
 

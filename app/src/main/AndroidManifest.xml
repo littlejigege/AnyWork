@@ -35,6 +35,7 @@
         <activity android:name=".fexam.ExamActivity" />
         <activity android:name=".fpaper.PaperActivity" />
         <activity android:name=".fuser.UserActivity" />
+        <activity android:name=".fgrade.AnalysisActivity" />
     </application>
 
 </manifest>

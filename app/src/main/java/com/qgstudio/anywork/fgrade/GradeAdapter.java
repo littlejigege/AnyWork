@@ -15,6 +15,7 @@ import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.StudentAnswer;
 import com.qgstudio.anywork.data.model.StudentAnswerResult;
 import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +134,7 @@ public class GradeAdapter extends Adapter<RecyclerView.ViewHolder> {
             text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    ToastUtil.showToast("点击");
                     rListener.getTestResult(gInfo.getId());
                 }
             });
