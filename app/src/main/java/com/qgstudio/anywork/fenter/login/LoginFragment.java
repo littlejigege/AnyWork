@@ -78,5 +78,6 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
         ToastUtil.showToast("登录成功");
         Intent intent = new Intent(mActivity, HomeActivity.class);
         mActivity.startActivity(intent);
+        mActivity.finish();
     }
 }

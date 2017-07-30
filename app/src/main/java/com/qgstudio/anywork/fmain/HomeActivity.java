@@ -126,6 +126,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
             case R.id.nav_exit: {
                 // TODO: 2017/7/12  弹出退出窗口
+                BaseDialog.Builder builder = new BaseDialog.Builder(this);
+                BaseDialog baseDialog = builder.cancelTouchout(false)
+                        .title("提示")
+                        .view(R.layout.point)
+                        .setNegativeListener("确认", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                finish();
+                            }
+                        })
+                        .setPositiveListener("取消", null)
+                        .build();
+                baseDialog.show();
                 break;
             }
             default: {
