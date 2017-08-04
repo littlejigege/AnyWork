@@ -24,17 +24,18 @@
         <activity
             android:name=".StartActivity"
             android:theme="@style/WelcomeStyle">
+
+        </activity>
+
+        <activity android:name=".fgrade.GradeActivity" />
+        <activity android:name=".fmain.HomeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".fgrade.GradeActivity" />
-        <activity android:name=".fmain.HomeActivity" />
         <activity android:name=".fexam.ExamActivity" />
         <activity android:name=".fpaper.PaperActivity" />
-        <activity android:name=".fexam.QuestionsActivity" />
         <activity android:name=".fuser.UserActivity" />
     </application>
 
