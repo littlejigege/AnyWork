@@ -13,16 +13,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.dialog.BaseDialog;
 import com.qgstudio.anywork.fuser.UserActivity;
+import com.qgstudio.anywork.utils.GlideUtil;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -32,6 +39,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout mDrawerLayout;
     @BindView(R.id.navigation)
     NavigationView mNavigationView;
+
+    ImageView headIv;
+    TextView name;
+    TextView mail;
 
     private Map<String, Fragment> mFragmentMap;
     private FragmentManager mFragmentManager;
@@ -48,10 +59,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mDrawerLayout.setDrawerListener(toggle);
+        mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         mNavigationView.setNavigationItemSelectedListener(this);
+
+        View navHeaderView = mNavigationView.getHeaderView(0);
+        headIv = (CircleImageView) navHeaderView.findViewById(R.id.imageView);
+        name = (TextView) navHeaderView.findViewById(R.id.tv_name);
+        mail = (TextView) navHeaderView.findViewById(R.id.tv_mail);
+        setDrawerInfo();
 
         mFragmentMap = new HashMap<>();
         mFragmentManager = getSupportFragmentManager();
@@ -71,6 +88,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         transaction.commit();
 
+    }
+
+    private void setDrawerInfo() {
+        User user = App.getInstance().getUser();
+        GlideUtil.setPictureWithOutCache(headIv, user.getUserId());
+        name.setText(user.getUserName());
+        mail.setText("邮箱：" + user.getEmail());
     }
 
     @Override
@@ -102,6 +126,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             }
             case R.id.nav_exit: {
                 // TODO: 2017/7/12  弹出退出窗口
+                BaseDialog.Builder builder = new BaseDialog.Builder(this);
+                BaseDialog baseDialog = builder.cancelTouchout(false)
+                        .title("提示")
+                        .view(R.layout.point)
+                        .setNegativeListener("确认", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                finish();
+                            }
+                        })
+                        .setPositiveListener("取消", null)
+                        .build();
+                baseDialog.show();
                 break;
             }
             default: {
@@ -118,7 +155,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         switch (requestCode) {
             case 1:
                 if (resultCode == RESULT_OK) {
-                    // TODO: 修改主界面的个人信息 2017/7/13
+                    setDrawerInfo();
                 }
                 break;
         }

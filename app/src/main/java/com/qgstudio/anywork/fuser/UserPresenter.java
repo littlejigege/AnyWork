@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.fuser;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.qgstudio.anywork.data.ResponseResult;
@@ -23,16 +24,55 @@ import static android.content.ContentValues.TAG;
 
 /**
  * MVPPlugin
- *  邮箱 784787081@qq.com
+ * 邮箱 784787081@qq.com
  */
 
-public class UserPresenter extends BasePresenterImpl<UserContract.View> implements UserContract.Presenter{
+public class UserPresenter extends BasePresenterImpl<UserContract.View> implements UserContract.Presenter {
+
+    @Override
+    public void detachView() {
+        mView = new UserContract.View() {
+            @Override
+            public void showSuccess(User user) {
+
+            }
+
+            @Override
+            public void showError(String s) {
+
+            }
+
+            @Override
+            public void setUser(User user) {
+
+            }
+
+            @Override
+            public void changeImg() {
+
+            }
+
+            @Override
+            public void showProgressDialog() {
+
+            }
+
+            @Override
+            public void hidProgressDialog() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+    }
 
     private UserApi userApi;
 
-
     @Override
-    public void changeInfo(User user) {
+    public void changeInfo(final User user) {
         if (userApi == null) {
             userApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(UserApi.class);
         }
@@ -42,7 +82,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
         info.put("phone", user.getPhone());
         info.put("email", user.getEmail());
 
-        Log.i(TAG, "changeInfo: "+ GsonUtil.GsonString(info));
+        Log.i(TAG, "changeInfo: " + GsonUtil.GsonString(info));
         userApi.changeInfo(info)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,6 +94,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        mView.showError("网络连接错误");
                         mView.hidProgressDialog();
                     }
 
@@ -62,7 +103,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                         assert result != null;
 
                         if (result.getState() == 1) {
-                            mView.showSuccess();
+                            mView.showSuccess(user);
                             mView.hidProgressDialog();
                         } else {
                             mView.showError(result.getStateInfo());
@@ -97,12 +138,13 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        mView.showError("网络连接错误");
                         mView.hidProgressDialog();
                     }
 
                     @Override
                     public void onNext(ResponseResult responseResult) {
-                        Log.i(TAG, "onNext: "+responseResult.getState()+responseResult.getStateInfo());
+                        Log.i(TAG, "onNext: " + responseResult.getState() + responseResult.getStateInfo());
                         if (responseResult.getState() == 1) {
                             mView.changeImg();
                         } else {

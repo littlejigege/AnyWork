@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.dialog;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.StyleRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -59,8 +61,10 @@ public class BaseDialog extends Dialog {
                 BaseDialog.this.cancel();
             }
         };
-        cancel.setOnClickListener(dialogClose);
-        confirm.setOnClickListener(dialogClose);
+        if (builder.negativeListener == null)
+            builder.negativeListener = dialogClose;
+        if (builder.positiveListener == null)
+            builder.positiveListener = dialogClose;
         close.setOnClickListener(dialogClose);
 
         if (builder.titleColor != -1) {
@@ -75,13 +79,13 @@ public class BaseDialog extends Dialog {
         if (builder.view != null) {
             viewContainer.addView(builder.view);
         }
-        if (builder.positiveListener != null) {
-            cancel.setVisibility(View.GONE);
+        if (builder.positiveText != null) {
+            cancel.setVisibility(View.VISIBLE);
             confirm.setText(builder.positiveText);
             confirm.setOnClickListener(builder.positiveListener);
         }
-        if (builder.negativeListener != null) {
-            confirm.setVisibility(View.GONE);
+        if (builder.negativeText != null) {
+            confirm.setVisibility(View.VISIBLE);
             cancel.setText(builder.negativeText);
             cancel.setOnClickListener(builder.negativeListener);
         }
@@ -107,8 +111,8 @@ public class BaseDialog extends Dialog {
         private View view;
         private View.OnClickListener negativeListener;
         private View.OnClickListener positiveListener;
-        private String negativeText;
-        private String positiveText;
+        private String negativeText = null;
+        private String positiveText = null;
         private int resStyle = -1;
 
         public Builder(Context context1) {
@@ -142,14 +146,16 @@ public class BaseDialog extends Dialog {
             return this;
         }
 
-        public void setNegativeListener(String text, View.OnClickListener negativeListener) {
+        public Builder setNegativeListener(String text, View.OnClickListener negativeListener) {
             this.negativeText = (text == null ? "" : text);
             this.negativeListener = negativeListener;
+            return this;
         }
 
-        public void setPositiveListener(String text, View.OnClickListener positiveListener) {
+        public Builder setPositiveListener(String text, View.OnClickListener positiveListener) {
             this.positiveText = (text == null ? "" : text);
             this.positiveListener = positiveListener;
+            return this;
         }
 
 

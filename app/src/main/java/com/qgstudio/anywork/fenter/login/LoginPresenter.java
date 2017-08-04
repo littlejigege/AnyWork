@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.fenter.login;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.qgstudio.anywork.App;
@@ -25,6 +26,27 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
  */
 
 public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implements LoginContract.Presenter{
+
+    @Override
+    public void detachView() {
+        mView = new LoginContract.View() {
+            @Override
+            public void showError(String errorInfo) {
+
+            }
+
+            @Override
+            public void showSuccess() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+        };
+
+    }
 
     private LoginApi loginApi;
 

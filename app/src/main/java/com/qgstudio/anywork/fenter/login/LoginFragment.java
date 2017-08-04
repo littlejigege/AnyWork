@@ -44,12 +44,8 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     }
 
     public static LoginFragment newInstance() {
-        //通过 newInstance 保证 Fragment 不被重复构造，造成 fragment 重叠
+        //可通过 newInstance 为 Fragment 添加参数，保证 Fragment 重建时参数字段不被销毁
         return new LoginFragment();
-    }
-
-    public LoginFragment() {
-        //防止无参构造器被外部调用
     }
 
     @Override
@@ -82,5 +78,6 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
         ToastUtil.showToast("登录成功");
         Intent intent = new Intent(mActivity, HomeActivity.class);
         mActivity.startActivity(intent);
+        mActivity.finish();
     }
 }

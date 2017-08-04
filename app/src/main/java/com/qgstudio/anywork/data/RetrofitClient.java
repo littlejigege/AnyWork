@@ -50,17 +50,13 @@ public enum RetrofitClient {
     private Retrofit retrofit;
 
     public Retrofit getRetrofit() {
-        if(retrofit == null) {
-            synchronized (Retrofit.class) {
-                if (retrofit == null) {
-                    retrofit = new Retrofit.Builder()
-                            .baseUrl(API_DEFAULT_URL)
-                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                            .client(client)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
-                }
-            }
+        if (retrofit == null) {
+            retrofit = new Retrofit.Builder()
+                    .baseUrl(ApiStores.API_DEFAULT_URL)
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .client(client)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
         }
         return retrofit;
     }

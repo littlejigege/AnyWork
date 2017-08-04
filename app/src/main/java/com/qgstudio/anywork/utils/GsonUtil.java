@@ -3,6 +3,11 @@ package com.qgstudio.anywork.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,6 +52,15 @@ public class GsonUtil {
         }
         return t;
     }
+
+    /**
+     * Json转List集合
+     */
+    public static <T> List<T> GsonToList(String json, Class<T[]> clz) {
+        T[] arr = gson.fromJson(json, clz);
+        return Arrays.asList(arr);
+    }
+
 
     /**
      * 转成map

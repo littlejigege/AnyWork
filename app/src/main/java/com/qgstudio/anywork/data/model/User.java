@@ -8,7 +8,7 @@ import android.os.Parcelable;
  * Created by FunriLy on 2017/7/10.
  * From small beginnings comes great things.
  */
-public class User implements Parcelable {
+public class User implements Parcelable, Cloneable {
 
     private int userId;         //id
     private String userName;    //昵称
@@ -117,6 +117,17 @@ public class User implements Parcelable {
                 ", phone='" + phone + '\'' +
                 ", mark=" + mark +
                 '}';
+    }
+
+    @Override
+    public User clone() {
+        User user = null;
+        try{
+            user = (User) super.clone();
+        }catch(CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 
     @Override
