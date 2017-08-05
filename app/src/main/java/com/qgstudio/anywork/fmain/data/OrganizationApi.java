@@ -24,4 +24,8 @@ public interface OrganizationApi {
     @POST("organization/search")
     Observable<ResponseResult<List<Organization>>> getAllOrganization(@Body Map<String, String> organizationName);
 
+
+    @POST("organization/join")
+    Observable<ResponseResult> joinOrganization(@Body Map<String, String> organizationName);
+
 }

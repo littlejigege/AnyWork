@@ -1,20 +1,26 @@
 package com.qgstudio.anywork.fmain.data;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.model.Organization;
 import com.qgstudio.anywork.fmain.OrganizationFragView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
+import com.qgstudio.anywork.utils.GsonUtil;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import retrofit2.Retrofit;
+import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Model+Presenter
@@ -38,6 +44,16 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
             }
 
             @Override
+            public void joinSuccess(int id, int position) {
+
+            }
+
+            @Override
+            public void joinFail(String info) {
+
+            }
+
+            @Override
             public Context getContext() {
                 return null;
             }
@@ -52,7 +68,7 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
     }
 
     public void getAllOrganization() {
-        Map<String, String> map = new HashMap();
+        Map<String, String> map = new HashMap<>();
         map.put("organizationName", "");
         mOrganizationApi.getAllOrganization(map)
                 .subscribeOn(Schedulers.io())
@@ -89,6 +105,36 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
 
                     @Override
                     protected void onMistake(Throwable t) {
+                    }
+                });
+    }
+
+    public void joinOrganization(final int id, String pass, final int position) {
+        Map<String, String> info = new HashMap<>();
+        info.put("organizationId", id+"");
+        info.put("token", pass);
+
+        mOrganizationApi.joinOrganization(info)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseResult>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        mView.joinFail("网络连接错误");
+                    }
+
+                    @Override
+                    public void onNext(ResponseResult responseResult) {
+                        if (responseResult.getState() == 1) {
+                            mView.joinSuccess(id, position);
+                        } else {
+                            mView.joinFail(responseResult.getStateInfo());
+                        }
                     }
                 });
     }

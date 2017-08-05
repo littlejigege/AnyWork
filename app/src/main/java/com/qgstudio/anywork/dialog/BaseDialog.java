@@ -80,12 +80,12 @@ public class BaseDialog extends Dialog {
             viewContainer.addView(builder.view);
         }
         if (builder.positiveText != null) {
-            cancel.setVisibility(View.VISIBLE);
+            confirm.setVisibility(View.VISIBLE);
             confirm.setText(builder.positiveText);
             confirm.setOnClickListener(builder.positiveListener);
         }
         if (builder.negativeText != null) {
-            confirm.setVisibility(View.VISIBLE);
+            cancel.setVisibility(View.VISIBLE);
             cancel.setText(builder.negativeText);
             cancel.setOnClickListener(builder.negativeListener);
         }

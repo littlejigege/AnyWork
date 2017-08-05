@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cimg"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        tools:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_marginStart="92dp"
+        android:layout_marginEnd="@dimen/activity_vertical_margin"
+        android:textSize="18sp"
+        android:textColor="@color/dark_blue_text"
+        tools:text="简述"/>
+
+    <EditText
+        android:id="@+id/et"
+        style="@style/AnyWork.Theme.EditText1"
+        android:layout_marginTop="104dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="72dp"
+        android:textColor="@color/AnyWork_accent"
+        android:hint="请输入组织密码"
+        android:inputType="textPassword"/>
+
+</FrameLayout>

@@ -70,7 +70,6 @@ public class EnterActivity extends AppCompatActivity {
 //                builder.cancelTouchout(false)
 //                .title("提示")
 //                //.titleColor(R.color.theme_yellow_background)
-//                .view(R.layout.point)
 //                .build();
 //        baseDialog.show();
 

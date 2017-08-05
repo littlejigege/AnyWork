@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.qgstudio.anywork.R;
@@ -14,6 +16,7 @@ import com.qgstudio.anywork.data.model.Organization;
 import com.qgstudio.anywork.dialog.BaseDialog;
 import com.qgstudio.anywork.fexam.QuestionFragment;
 import com.qgstudio.anywork.fpaper.PaperActivity;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import java.util.List;
 
@@ -34,7 +37,16 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
     private int mType;
 
     private Context mContext;
+
     private List<Organization> mOrganizations;
+
+    private BaseDialog baseDialog;
+
+    public void updatemOrganizations(int position) {
+        baseDialog.cancel();
+        mOrganizations.get(position).setIsJoin(1);
+        notifyDataSetChanged();
+    }
 
     public OrganizationAdapter(int type, Context context, List<Organization> organizations) {
         mType = type;
@@ -56,7 +68,7 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         holder.tv_teacher.setText(organization.getTeacherName());
         holder.tv_description.setText(organization.getDescription());
 
-        String url = API_DEFAULT_URL + "picture/organization/" + organization.getOrganizationId() + ".jpg";
+        final String url = API_DEFAULT_URL + "picture/organization/" + organization.getOrganizationId() + ".jpg";
         Glide.with(mContext).load(url).into(holder.civ);
 
         if (mType == TYPE_ALL) {
@@ -71,17 +83,29 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
         }
 
-        if (mType == TYPE_ALL) {
+        if (mType == TYPE_ALL && organization.getIsJoin() != 1) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new BaseDialog.Builder(mContext)
-                            .title(organization.getOrganizationName())
-//                            .view()
-//                            .addViewOnClick()
+                    View view = LayoutInflater.from(mContext).inflate(R.layout.dialog_origanization, null);
+                    CircleImageView imageView = (CircleImageView) view.findViewById(R.id.cimg);
+                    TextView textView = (TextView) view.findViewById(R.id.text);
+                    final EditText et = (EditText) view.findViewById(R.id.et);
+                    Glide.with(mContext).load(url).into(imageView);
+                    textView.setText(organization.getTeacherName()+" "+organization.getDescription());
 
-                            .build()
-                            .show();
+                    baseDialog = new BaseDialog.Builder(mContext)
+                            .title(organization.getOrganizationName())
+                            .view(view)
+                            .setPositiveListener("加入", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    joinListener.join(organization.getOrganizationId(),
+                                            et.getText().toString(), position);
+                                }
+                            })
+                            .build();
+                    baseDialog.show();
                 }
             });
         } else {
@@ -127,4 +151,13 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         }
     }
 
+    interface JoinListener {
+        void join(int id, String pass, int position);
+    }
+
+    private JoinListener joinListener;
+
+    public void setJoinListener(JoinListener joinListener) {
+        this.joinListener = joinListener;
+    }
 }
