@@ -139,4 +139,36 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
                 });
     }
 
+    public void leaveOrganization(final int id) {
+        Map<String, Integer> info = new HashMap<>();
+        info.put("organizationId", id);
+
+        Log.i(TAG, "leaveOrganization: "+GsonUtil.GsonString(info));
+        mOrganizationApi.leave(info)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseResult>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i(TAG, "onError: 网络连接错误");
+                        mView.joinFail("网络连接错误");
+                    }
+
+                    @Override
+                    public void onNext(ResponseResult responseResult) {
+                        if (responseResult.getState() == 1) {
+                            mView.joinSuccess(0, 0);
+                        } else {
+                            mView.joinFail(responseResult.getStateInfo());
+                        }
+                    }
+                });
+    }
+
+
 }

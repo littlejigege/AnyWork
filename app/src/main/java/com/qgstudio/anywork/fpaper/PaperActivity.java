@@ -5,14 +5,26 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.StartActivity;
+import com.qgstudio.anywork.data.model.Organization;
+import com.qgstudio.anywork.dialog.BaseDialog;
+import com.qgstudio.anywork.fmain.OrganizationFragView;
+import com.qgstudio.anywork.fmain.data.OrganizationRepository;
+import com.qgstudio.anywork.mvp.MVPBaseActivity;
+import com.qgstudio.anywork.utils.ToastUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +34,7 @@ import butterknife.OnClick;
  * Created by Yason on 2017/4/2.
  */
 
-public class PaperActivity extends AppCompatActivity {
+public class PaperActivity extends MVPBaseActivity<OrganizationFragView, OrganizationRepository> implements OrganizationFragView {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
@@ -32,6 +44,9 @@ public class PaperActivity extends AppCompatActivity {
 
     @BindView(R.id.pager)
     ViewPager mViewPager;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
 
     private int mOrganizationId;
     private PaperFragAdapter mPaperFragAdapter;
@@ -60,6 +75,28 @@ public class PaperActivity extends AppCompatActivity {
         mTabLayout.setTabTextColors(ResourcesCompat.getColor(getResources(), R.color.dark_grey_status, null),
                                     ResourcesCompat.getColor(getResources(), R.color.dark_green_text, null));
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                View view1 = LayoutInflater.from(PaperActivity.this).inflate(R.layout.dialog_point, null);
+                TextView tv = (TextView) view1.findViewById(R.id.point);
+                tv.setText("确认退出当前的班级吗？");
+                BaseDialog.Builder builder = new BaseDialog.Builder(PaperActivity.this);
+                builder.cancelTouchout(false)
+                        .title("提示")
+                        .view(view1)
+                        .setNegativeListener("确认", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                mPresenter.leaveOrganization(mOrganizationId);
+                            }
+                        })
+                        .setPositiveListener("取消", null)
+                        .build()
+                        .show();
+            }
+        });
+
     }
 
     @OnClick(R.id.btn_back)
@@ -73,4 +110,24 @@ public class PaperActivity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
+    @Override
+    public void addOrganization(Organization organization) {
+
+    }
+
+    @Override
+    public void addOrganizations(List<Organization> organizations) {
+
+    }
+
+    @Override
+    public void joinSuccess(int id, int position) {
+        ToastUtil.showToast("退出班级成功");
+        finish();
+    }
+
+    @Override
+    public void joinFail(String info) {
+        ToastUtil.showToast(info);
+    }
 }
