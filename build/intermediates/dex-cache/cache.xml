@@ -3,21 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="D:\cy_android\anywork\AnyWork\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jar="C:\Users\zydx\Desktop\git\AnyWork\client-student\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="94bfa825d46727265a518e7addb558f17ad41b89">
+        <dex dex="C:\Users\zydx\Desktop\git\AnyWork\client-student\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_14dec506370f703b84ea4dd2adb243e2c6531d83\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\zydx\Desktop\git\AnyWork\client-student\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.0"
         sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
-        <dex dex="D:\cy_android\anywork\AnyWork\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_c6d6df1a4596af38405a292e82826d15ced9d469\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="D:\cy_android\anywork\AnyWork\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.0"
-        sha1="13a93b6327b674080d84a2a28c25b6f41c3ed222">
-        <dex dex="D:\cy_android\anywork\AnyWork\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_284cf63800f89d21906b418b8c7d95bf6cd6e41f\classes.dex" />
+        <dex dex="C:\Users\zydx\Desktop\git\AnyWork\client-student\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_cdaaed17771614eae571dcbc48dd4fc8487caf86\classes.dex" />
     </item>
 
 </items>

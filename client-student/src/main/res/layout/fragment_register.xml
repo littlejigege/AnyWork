@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="42dp"
+    android:clickable="true"
+    android:background="@color/AnyWork_primary_dark">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_marginTop="24dp"
+        android:text="@string/register"
+        style="@style/AnyWork.Theme.TextView2" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/name"
+        style="@style/AnyWork.Theme.EditText1"
+        android:layout_marginTop="16dp"
+        android:hint="@string/name"
+        android:inputType="text"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/account"
+        style="@style/AnyWork.Theme.EditText1"
+        android:hint="@string/account"
+        android:inputType="textEmailAddress"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/phone"
+        style="@style/AnyWork.Theme.EditText1"
+        android:hint="@string/phone"
+        android:inputType="phone"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/password"
+        style="@style/AnyWork.Theme.EditText1"
+        android:hint="@string/password"
+        android:inputType="textPassword"/>
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/password2"
+        style="@style/AnyWork.Theme.EditText1"
+        android:hint="@string/rePassword"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:id="@+id/register"
+        style="@style/AnyWork.Theme.Button"
+        android:layout_marginTop="@dimen/spacing_big"
+        android:background="@drawable/bg_btn_gray"
+        android:text="@string/sign_up" />
+
+    <ImageView
+        android:id="@+id/cancel"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:src="@mipmap/cancel"/>
+
+</LinearLayout>
