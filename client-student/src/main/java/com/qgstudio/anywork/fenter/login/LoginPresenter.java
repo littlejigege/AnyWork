@@ -39,7 +39,6 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
             @Override
             public void showSuccess() {
-
             }
 
             @Override
