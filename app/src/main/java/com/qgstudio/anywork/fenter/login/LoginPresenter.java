@@ -10,8 +10,10 @@ import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 import com.qgstudio.anywork.utils.DataBaseUtil;
 import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.MyOpenHelper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import rx.Observer;
@@ -52,12 +54,12 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
     @Override
     public User getUser() {
-        User user = DataBaseUtil.getHelper().queryById(User.class, 1);
-        return user;
+        List<User> users = DataBaseUtil.getHelper().queryAll(User.class);
+        return users.get(users.size() - 1);
     }
 
     @Override
-    public void login(String account, final String password) {
+    public void login(final String account, final String password) {
         if (loginApi == null) {
             loginApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(LoginApi.class);
         }
@@ -90,8 +92,11 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                             Log.i(TAG, "onNext: login" + GsonUtil.GsonString(user));
                             mView.showSuccess();
 
+                            user.setEmail(account);
                             user.setPassword(password);
-                            DataBaseUtil.getHelper().save(user);
+                            MyOpenHelper myOpenHelper = DataBaseUtil.getHelper();
+                            myOpenHelper.clear(User.class);
+                            myOpenHelper.save(user);
                         } else {
                             mView.showError(result.getStateInfo());
                         }
