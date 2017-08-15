@@ -7,7 +7,7 @@ import rx.Subscriber;
 
 /**
  * 此类对 Subscriber 进行了一层扩展
- * Created by Yason on 2017/4/12.
+ * @author Yason 2017/4/12.
  */
 
 public abstract class RetrofitSubscriber<T> extends Subscriber<ResponseResult<T>> {

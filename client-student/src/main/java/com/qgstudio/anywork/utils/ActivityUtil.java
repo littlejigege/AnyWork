@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 /**
- * Created by Yason on 2017/4/2.
  * 负责添加 Fragment 到 Activity 中
+ * @author Yason 2017/4/2.
  */
 
 public class ActivityUtil {

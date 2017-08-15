@@ -32,7 +32,7 @@ import butterknife.OnClick;
 
 /**
  * 考试和练习试卷列表的容器
- * Created by Yason on 2017/4/2.
+ * @author Yason 2017/4/2.
  */
 
 public class PaperActivity extends AppCompatActivity {

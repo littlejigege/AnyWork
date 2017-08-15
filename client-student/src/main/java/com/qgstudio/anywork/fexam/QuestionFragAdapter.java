@@ -14,38 +14,18 @@ import com.qgstudio.anywork.data.model.Question;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionFragAdapter extends FragmentPagerAdapter {
+public class QuestionFragAdapter extends FragmentStatePagerAdapter {
 
     private List<Fragment> mFragments;
-    private FragmentManager mFragmentManager;
 
     public QuestionFragAdapter(FragmentManager fm, List<Fragment> fragments) {
         super(fm);
         mFragments = fragments;
-        mFragmentManager = fm;
-    }
-
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        mFragmentManager.beginTransaction().show(fragment).commit();
-        return fragment;
-    }
-
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        Fragment fragment = mFragments.get(position);
-        mFragmentManager.beginTransaction().hide(fragment).commit();
     }
 
     @Override
     public Fragment getItem(int position) {
         return mFragments.get(position);
-    }
-
-    public void add(Fragment fragment) {
-        mFragments.add(fragment);
-        notifyDataSetChanged();
     }
 
     public void addAll(List<Fragment> fragments) {

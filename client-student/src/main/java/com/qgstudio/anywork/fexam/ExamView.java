@@ -11,7 +11,7 @@ import com.qgstudio.anywork.mvp.BaseView;
 
 import java.util.List;
 
-public interface ExamView extends BaseView {
+public interface ExamView extends BaseView ,PreLoading{
     void addQuestions(List<Question> questions);
     void startGradeAty(double socre, List<StudentAnswerResult> analysis);
 }

@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.data.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * Created by FunriLy on 2017/7/10.
  * From small beginnings comes great things.
  */
-public class StudentAnswer {
+public class StudentAnswer implements Serializable{
     private int studentAnswerId;
     private int questionId;
     private String studentAnswer;

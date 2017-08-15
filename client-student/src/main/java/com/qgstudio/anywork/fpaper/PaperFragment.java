@@ -25,7 +25,7 @@ import butterknife.Unbinder;
 
 /**
  * 显示考试或练习(单个)列表
- * Created by Yason on 2017/4/2.
+ * @author Yason 2017/4/2.
  */
 
 public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepository> implements PaperFragView {
@@ -96,8 +96,8 @@ public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepositor
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mUnbinder.unbind();
+        super.onDestroyView();
     }
 
     @Override

@@ -125,7 +125,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 BaseDialog.Builder builder = new BaseDialog.Builder(this);
                 BaseDialog baseDialog = builder.cancelTouchout(false)
                         .title("提示")
-                        .view(R.layout.dialog_point)
+                        .content("确定要退出当前账号吗？")
                         .setNegativeListener("确认", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {

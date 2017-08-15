@@ -16,11 +16,14 @@ import com.qgstudio.anywork.data.model.Question;
 import com.qgstudio.anywork.data.model.StudentAnswer;
 import com.qgstudio.anywork.data.model.StudentAnswerResult;
 import com.qgstudio.anywork.data.model.StudentPaper;
+import com.qgstudio.anywork.dialog.BaseDialog;
+import com.qgstudio.anywork.fexam.adapters.AnswerBuffer;
 import com.qgstudio.anywork.fexam.data.ExamRepository;
 import com.qgstudio.anywork.fgrade.GradeActivity;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
 import com.qgstudio.anywork.ui.ExamPagerView;
 import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +34,17 @@ import butterknife.OnClick;
 
 /**
  * 整套试卷的容器
- * Created by Yason on 2017/4/2.
+ * @author Yason 2017/4/2.
  */
 
-public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> implements ExamView, ViewPager.OnPageChangeListener {
+public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> implements ExamView,
+        ViewPager.OnPageChangeListener {
 
     @BindView(R.id.epv) ExamPagerView mExamPagerView;
     @BindView(R.id.fab) FloatingActionButton mSubmitFab;
 
     private int mTestPaperId;
-    private QuestionFragAdapter mQuestionFragAdapter;
-
-    private List<StudentAnswer> mStudentAnswerBuffer =
-            new ArrayList<>(0);//学生答案缓存
+    private QuestionFragAdapter mQuestionFragAdapter;//数据适配器
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,44 +68,37 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
         mExamPagerView.setViewPagerListener(this);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setMessage("你还未完成选择题，确认返回？");
-//        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                finish();
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.create().show();
-//    }
+    @Override
+    protected void onDestroy() {
+        //记住退出前一定要清空缓存
+        AnswerBuffer.getInstance().clear();
 
-//    public void setNextPage() {
-//        mExamPagerView.setViewPagerNextItem();
-//    }
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new BaseDialog.Builder(this)
+                .title("提示")
+                .content("您还未提交试卷，退出将不保存作答内容！！！")
+                .setNegativeListener("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                })
+                .setPositiveListener("取消", null)
+                .cancelTouchout(true)
+                .build()
+                .show();
+    }
 
     @OnClick(R.id.fab)
     public void submit() {
-        //获取填写的答案
-        List<StudentAnswer> studentAnswers = new ArrayList<>();
-        for (int pos = 0; pos < mQuestionFragAdapter.getCount(); pos++) {
-            QuestionFragment fragment = (QuestionFragment) mQuestionFragAdapter.getItem(pos);
-            studentAnswers.add(fragment.getStudentAnswer());
-        }
-        //提交
         StudentPaper studentPaper = new StudentPaper();
         studentPaper.setStudentId(((App) getApplication()).getUser().getUserId());
+        studentPaper.setStudentAnswer(AnswerBuffer.getInstance().getResult());
         studentPaper.setTestpaperId(mTestPaperId);
-        studentPaper.setStudentAnswer(studentAnswers);
-
         mPresenter.submitTestPaper(studentPaper);
     }
 
@@ -136,25 +130,37 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
 
     @Override
     public void addQuestions(List<Question> questions) {
-        addAll(questions);
+        List<Fragment> fragments = new ArrayList<>();
+        int position = 0;
+        for (Question question : questions) {
+            //将每道题传入每个fragment中
+            fragments.add(QuestionFragment.newInstance(question, position));
+            position++;
+        }
+        mQuestionFragAdapter.addAll(fragments);
+        mExamPagerView.setTitleCenterTextString((position != 0 ? 1 : 0) + "/" + questions.size());
     }
 
     @Override
     public void startGradeAty(double socre, List<StudentAnswerResult> results) {
-        startAty(socre, results);
-    }
-
-    private void addAll(List<Question> questions){
-        List<Fragment> fragments = new ArrayList<>();
-        for (Question question : questions) {
-            fragments.add(QuestionFragment.newInstance(question));
-        }
-        mQuestionFragAdapter.addAll(fragments);
-        mExamPagerView.setTitleCenterTextString(1 + "/" + questions.size());
-    }
-
-    private void startAty(double socre, List<StudentAnswerResult> results) {
         GradeActivity.start(this, socre, GsonUtil.GsonString(results));
         finish();
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showToast(String s) {
+        ToastUtil.showToast(s);
+    }
+
+
 }

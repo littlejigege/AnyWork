@@ -16,6 +16,7 @@ import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +34,8 @@ import rx.schedulers.Schedulers;
 
 public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamPresenter {
 
+    public static final String TAG = "ExamRepository";
+
     private ExamApi mExamApi;
 
     public ExamRepository() {
@@ -49,26 +52,32 @@ public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamP
                 .subscribe(new RetrofitSubscriber<List<Question>>() {
                     @Override
                     protected void onSuccess(List<Question> data) {
+                        LogUtil.d(TAG, "[getTestpaper] " + "onSuccess -> " + data);
                         mView.addQuestions(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
+                        LogUtil.d(TAG, "[getTestpaper] " + "onFailure -> " + info);
+                        mView.showToast(info);
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
+                        LogUtil.d(TAG, "[getTestpaper] " + "onMistake -> " + t.getMessage());
                     }
                 });
     }
 
     public void submitTestPaper(StudentPaper studentPaper) {
+        LogUtil.d(TAG, "[submitTestPaper] " + "studentPaper -> " + GsonUtil.GsonString(studentPaper));
         mExamApi.submitTestpaper(studentPaper)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RetrofitSubscriber<StudentTestResult>() {
                     @Override
                     protected void onSuccess(StudentTestResult data) {
+                        LogUtil.d(TAG, "[submitTestPaper] " + "onSuccess -> " + data);
                         double socre = data.getSocre();
                         List<StudentAnswerResult> results = new ArrayList<>();
                         List<StudentAnswerAnalysis> analysis = data.getStudentAnswerAnalysis();
@@ -80,11 +89,12 @@ public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamP
 
                     @Override
                     protected void onFailure(String info) {
+                        LogUtil.d(TAG, "[submitTestPaper] " + "onFailure -> " + info);
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-
+                        LogUtil.d(TAG, "[submitTestPaper] " + "onMistake -> " + t.getMessage());
                     }
                 });
     }

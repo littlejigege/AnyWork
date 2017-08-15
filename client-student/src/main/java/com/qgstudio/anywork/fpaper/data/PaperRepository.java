@@ -10,6 +10,7 @@ import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fpaper.PaperFragView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
+import com.qgstudio.anywork.utils.LogUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +22,12 @@ import rx.schedulers.Schedulers;
 
 
 /**
- * Created by Yason on 2017/4/12.
+ * @author Yason 2017/4/12.
  */
 
 public class PaperRepository extends BasePresenterImpl<PaperFragView> implements PaperPresenter {
 
+    private static final String TAG = "PaperRepository";
     private PaperApi mPaperApi;
 
     public PaperRepository() {
@@ -42,17 +44,19 @@ public class PaperRepository extends BasePresenterImpl<PaperFragView> implements
                 .subscribe(new RetrofitSubscriber<List<Testpaper>>() {
                     @Override
                     protected void onSuccess(List<Testpaper> data) {
+                        LogUtil.d(TAG, "[getExaminationPaper] " + "onSuccess -> " + data);
                         mView.addExaminationPapers(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
+                        LogUtil.d(TAG, "[getExaminationPaper] " + "onFailure -> " + info);
 
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-
+                        LogUtil.d(TAG, "[getExaminationPaper] " + "onMistake -> " + t.getMessage());
                     }
                 });
     }
@@ -66,17 +70,18 @@ public class PaperRepository extends BasePresenterImpl<PaperFragView> implements
                 .subscribe(new RetrofitSubscriber<List<Testpaper>>() {
                     @Override
                     protected void onSuccess(List<Testpaper> data) {
+                        LogUtil.d(TAG, "[getPracticePaper] " + "onSuccess -> " + data);
                         mView.addPracticePapers(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
-
+                        LogUtil.d(TAG, "[getPracticePaper] " + "onFailure -> " + info);
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-
+                        LogUtil.d(TAG, "[getPracticePaper] " + "onMistake -> " + t.getMessage());
                     }
                 });
     }

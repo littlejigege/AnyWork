@@ -23,7 +23,7 @@ import static com.qgstudio.anywork.data.ApiStores.API_DEFAULT_URL;
 
 
 /**
- * Created by Yason on 2017/7/10.
+ * @author Yason 2017/7/10.
  */
 
 public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
@@ -49,7 +49,10 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
 
         //设置标题，章节，类型
         holder.tv_title.setText(paper.getTestpaperTitle());
-        holder.tv_chapter.setText(paper.getChapterName());
+
+        String chapter = paper.getChapterName();
+        holder.tv_chapter.setText((chapter == null || chapter.equals("") ? "——" : chapter));
+
         holder.tv_type.setText(paper.getTestpaperType() == 1 ? "考试" : "练习");
 
         //设置时间
@@ -74,11 +77,6 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
     @Override
     public int getItemCount() {
         return mPapers.size();
-    }
-
-    public void add(Testpaper paper) {
-        mPapers.add(paper);
-        notifyItemInserted(mPapers.size());
     }
 
     public void addAll(List<Testpaper> papers) {

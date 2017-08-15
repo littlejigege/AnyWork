@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -96,7 +97,7 @@ public class ExamPagerView extends LinearLayout {
 
     public void setViewPagerNextItem() {
         int cp = mViewPager.getCurrentItem();
-        if (cp < mViewPager.getChildCount()) {
+        if (cp < mViewPager.getAdapter().getCount()) {
             mViewPager.setCurrentItem(cp + 1);
         }
     }
@@ -114,8 +115,8 @@ public class ExamPagerView extends LinearLayout {
         }
     }
 
-    public void setViewPagerAdapter(FragmentPagerAdapter fragmentPagerAdapter) {
-        mViewPager.setAdapter(fragmentPagerAdapter);
+    public void setViewPagerAdapter(PagerAdapter pagerAdapter) {
+        mViewPager.setAdapter(pagerAdapter);
 //        mViewPager.setOffscreenPageLimit(fragmentPagerAdapter.getCount());
     }
 

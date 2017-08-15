@@ -117,8 +117,10 @@ public class BaseDialog extends Dialog {
 
         public Builder(Context context1) {
             context = context1;
-            height = 650;
-            width = 850;
+            int defaultWidth = context.getResources().getDisplayMetrics().widthPixels - 40;
+            int defaultHeight = (int) (defaultWidth * 0.75);
+            width = defaultWidth;
+            height = defaultHeight;
         }
 
         public Builder titleColor(int colorRes) {
@@ -133,6 +135,13 @@ public class BaseDialog extends Dialog {
 
         public Builder isClose(boolean is) {
             isClose = is;
+            return this;
+        }
+
+        public Builder content(String text) {
+            TextView view1 = (TextView) LayoutInflater.from(context).inflate(R.layout.dialog_point, null);
+            view1.setText(text);
+            view = view1;
             return this;
         }
 

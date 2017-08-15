@@ -13,10 +13,10 @@ public class Question implements Serializable {
 
     private int questionId;     //问题id
     private int type;           //题目类型  1-选择题 2-判断题 3-填空题 4-问答题 5-编程题 6-综合题
-    private String A;
-    private String B;
-    private String C;
-    private String D;
+    private String a;
+    private String b;
+    private String c;
+    private String d;
     private String key;         //答案
     private String content;     //题目内容
     private int socre;          //分数
@@ -45,35 +45,35 @@ public class Question implements Serializable {
     }
 
     public String getA() {
-        return A;
+        return a;
     }
 
     public void setA(String a) {
-        A = a;
+        this.a = a;
     }
 
     public String getB() {
-        return B;
+        return b;
     }
 
     public void setB(String b) {
-        B = b;
+        this.b = b;
     }
 
     public String getC() {
-        return C;
+        return c;
     }
 
     public void setC(String c) {
-        C = c;
+        this.c = c;
     }
 
     public String getD() {
-        return D;
+        return d;
     }
 
     public void setD(String d) {
-        D = d;
+        this.d = d;
     }
 
     public String getKey() {
@@ -123,10 +123,10 @@ public class Question implements Serializable {
         return "Question{" +
                 "questionId=" + questionId +
                 ", type=" + type +
-                ", A='" + A + '\'' +
-                ", B='" + B + '\'' +
-                ", C='" + C + '\'' +
-                ", D='" + D + '\'' +
+                ", A='" + a + '\'' +
+                ", B='" + b + '\'' +
+                ", C='" + c + '\'' +
+                ", D='" + d + '\'' +
                 ", key='" + key + '\'' +
                 ", content='" + content + '\'' +
                 ", socre=" + socre +

@@ -1,7 +1,7 @@
 package com.qgstudio.anywork.data;
 
 /**
- * Created by Yason on 2017/4/11.
+ * @author Yason 2017/4/11.
  */
 
 public interface ApiStores {
