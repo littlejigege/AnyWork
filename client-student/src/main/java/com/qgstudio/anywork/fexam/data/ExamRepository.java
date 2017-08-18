@@ -1,26 +1,20 @@
 package com.qgstudio.anywork.fexam.data;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.model.Question;
-import com.qgstudio.anywork.data.model.StudentAnswer;
 import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
 import com.qgstudio.anywork.data.model.StudentAnswerResult;
 import com.qgstudio.anywork.data.model.StudentPaper;
 import com.qgstudio.anywork.data.model.StudentTestResult;
-import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 import com.qgstudio.anywork.utils.GsonUtil;
 import com.qgstudio.anywork.utils.LogUtil;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +23,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
- * Created by Yason on 2017/4/14.
+ * @author Yason 2017/4/14.
  */
 
 public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamPresenter {
@@ -59,12 +53,20 @@ public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamP
                     @Override
                     protected void onFailure(String info) {
                         LogUtil.d(TAG, "[getTestpaper] " + "onFailure -> " + info);
-                        mView.showToast(info);
+                        handleGetPaperContentFailure();
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
                         LogUtil.d(TAG, "[getTestpaper] " + "onMistake -> " + t.getMessage());
+
+                        if (t instanceof ConnectException) {
+                            mView.showToast("无法连接到服务器");
+                            mView.destroySelf();
+                            return;
+                        }
+
+                        handleGetPaperContentFailure();
                     }
                 });
     }
@@ -78,25 +80,41 @@ public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamP
                     @Override
                     protected void onSuccess(StudentTestResult data) {
                         LogUtil.d(TAG, "[submitTestPaper] " + "onSuccess -> " + data);
+
                         double socre = data.getSocre();
                         List<StudentAnswerResult> results = new ArrayList<>();
+
                         List<StudentAnswerAnalysis> analysis = data.getStudentAnswerAnalysis();
                         for (StudentAnswerAnalysis analysi : analysis) {
                             results.add(new StudentAnswerResult(analysi));
                         }
+
                         mView.startGradeAty(socre, results);
                     }
 
                     @Override
                     protected void onFailure(String info) {
                         LogUtil.d(TAG, "[submitTestPaper] " + "onFailure -> " + info);
+                        mView.showToast("提交试卷失败");
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
-                        LogUtil.d(TAG, "[submitTestPaper] " + "onMistake -> " + t.getMessage());
+                        LogUtil.d(TAG, "[submitTestPaper] " + "onMistake -> " + t);
+
+                        if (t instanceof ConnectException) {
+                            mView.showToast("无法连接到服务器");
+                            return;
+                        }
+
+                        mView.showToast("提交试卷失败");
                     }
                 });
+    }
+
+    private void handleGetPaperContentFailure(){
+        mView.showToast("获取试卷内容失败");
+        mView.destroySelf();
     }
 
 }

@@ -1,56 +1,86 @@
 package com.qgstudio.anywork.fmain;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.common.DialogManagerActivity;
 import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.dialog.BaseDialog;
+import com.qgstudio.anywork.fenter.EnterActivity;
 import com.qgstudio.anywork.fuser.UserActivity;
 import com.qgstudio.anywork.utils.GlideUtil;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.qgstudio.anywork.utils.LogUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomeActivity extends DialogManagerActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static final String TAG = "HomeActivity";
+    public static final String ACTION = TAG + "$Receiver";//广播action
 
     @BindView(R.id.toolbar) Toolbar mToolbar;
     @BindView(R.id.drawer) DrawerLayout mDrawerLayout;
     @BindView(R.id.navigation) NavigationView mNavigationView;
 
-    ImageView headIv;
+    CircleImageView headIv;
     TextView name;
     TextView mail;
 
-    private Map<String, Fragment> mFragmentMap;
     private FragmentManager mFragmentManager;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        initView();
+        registerBroadcast();
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterBroadcast();
+        super.onDestroy();
+    }
+
+    private void registerBroadcast() {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(ACTION);
+        mReceiver = new Receiver();
+        registerReceiver(mReceiver, intentFilter);
+    }
+
+    private void unregisterBroadcast() {
+        if (mReceiver != null) {
+            unregisterReceiver(mReceiver);
+        }
+    }
+
+    private void initView() {
         ButterKnife.bind(this);
 
-        //1.View初始化
+        View navHeaderView = mNavigationView.getHeaderView(0);
+        headIv = (CircleImageView) navHeaderView.findViewById(R.id.civ_headIv);
+        name = (TextView) navHeaderView.findViewById(R.id.tv_name);
+        mail = (TextView) navHeaderView.findViewById(R.id.tv_mail);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -61,29 +91,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         mNavigationView.setNavigationItemSelectedListener(this);
 
-        View navHeaderView = mNavigationView.getHeaderView(0);
-        headIv = (CircleImageView) navHeaderView.findViewById(R.id.imageView);
-        name = (TextView) navHeaderView.findViewById(R.id.tv_name);
-        mail = (TextView) navHeaderView.findViewById(R.id.tv_mail);
         setDrawerInfo();
 
-        mFragmentMap = new HashMap<>();
         mFragmentManager = getSupportFragmentManager();
-
-        //2.添加fragment
-        Fragment fragAll = OrganizationFragment.newInstance(OrganizationFragment.TYPE_ALL);
-        Fragment fragJoin = OrganizationFragment.newInstance(OrganizationFragment.TYPE_JOIN);
-
-        mFragmentMap.put("ALL", fragAll);
-        mFragmentMap.put("JOIN", fragJoin);
-
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.add(R.id.frame, mFragmentMap.get("ALL"));
-        transaction.add(R.id.frame, mFragmentMap.get("JOIN"));
-        transaction.hide(mFragmentMap.get("ALL"));
-        transaction.show(mFragmentMap.get("JOIN"));
-
-        transaction.commit();
+        mFragmentManager.beginTransaction()
+                .add(R.id.frame, OrganizationFragment.newInstance(OrganizationFragment.TYPE_JOIN))
+                .commit();
 
     }
 
@@ -102,26 +115,32 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.nav_searching:{
+                SearchingActivity.start(this);
+                return true;
+            }
+            default:{}
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_all: {
-                showFragment("ALL");
+            case R.id.nav_join:{//我的班级
                 break;
             }
-            case R.id.nav_join: {
-                showFragment("JOIN");
-                break;
-            }
-            case R.id.nav_inform:{
+            case R.id.nav_inform:{//个人信息
                 Intent intent = new Intent(this, UserActivity.class);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 0);
                 break;
             }
-            case R.id.nav_exit: {
+            case R.id.nav_feedback:{//意见反馈
+                // TODO: 2017/8/16 意见反馈
+                break;
+            }
+            case R.id.nav_exit: {//退出登入
                 BaseDialog.Builder builder = new BaseDialog.Builder(this);
                 BaseDialog baseDialog = builder.cancelTouchout(false)
                         .title("提示")
@@ -129,6 +148,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         .setNegativeListener("确认", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                //切换帐号
+                                EnterActivity.start(HomeActivity.this, EnterActivity.FLAG_SWITCH_USER);
                                 finish();
                             }
                         })
@@ -149,26 +170,27 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case 1:
+            case 0: {
                 if (resultCode == RESULT_OK) {
                     setDrawerInfo();
                 }
                 break;
+            }
+            default:{}
         }
     }
 
-    private void showFragment(String type) {
-        //1.隐藏全部fragment
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        for (String key : mFragmentMap.keySet()) {
-            transaction.hide(mFragmentMap.get(key));
+    /**
+     * 监听SearchingActivity页面的加入或退出通知
+     * 并及时更新自己的页面
+     */
+    class Receiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            OrganizationFragment ofm = (OrganizationFragment) mFragmentManager.getFragments().get(0);
+            ofm.loadData();
         }
-//        //2.显示所需fragment
-//        if (!mFragmentMap.containsKey(type)) {
-//            mFragmentMap.put(type, OrganizationFragment.newInstance());
-//            transaction.add(R.id.frame, mFragmentMap.get(type));
-//        }
-        transaction.show(mFragmentMap.get(type));
-        transaction.commit();
     }
+
 }

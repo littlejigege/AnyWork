@@ -14,4 +14,5 @@ import java.util.List;
 public interface ExamView extends BaseView ,PreLoading{
     void addQuestions(List<Question> questions);
     void startGradeAty(double socre, List<StudentAnswerResult> analysis);
+    void destroySelf();
 }

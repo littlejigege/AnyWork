@@ -1,19 +1,20 @@
 package com.qgstudio.anywork.fenter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.transition.ChangeBounds;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 
 import com.qgstudio.anywork.R;
-import com.qgstudio.anywork.dialog.BaseDialog;
+import com.qgstudio.anywork.common.DialogManagerActivity;
 import com.qgstudio.anywork.fenter.login.LoginFragment;
 import com.qgstudio.anywork.fenter.register.RegisterFragment;
 import com.qgstudio.anywork.utils.ActivityUtil;
@@ -28,9 +29,12 @@ import butterknife.OnClick;
  * Created by chenyi on 2017/3/28.
  */
 
-public class EnterActivity extends AppCompatActivity {
+public class EnterActivity extends DialogManagerActivity {
 
     @BindView(R.id.container) FrameLayout container;
+
+    //切换帐号标志
+    public static final int FLAG_SWITCH_USER = 0;
 
     @OnClick(R.id.register)
     public void intoRegister() {
@@ -74,7 +78,7 @@ public class EnterActivity extends AppCompatActivity {
 //        baseDialog.show();
 
         ToastUtil.showToast("暂未开放游客模式。");
-        // TODO:通过游客模式进入 2017/7/10
+        // TODO: 2017/7/10 通过游客模式进入
     }
 
     @Override
@@ -82,6 +86,12 @@ public class EnterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter);
         ButterKnife.bind(this);
+
+        int flag = getIntent().getIntExtra("FLAG", -1);
+        if (FLAG_SWITCH_USER == flag) {
+            intoLogin();
+        }
+
     }
 
     @Override
@@ -92,6 +102,12 @@ public class EnterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public static void start(Context context, int flag) {
+        Intent intent = new Intent(context, EnterActivity.class);
+        intent.putExtra("FLAG", flag);
+        context.startActivity(intent);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

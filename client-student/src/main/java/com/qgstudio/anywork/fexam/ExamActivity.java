@@ -44,13 +44,17 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
     @BindView(R.id.fab) FloatingActionButton mSubmitFab;
 
     private int mTestPaperId;
+    private int mTestPaperType;//1为考试，0为练习
     private QuestionFragAdapter mQuestionFragAdapter;//数据适配器
+
+    private BaseDialog mBaseDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam);
         mTestPaperId = getIntent().getIntExtra("TESTPAPER_ID", -1);
+        mTestPaperType = getIntent().getIntExtra("TESTPAPER_TYPE", -1);
         initView();
         loadData();
     }
@@ -70,7 +74,7 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
 
     @Override
     protected void onDestroy() {
-        //记住退出前一定要清空缓存
+        //退出前一定要清空缓存
         AnswerBuffer.getInstance().clear();
 
         super.onDestroy();
@@ -78,19 +82,31 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
 
     @Override
     public void onBackPressed() {
-        new BaseDialog.Builder(this)
-                .title("提示")
-                .content("您还未提交试卷，退出将不保存作答内容！！！")
-                .setNegativeListener("确认", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                })
-                .setPositiveListener("取消", null)
-                .cancelTouchout(true)
-                .build()
-                .show();
+        if (mTestPaperType == 1) {
+            checkExit();
+            return;
+        }
+        super.onBackPressed();
+    }
+
+    public void checkExit() {
+        if (mBaseDialog == null) {
+            mBaseDialog = new BaseDialog.Builder(this)
+                    .title("提示")
+                    .content("您还未提交试卷，退出将不保存作答内容！！！")
+                    .setNegativeListener("确认", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            finishAty();
+                        }
+                    })
+                    .setPositiveListener("取消", null)
+                    .cancelTouchout(true)
+                    .build();
+        }
+        if (!mBaseDialog.isShowing()) {
+            mBaseDialog.show();
+        }
     }
 
     @OnClick(R.id.fab)
@@ -122,9 +138,10 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
 
     }
 
-    public static void start(Context context, int testpaperId) {
+    public static void start(Context context, int testpaperId, int testpaperType) {
         Intent intent = new Intent(context, ExamActivity.class);
         intent.putExtra("TESTPAPER_ID", testpaperId);
+        intent.putExtra("TESTPAPER_TYPE", testpaperType);
         context.startActivity(intent);
     }
 
@@ -144,7 +161,12 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
     @Override
     public void startGradeAty(double socre, List<StudentAnswerResult> results) {
         GradeActivity.start(this, socre, GsonUtil.GsonString(results));
-        finish();
+        finishAty();
+    }
+
+    @Override
+    public void destroySelf() {
+        finishAty();
     }
 
     @Override
@@ -162,5 +184,9 @@ public class ExamActivity extends MVPBaseActivity<ExamView, ExamRepository> impl
         ToastUtil.showToast(s);
     }
 
+
+    private void finishAty() {
+        this.finish();
+    }
 
 }

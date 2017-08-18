@@ -1,14 +1,11 @@
 package com.qgstudio.anywork.dialog;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.StyleRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.common.DialogManagerActivity;
 import com.qgstudio.anywork.utils.DesityUtil;
 
 import butterknife.BindView;
@@ -99,9 +97,9 @@ public class BaseDialog extends Dialog {
         window.setAttributes(layoutParams);
     }
 
-    public static final class  Builder {
+    public static final class  Builder<T extends DialogManagerActivity> {
 
-        private  Context context;
+        private  T context;
         private int height, width;
         private boolean cancelTouchout;
 
@@ -115,7 +113,7 @@ public class BaseDialog extends Dialog {
         private String positiveText = null;
         private int resStyle = -1;
 
-        public Builder(Context context1) {
+        public Builder(T context1) {
             context = context1;
             int defaultWidth = context.getResources().getDisplayMetrics().widthPixels - 40;
             int defaultHeight = (int) (defaultWidth * 0.75);
@@ -203,11 +201,17 @@ public class BaseDialog extends Dialog {
         }
 
         public BaseDialog build() {
+            BaseDialog baseDialog;
             if (resStyle != -1) {
-                return new BaseDialog(this, resStyle);
+                baseDialog =  new BaseDialog(this, resStyle);
             } else {
-                return new BaseDialog(this, R.style.AnyWork_Theme_Dialog);
+                baseDialog =  new BaseDialog(this, R.style.AnyWork_Theme_Dialog);
             }
+
+            //反向注册
+            context.addDialog(baseDialog);
+
+            return baseDialog;
         }
     }
 }

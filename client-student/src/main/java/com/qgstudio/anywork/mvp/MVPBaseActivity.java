@@ -3,7 +3,8 @@ package com.qgstudio.anywork.mvp;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import com.qgstudio.anywork.common.DialogManagerActivity;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -13,7 +14,7 @@ import java.lang.reflect.ParameterizedType;
  *  邮箱 784787081@qq.com
  */
 
-public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenterImpl<V>> extends AppCompatActivity implements BaseView{
+public abstract class MVPBaseActivity<V extends BaseView,T extends BasePresenterImpl<V>> extends DialogManagerActivity implements BaseView{
     public T mPresenter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

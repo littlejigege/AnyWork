@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * Created by Yason on 2017/4/14.
+ * @author Yason 2017/4/14.
  */
 
 public interface OrganizationApi {
@@ -25,8 +25,8 @@ public interface OrganizationApi {
     Observable<ResponseResult<List<Organization>>> getAllOrganization(@Body Map<String, String> organizationName);
 
     @POST("organization/join")
-    Observable<ResponseResult> joinOrganization(@Body Map<String, String> organizationName);
+    Observable<ResponseResult> joinOrganization(@Body Map<String, String> organizationInfo);
 
     @POST("organization/leave")
-    Observable<ResponseResult> leave(@Body Map<String, Integer> organizationId);
+    Observable<ResponseResult> leaveOrganization(@Body Map<String, Integer> organizationId);
 }

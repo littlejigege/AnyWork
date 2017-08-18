@@ -4,6 +4,7 @@ package com.qgstudio.anywork.fpaper.data;
 import android.content.Context;
 import android.util.Log;
 
+import com.qgstudio.anywork.common.PreLoading;
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
@@ -12,6 +13,7 @@ import com.qgstudio.anywork.fpaper.PaperFragView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 import com.qgstudio.anywork.utils.LogUtil;
 
+import java.net.ConnectException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,33 +37,10 @@ public class PaperRepository extends BasePresenterImpl<PaperFragView> implements
         mPaperApi = retrofit.create(PaperApi.class);
     }
 
-    public void getExaminationPaper(int organizationId) {
-        Map<String, String> map = new HashMap();
-        map.put("organizationId", organizationId + "");
-        mPaperApi.getExaminationPaper(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new RetrofitSubscriber<List<Testpaper>>() {
-                    @Override
-                    protected void onSuccess(List<Testpaper> data) {
-                        LogUtil.d(TAG, "[getExaminationPaper] " + "onSuccess -> " + data);
-                        mView.addExaminationPapers(data);
-                    }
-
-                    @Override
-                    protected void onFailure(String info) {
-                        LogUtil.d(TAG, "[getExaminationPaper] " + "onFailure -> " + info);
-
-                    }
-
-                    @Override
-                    protected void onMistake(Throwable t) {
-                        LogUtil.d(TAG, "[getExaminationPaper] " + "onMistake -> " + t.getMessage());
-                    }
-                });
-    }
-
     public void getPracticePaper(int organizationId) {
+        mView.hideImageError();
+        prepareLoading();
+
         Map<String, String> map = new HashMap();
         map.put("organizationId", organizationId + "");
         mPaperApi.getPracticePaper(map)
@@ -71,19 +50,98 @@ public class PaperRepository extends BasePresenterImpl<PaperFragView> implements
                     @Override
                     protected void onSuccess(List<Testpaper> data) {
                         LogUtil.d(TAG, "[getPracticePaper] " + "onSuccess -> " + data);
+
+                        if (data.size() <= 0) {
+                            mView.showImageBlank();
+                            return;
+                        }
+
                         mView.addPracticePapers(data);
+                        afterLoading();
                     }
 
                     @Override
                     protected void onFailure(String info) {
                         LogUtil.d(TAG, "[getPracticePaper] " + "onFailure -> " + info);
+
+                        handleGetTestPaperError();
+                        afterLoading();
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
                         LogUtil.d(TAG, "[getPracticePaper] " + "onMistake -> " + t.getMessage());
+
+                        if (t instanceof ConnectException) {
+                            mView.showToast("无法连接到服务器");
+                            mView.showImageError();
+                        } else {
+                            handleGetTestPaperError();
+                        }
+
+                        afterLoading();
                     }
                 });
+    }
+
+    public void getExaminationPaper(int organizationId) {
+        mView.hideImageError();
+        prepareLoading();
+
+        Map<String, String> map = new HashMap();
+        map.put("organizationId", organizationId + "");
+        mPaperApi.getExaminationPaper(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new RetrofitSubscriber<List<Testpaper>>() {
+                    @Override
+                    protected void onSuccess(List<Testpaper> data) {
+                        LogUtil.d(TAG, "[getExaminationPaper] " + "onSuccess -> " + data);
+
+                        if (data.size() <= 0) {
+                            mView.showImageBlank();
+                            return;
+                        }
+
+                        mView.addExaminationPapers(data);
+                        afterLoading();
+                    }
+
+                    @Override
+                    protected void onFailure(String info) {
+                        LogUtil.d(TAG, "[getExaminationPaper] " + "onFailure -> " + info);
+
+                        handleGetTestPaperError();
+                        afterLoading();
+                    }
+
+                    @Override
+                    protected void onMistake(Throwable t) {
+                        LogUtil.d(TAG, "[getExaminationPaper] " + "onMistake -> " + t.getMessage());
+
+                        if (t instanceof ConnectException) {
+                            mView.showToast("无法连接到服务器");
+                            mView.showImageError();
+                        } else {
+                            handleGetTestPaperError();
+                        }
+
+                        afterLoading();
+                    }
+                });
+    }
+
+    private void handleGetTestPaperError() {
+        mView.showToast("获取试卷失败");
+        mView.showImageError();
+    }
+
+    private void afterLoading() {
+        mView.hideLoading();
+    }
+
+    private void prepareLoading() {
+        mView.showLoading();
     }
 
 }

@@ -44,4 +44,24 @@ public class LogUtil {
         }
     }
 
+    public static void e2(String className, String methodName, String msg) {
+        e(className, "[" + methodName + "] " + msg);
+    }
+
+    public static void i2(String className, String methodName, String msg) {
+        i(className, "[" + methodName + "] " + msg);
+    }
+
+    public static void d2(String className, String methodName, String msg) {
+        d(className, "[" + methodName + "] " + msg);
+    }
+
+    public static void w2(String className, String methodName, String msg) {
+        w(className, "[" + methodName + "] " + msg);
+    }
+
+    public static void v2(String className, String methodName, String msg) {
+        v(className, "[" + methodName + "] " + msg);
+    }
+
 }

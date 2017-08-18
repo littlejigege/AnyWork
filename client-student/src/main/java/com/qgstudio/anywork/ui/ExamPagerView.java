@@ -41,7 +41,7 @@ public class ExamPagerView extends LinearLayout {
     private TextView mTitleCenterTV;
     private ImageView mTitleRightIcon;
     private ViewPager mViewPager;
-    private RecyclerView mRecycler;
+//    private RecyclerView mRecycler;
     private LinearLayout mBottomLinear;
     private Button mLeftBottomBtn;
     private Button mRightBottomBtn;
@@ -272,7 +272,7 @@ public class ExamPagerView extends LinearLayout {
                 public void onClick(View v) {
                     if (mContext instanceof Activity) {
                         Activity activity = (Activity) mContext;
-                        activity.finish();
+                        activity.onBackPressed();
                     }
                 }
             });

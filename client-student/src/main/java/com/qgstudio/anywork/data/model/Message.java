@@ -7,5 +7,4 @@ package com.qgstudio.anywork.data.model;
  */
 public class Message {
 
-    // TODO: 2017/7/10 需要确定有哪些类型的消息
 }

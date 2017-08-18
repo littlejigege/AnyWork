@@ -2,10 +2,14 @@ package com.qgstudio.anywork.fpaper;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Organization;
@@ -21,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -31,6 +36,11 @@ import butterknife.Unbinder;
 public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepository> implements PaperFragView {
 
     @BindView(R.id.recycler_paper) RecyclerView mRecyclerView;
+    @BindView(R.id.refresh) SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @BindView(R.id.bg) RelativeLayout mBg;//加载异常时显示的布局
+    @BindView(R.id.img) ImageView mImg;
+    @BindView(R.id.tv) TextView mTv;
 
     private PaperAdapter mPaperAdapter;
     private LinearLayoutManager mLinearLayoutManager;
@@ -76,6 +86,8 @@ public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepositor
 
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        mSwipeRefreshLayout.setEnabled(false);
+
     }
 
     @Override
@@ -89,8 +101,7 @@ public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepositor
                 mPresenter.getPracticePaper(mOrganizationId);
                 break;
             }
-            default: {
-            }
+            default: {}
         }
     }
 
@@ -111,13 +122,54 @@ public class PaperFragment extends MVPBaseFragment<PaperFragView, PaperRepositor
     }
 
     @Override
-    public void showLoading() {
+    public void showImageError() {
+        mSwipeRefreshLayout.setVisibility(View.GONE);
 
+        mBg.setVisibility(View.VISIBLE);
+        mImg.setImageResource(R.drawable.bg_load_error);
+        mTv.setText(R.string.tip_load_error);
+
+        mImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadData();
+            }
+        });
+    }
+
+    @Override
+    public void hideImageError() {
+        mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+        mBg.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showImageBlank() {
+        mSwipeRefreshLayout.setVisibility(View.GONE);
+
+        mBg.setVisibility(View.VISIBLE);
+        mImg.setImageResource(R.drawable.bg_load_blank);
+        mTv.setText(R.string.tip_load_blank);
+    }
+
+//    @Override
+//    public void hideImageBlank() {
+//        mSwipeRefreshLayout.setVisibility(View.VISIBLE);
+//        mBg.setVisibility(View.GONE);
+//    }
+
+    @Override
+    public void showLoading() {
+        if (!mSwipeRefreshLayout.isRefreshing()) {
+            mSwipeRefreshLayout.setRefreshing(true);
+        }
     }
 
     @Override
     public void hideLoading() {
-
+        if (mSwipeRefreshLayout.isRefreshing()) {
+            mSwipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     @Override

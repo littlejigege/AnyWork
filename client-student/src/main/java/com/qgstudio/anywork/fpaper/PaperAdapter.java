@@ -12,6 +12,7 @@ import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.Testpaper;
 import com.qgstudio.anywork.fexam.ExamActivity;
 import com.qgstudio.anywork.utils.DateUtil;
+import com.qgstudio.anywork.utils.ToastUtil;
 
 import java.util.List;
 
@@ -45,21 +46,26 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, final int position) {
-        Testpaper paper = mPapers.get(position);
+        final Testpaper paper = mPapers.get(position);
+        final int type = paper.getTestpaperType();
 
         //设置标题，章节，类型
         holder.tv_title.setText(paper.getTestpaperTitle());
 
         String chapter = paper.getChapterName();
-        holder.tv_chapter.setText((chapter == null || chapter.equals("") ? "——" : chapter));
+        holder.tv_chapter.setText(getTextString(chapter));
 
-        holder.tv_type.setText(paper.getTestpaperType() == 1 ? "考试" : "练习");
+        holder.tv_type.setText(type == 1 ? "考试" : "练习");
 
         //设置时间
-        String pattern = "MM月dd日";
-        String create = DateUtil.longToString(paper.getCreateTime(), pattern);
-        String ending = DateUtil.longToString(paper.getEndingTime(), pattern);
-        holder.tv_date.setText(create + " ~ " + ending);
+        if (type == 1) {
+            String pattern = "yyyy/MM/dd";
+            String create = DateUtil.longToString(paper.getCreateTime(), pattern);
+            String ending = DateUtil.longToString(paper.getEndingTime(), pattern);
+            holder.tv_date.setText(create + " ~ " + ending);
+        } else {
+            holder.tv_date.setText("——");
+        }
 
         //设置头像
         String url = API_DEFAULT_URL + "picture/organization/" + paper.getOrganizationId() + ".jpg";
@@ -68,7 +74,18 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExamActivity.start(v.getContext(), mPapers.get(position).getTestpaperId());
+                if (type == 1) {
+                    long now = System.currentTimeMillis();
+                    if (now < paper.getCreateTime()) {
+                        ToastUtil.showToast("未到达考试时间");
+                        return;
+                    }
+                    if (now > paper.getEndingTime()) {
+                        ToastUtil.showToast("考试时间已截止");
+                        return;
+                    }
+                }
+                ExamActivity.start(v.getContext(), mPapers.get(position).getTestpaperId(), type);
             }
         });
 
@@ -91,6 +108,12 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
         notifyItemRangeInserted(start, count);
     }
 
+    private String getTextString(String text) {
+        if (text == null || text.equals("")) {
+            return "——";
+        }
+        return text;
+    }
 
     class Holder extends RecyclerView.ViewHolder {
 

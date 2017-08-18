@@ -16,8 +16,6 @@ public class Organization {
     private int count;              //组织人数
     private int isJoin;             //判断字段，标志学生是否是该组织成员
 
-    //TODO:考虑老师登录后是否要带上学生列表或者试卷列表
-
     public Organization() {
     }
 

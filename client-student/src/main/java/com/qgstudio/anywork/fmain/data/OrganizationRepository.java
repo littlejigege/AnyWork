@@ -1,8 +1,5 @@
 package com.qgstudio.anywork.fmain.data;
 
-import android.content.Context;
-import android.util.Log;
-
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
@@ -10,6 +7,7 @@ import com.qgstudio.anywork.data.model.Organization;
 import com.qgstudio.anywork.fmain.OrganizationFragView;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.LogUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,43 +18,14 @@ import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-import static android.content.ContentValues.TAG;
 
 /**
- * Created by Yason on 2017/4/14.
+ * @author Yason 2017/4/14.
  */
 
-public class OrganizationRepository extends BasePresenterImpl<OrganizationFragView>{
+public class OrganizationRepository extends BasePresenterImpl<OrganizationFragView> implements OrganizationPresenter {
 
-    @Override
-    public void detachView() {
-        mView = new OrganizationFragView() {
-            @Override
-            public void addOrganization(Organization organization) {
-
-            }
-
-            @Override
-            public void addOrganizations(List<Organization> organizations) {
-
-            }
-
-            @Override
-            public void joinSuccess(int id, int position) {
-
-            }
-
-            @Override
-            public void joinFail(String info) {
-
-            }
-
-            @Override
-            public Context getContext() {
-                return null;
-            }
-        };
-    }
+    public static final String TAG = "OrganizationRepository";
 
     private OrganizationApi mOrganizationApi;
 
@@ -65,7 +34,10 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
         mOrganizationApi = retrofit.create(OrganizationApi.class);
     }
 
+    @Override
     public void getAllOrganization() {
+        prepareLoading();
+
         Map<String, String> map = new HashMap<>();
         map.put("organizationName", "");
         mOrganizationApi.getAllOrganization(map)
@@ -74,43 +46,75 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
                 .subscribe(new RetrofitSubscriber<List<Organization>>() {
                     @Override
                     protected void onSuccess(List<Organization> data) {
+                        LogUtil.d2(TAG, "getAllOrganization", "onSuccess -> " + data);
+
+                        afterLoading();
                         mView.addOrganizations(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
+                        LogUtil.d2(TAG, "getAllOrganization", "onFailure -> " + info);
+
+                        afterLoading();
+                        mView.showToast("获取信息失败");
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
+                        LogUtil.d2(TAG, "getAllOrganization", "onMistake -> " + t.getMessage());
+
+                        afterLoading();
+                        mView.showToast("获取信息失败");
                     }
                 });
     }
 
-    public void getJoinOrganization() {
+    @Override
+    public void getJoinOrganization(){
+        prepareLoading();
+        updateJoinOrganization();
+    }
+
+    @Override
+    public void updateJoinOrganization() {
+//        prepareLoading();
+
         mOrganizationApi.getJoinOrganization()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new RetrofitSubscriber<List<Organization>>() {
                     @Override
                     protected void onSuccess(List<Organization> data) {
+                        LogUtil.d2(TAG, "getJoinOrganization", "onSuccess -> " + data);
+
+                        afterLoading();
                         mView.addOrganizations(data);
                     }
 
                     @Override
                     protected void onFailure(String info) {
+                        LogUtil.d2(TAG, "getJoinOrganization", "onFailure -> " + info);
+
+                        afterLoading();
+                        mView.showToast("获取信息失败");
                     }
 
                     @Override
                     protected void onMistake(Throwable t) {
+                        LogUtil.d2(TAG, "getJoinOrganization", "onMistake -> " + t.getMessage());
+
+                        afterLoading();
+                        mView.showToast("获取信息失败");
                     }
                 });
     }
 
-    public void joinOrganization(final int id, String pass, final int position) {
+    @Override
+    public void joinOrganization(final int organizationId, String password, final int position) {
         Map<String, String> info = new HashMap<>();
-        info.put("organizationId", id+"");
-        info.put("token", pass);
+        info.put("organizationId", organizationId + "");
+        info.put("token", password);
 
         mOrganizationApi.joinOrganization(info)
                 .subscribeOn(Schedulers.io())
@@ -123,26 +127,36 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
 
                     @Override
                     public void onError(Throwable e) {
-                        mView.joinFail("网络连接错误");
+                        LogUtil.d2(TAG, "joinOrganization", "onError -> " + e.getMessage());
+                        mView.showToast("加入组织失败");
                     }
 
                     @Override
                     public void onNext(ResponseResult responseResult) {
                         if (responseResult.getState() == 1) {
-                            mView.joinSuccess(id, position);
+                            LogUtil.d2(TAG, "joinOrganization", "onNext -> joinSuccess");
+
+                            mView.updateItemJoinStatus(position, true);
+                            mView.destroySelf();
+                            mView.startPaperAty(organizationId);
+                            mView.showToast("加入班级成功");
+
+                            mView.sendUpdateBroadCast();
                         } else {
-                            mView.joinFail(responseResult.getStateInfo());
+                            LogUtil.d2(TAG, "joinOrganization", "onNext -> joinFailure，" + responseResult.getStateInfo());
+                            mView.showToast("加入班级失败");
                         }
                     }
                 });
     }
 
-    public void leaveOrganization(final int id) {
-        Map<String, Integer> info = new HashMap<>();
-        info.put("organizationId", id);
+    @Override
+    public void leaveOrganization(int organizationId, final int position) {
+        Map<String, Integer> organizationInfo = new HashMap<>();
+        organizationInfo.put("organizationId", organizationId);
 
-        Log.i(TAG, "leaveOrganization: "+GsonUtil.GsonString(info));
-        mOrganizationApi.leave(info)
+        LogUtil.d2(TAG, "leaveOrganization", "organizationInfo -> " + GsonUtil.GsonString(organizationInfo));
+        mOrganizationApi.leaveOrganization(organizationInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseResult>() {
@@ -153,19 +167,33 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.i(TAG, "onError: 网络连接错误");
-                        mView.joinFail("网络连接错误");
+                        LogUtil.d2(TAG, "leaveOrganization", "onError -> " + e.getMessage());
+                        mView.showToast("退出班级失败");
                     }
 
                     @Override
                     public void onNext(ResponseResult responseResult) {
                         if (responseResult.getState() == 1) {
-                            mView.joinSuccess(0, 0);
+                            LogUtil.d2(TAG, "leaveOrganization", "onNext -> leaveSuccess");
+
+                            mView.updateItemJoinStatus(position, false);
+                            mView.showToast("退出班级成功");
+
+                            mView.sendUpdateBroadCast();
                         } else {
-                            mView.joinFail(responseResult.getStateInfo());
+                            LogUtil.d2(TAG, "leaveOrganization", "onNext -> leaveFailure，" + responseResult.getStateInfo());
+                            mView.showToast("退出班级失败");
                         }
                     }
                 });
+    }
+
+    private void afterLoading() {
+        mView.hideLoading();
+    }
+
+    private void prepareLoading() {
+        mView.showLoading();
     }
 
 

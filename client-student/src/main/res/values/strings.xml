@@ -31,5 +31,7 @@
     <string name="confirm">确认</string>
     <string name="cancel">取消</string>
 
+    <string name="tip_load_blank">暂时木有内容呀～～</string>
+    <string name="tip_load_error">轻触重新加载～～</string>
 
 </resources>

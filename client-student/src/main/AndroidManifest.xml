@@ -3,7 +3,10 @@
     package="com.qgstudio.anywork"
     android:versionCode="1">
 
+    <!-- 访问网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 监听网络状态权限 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 往SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 向SDCard读取数据权限 -->
@@ -26,16 +29,21 @@
             android:theme="@style/WelcomeStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".fgrade.GradeActivity" />
-        <activity
-            android:name=".fmain.HomeActivity"/>
+        <activity android:name=".fmain.HomeActivity" />
         <activity android:name=".fexam.ExamActivity" />
         <activity android:name=".fpaper.PaperActivity" />
         <activity android:name=".fuser.UserActivity" />
+        <activity android:name=".fmain.SearchingActivity"/>
+        <receiver android:name=".common.NetworkStatusReceiver" >
+            <intent-filter >
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
