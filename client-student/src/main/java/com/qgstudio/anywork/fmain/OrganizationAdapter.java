@@ -322,13 +322,13 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
             tv.setText(teacher + "\n" + description);
 
             //显示或隐藏密码输入框
-            int visibility = t.equals(TYPE_JOIN) ? View.VISIBLE : View.INVISIBLE;
+            int visibility = t.equals(TYPE_JOIN) ? View.VISIBLE : View.GONE;
             edi.setVisibility(visibility);
 
         }
 
         public BaseDialog create(View.OnClickListener listener) {
-            return new BaseDialog.Builder(mContext)
+            return new BaseDialog.Builder(mContext, -2)
                     .title(organization.getOrganizationName())
                     .view(root)
                     .setPositiveListener(type, listener)

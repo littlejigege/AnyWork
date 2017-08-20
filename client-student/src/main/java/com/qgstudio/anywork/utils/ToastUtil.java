@@ -1,5 +1,6 @@
 package com.qgstudio.anywork.utils;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import com.qgstudio.anywork.App;
@@ -14,6 +15,15 @@ public class ToastUtil {
     public static void showToast(String content) {
         if (toast == null) {
             toast = Toast.makeText(App.getInstance(), content, Toast.LENGTH_SHORT);
+        } else {
+            toast.setText(content);
+        }
+        toast.show();
+    }
+
+    public static void showToast(Context context, String content) {
+        if (toast == null) {
+            toast = Toast.makeText(context, content, Toast.LENGTH_SHORT);
         } else {
             toast.setText(content);
         }

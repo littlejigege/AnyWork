@@ -54,7 +54,11 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
     @Override
     public User getUser() {
         List<User> users = DataBaseUtil.getHelper().queryAll(User.class);
-        return users.get(users.size() - 1);
+        if (users != null) {
+            return users.get(users.size() - 1);
+        } else {
+            return new User();
+        }
     }
 
     @Override
@@ -68,6 +72,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
         loginInfo.put("email", account);
         loginInfo.put("password", password);
 
+        Log.e(TAG, "login: "+GsonUtil.GsonString(loginInfo) );
         loginApi.login(loginInfo)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -80,6 +85,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         mView.showError("网络连接错误");
+                        Log.e(TAG, "onError: aaa");
                     }
 
                     @Override
@@ -94,7 +100,6 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                             user.setEmail(account);
                             user.setPassword(password);
                             MyOpenHelper myOpenHelper = DataBaseUtil.getHelper();
-                            myOpenHelper.clear(User.class);
                             myOpenHelper.save(user);
                         } else {
                             mView.showError(result.getStateInfo());

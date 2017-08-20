@@ -26,7 +26,7 @@
             android:id="@+id/edi_searching"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_searching"
+            android:drawableEnd="@mipmap/ic_searching"
             android:singleLine="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="5dp"
@@ -37,6 +37,7 @@
     <FrameLayout
         android:id="@+id/frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="#ffffff"/>
 
 </LinearLayout>

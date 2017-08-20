@@ -9,4 +9,4 @@
     android:textColor="@color/red"
     android:textSize="24sp"
     android:padding="10dp"
-    tools:text="确定要退出当前账号吗？" />
+    tools:text="确定退出当前账号吗？" />

@@ -22,8 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/AnyWork.Theme">
         <activity
-            android:name=".fenter.EnterActivity"
-            android:configChanges="orientation|screenSize" />
+            android:name=".fenter.EnterActivity"/>
         <activity
             android:name=".StartActivity"
             android:theme="@style/WelcomeStyle">

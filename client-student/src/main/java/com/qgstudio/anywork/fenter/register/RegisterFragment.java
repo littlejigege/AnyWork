@@ -37,7 +37,7 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
         String n = name.getText().toString();
         String p = phone.getText().toString();
         String pass1 = password.getText().toString();
-        String pass2 = password.getText().toString();
+        String pass2 = password2.getText().toString();
 
         if (!n.matches("[a-z0-9A-Z\\u4e00-\\u9fa5]{1,15}")) {
             name.setError("请输入1-15个字符的姓名");
@@ -47,7 +47,7 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
             phone.setError("请输入正确的电话号码");
         } else if (!pass1.matches("[a-z0-9A-Z]{6,15}")) {
             password.setError("请输入6-15位的密码");
-        } else if (!pass1.equals(pass2)) {
+        } else if (pass1.length() != pass2.length() && !pass1.equals(pass2)) {
             ToastUtil.showToast("请输入相同的确认密码！");
         } else {
             mPresenter.register(a, pass1, n, p);

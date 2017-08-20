@@ -167,6 +167,23 @@ public class HomeActivity extends DialogManagerActivity implements NavigationVie
     }
 
     @Override
+    public void onBackPressed() {
+        BaseDialog.Builder builder = new BaseDialog.Builder(this);
+        BaseDialog baseDialog = builder.cancelTouchout(false)
+                .title("提示")
+                .content("确定要退出当前账号吗？")
+                .setNegativeListener("确认", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        HomeActivity.super.onBackPressed();
+                    }
+                })
+                .setPositiveListener("取消", null)
+                .build();
+        baseDialog.show();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {

@@ -6,6 +6,7 @@ import android.support.annotation.StyleRes;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,6 +20,9 @@ import com.qgstudio.anywork.utils.DesityUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.widget.ListPopupWindow.WRAP_CONTENT;
 
 /**
  * 基础的 Dialog 用于显示自定义自己的 Dialog
@@ -115,10 +119,16 @@ public class BaseDialog extends Dialog {
 
         public Builder(T context1) {
             context = context1;
-            int defaultWidth = context.getResources().getDisplayMetrics().widthPixels - 40;
+            int defaultWidth = context.getResources().getDisplayMetrics().widthPixels - DesityUtil.dp2px(context, 60);
             int defaultHeight = (int) (defaultWidth * 0.75);
             width = defaultWidth;
             height = defaultHeight;
+        }
+
+        public Builder(T context1, int defaultheight) {
+            context = context1;
+            width = context.getResources().getDisplayMetrics().widthPixels - DesityUtil.dp2px(context, 60);
+            height = defaultheight;
         }
 
         public Builder titleColor(int colorRes) {
