@@ -73,7 +73,6 @@ class GradePresenter extends BasePresenterImpl<GradeContract.View> implements Gr
 
                     @Override
                     public void onNext(ResponseResult<StudentAnswerAnalysis> result) {
-                        mView.showError("收到啦");
                         assert result != null;
 
                         if (result.getState() == 1) {

@@ -5,6 +5,7 @@ import android.widget.EditText;
 
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.User;
+import com.qgstudio.anywork.dialog.LoadingDialog;
 import com.qgstudio.anywork.fmain.HomeActivity;
 import com.qgstudio.anywork.mvp.MVPBaseFragment;
 import com.qgstudio.anywork.utils.ToastUtil;
@@ -25,6 +26,8 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
     @BindView(R.id.account) EditText account;
 
     @BindView(R.id.password) EditText password;
+
+    LoadingDialog loadingDialog;
 
     @OnClick(R.id.sign_in)
     public void login() {
@@ -79,5 +82,18 @@ public class LoginFragment extends MVPBaseFragment<LoginContract.View, LoginPres
         Intent intent = new Intent(mActivity, HomeActivity.class);
         mActivity.startActivity(intent);
         mActivity.finish();
+    }
+
+    @Override
+    public void showLoad() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog();
+        }
+        loadingDialog.show(getFragmentManager(), "");
+    }
+
+    @Override
+    public void stopLoad() {
+        loadingDialog.dismiss();
     }
 }

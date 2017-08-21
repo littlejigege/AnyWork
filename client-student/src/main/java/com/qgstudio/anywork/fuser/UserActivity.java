@@ -20,6 +20,7 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
 import com.qgstudio.anywork.data.model.User;
+import com.qgstudio.anywork.dialog.LoadingDialog;
 import com.qgstudio.anywork.mvp.MVPBaseActivity;
 import com.qgstudio.anywork.utils.GlideUtil;
 import com.qgstudio.anywork.utils.ToastUtil;
@@ -242,13 +243,18 @@ public class UserActivity extends MVPBaseActivity<UserContract.View, UserPresent
         GlideUtil.setPictureWithOutCache(pic, user.getUserId());
     }
 
+    private LoadingDialog dialog;
+
     @Override
     public void showProgressDialog() {
-
+        if (dialog == null) {
+            dialog = new LoadingDialog();
+        }
+        dialog.show(getSupportFragmentManager(), "");
     }
 
     @Override
     public void hidProgressDialog() {
-
+        dialog.dismiss();
     }
 }

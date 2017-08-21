@@ -15,6 +15,10 @@ public class LoginContract {
         void showError(String errorInfo);
 
         void showSuccess();
+
+        void showLoad();
+
+        void stopLoad();
     }
 
     interface  Presenter extends BasePresenter<View> {

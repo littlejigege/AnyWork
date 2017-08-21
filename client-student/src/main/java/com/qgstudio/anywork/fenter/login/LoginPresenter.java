@@ -42,6 +42,16 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
             }
 
             @Override
+            public void showLoad() {
+
+            }
+
+            @Override
+            public void stopLoad() {
+
+            }
+
+            @Override
             public Context getContext() {
                 return null;
             }
@@ -63,6 +73,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
 
     @Override
     public void login(final String account, final String password) {
+        mView.showLoad();
         if (loginApi == null) {
             loginApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(LoginApi.class);
         }
@@ -86,6 +97,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         e.printStackTrace();
                         mView.showError("网络连接错误");
                         Log.e(TAG, "onError: aaa");
+                        mView.stopLoad();
                     }
 
                     @Override
@@ -104,6 +116,7 @@ public class LoginPresenter extends BasePresenterImpl<LoginContract.View> implem
                         } else {
                             mView.showError(result.getStateInfo());
                         }
+                        mView.stopLoad();
                     }
                 });
     }

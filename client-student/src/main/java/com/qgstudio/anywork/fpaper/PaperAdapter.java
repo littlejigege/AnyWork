@@ -1,25 +1,54 @@
 package com.qgstudio.anywork.fpaper;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.qgstudio.anywork.App;
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.data.ResponseResult;
+import com.qgstudio.anywork.data.RetrofitClient;
+import com.qgstudio.anywork.data.model.StudentAnswerAnalysis;
+import com.qgstudio.anywork.data.model.StudentAnswerResult;
+import com.qgstudio.anywork.data.model.StudentTestResult;
 import com.qgstudio.anywork.data.model.Testpaper;
-import com.qgstudio.anywork.fexam.ExamActivity;
-import com.qgstudio.anywork.utils.DateUtil;
-import com.qgstudio.anywork.utils.ToastUtil;
 
+import com.qgstudio.anywork.dialog.LoadingDialog;
+import com.qgstudio.anywork.fexam.ExamActivity;
+import com.qgstudio.anywork.fgrade.GradeActivity;
+import com.qgstudio.anywork.utils.DateUtil;
+import com.qgstudio.anywork.utils.GsonUtil;
+import com.qgstudio.anywork.utils.ToastUtil;
+import com.victor.loading.newton.NewtonCradleLoading;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import rx.Observable;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 import static com.qgstudio.anywork.data.ApiStores.API_DEFAULT_URL;
 
 
@@ -84,8 +113,13 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
                         ToastUtil.showToast("考试时间已截止");
                         return;
                     }
+                    LoadingDialog dialog = new LoadingDialog();
+                    dialog.show(((AppCompatActivity)mContext).getSupportFragmentManager(), "");
+
+                    intoTestActivity(v.getContext(), mPapers.get(position).getTestpaperId(), type, dialog);
+                } else {
+                    ExamActivity.start(v.getContext(), mPapers.get(position).getTestpaperId(), type);
                 }
-                ExamActivity.start(v.getContext(), mPapers.get(position).getTestpaperId(), type);
             }
         });
 
@@ -127,6 +161,57 @@ public class PaperAdapter extends RecyclerView.Adapter<PaperAdapter.Holder> {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    private void intoTestActivity(final Context context, final int testpaperId, final int type, final LoadingDialog dialog) {
+
+
+        Map<String, Integer> info = new HashMap<>();
+        info.put("testpaperId", testpaperId);
+        info.put("userId", App.getInstance().getUser().getUserId());
+
+        Log.e(TAG, "checkTheTestFinish: "+ GsonUtil.GsonString(info) );
+        RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(CheckApi.class)
+                .checkTheTestFinish(info)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseResult<StudentTestResult>>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dialog.dismiss();
+                        e.printStackTrace();
+                        ToastUtil.showToast("网络连接错误");
+                    }
+
+                    @Override
+                    public void onNext(ResponseResult<StudentTestResult> result) {
+                        dialog.dismiss();
+                        if (result.getState() == 1) {
+                            double socre = result.getData().getSocre();
+                            List<StudentAnswerResult> results = new ArrayList<>();
+
+                            List<StudentAnswerAnalysis> analysis = result.getData().getStudentAnswerAnalysis();
+                            for (StudentAnswerAnalysis analysi : analysis) {
+                                results.add(new StudentAnswerResult(analysi));
+                            }
+                            GradeActivity.start(context, socre, GsonUtil.GsonString(results));
+
+                        } else {
+                            ExamActivity.start(context, testpaperId, type);
+                        }
+                    }
+                });
+    }
+
+    public interface CheckApi {
+
+        @POST("organization/studentTestDetail")
+        @Headers("Content-Type:application/json")
+        Observable<ResponseResult<StudentTestResult>> checkTheTestFinish(@Body Map<String, Integer> testpaperId);
     }
 
 }

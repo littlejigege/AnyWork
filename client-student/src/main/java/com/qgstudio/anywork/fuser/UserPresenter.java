@@ -116,6 +116,7 @@ public class UserPresenter extends BasePresenterImpl<UserContract.View> implemen
 
     @Override
     public void changePic(final String path) {
+        mView.showProgressDialog();
         RequestBody pictureNameBody = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), "file");
         File picture = new File(path);
         final RequestBody requestFile = RequestBody.create(MediaType.parse(MULTIPART_FORM_DATA), picture);
