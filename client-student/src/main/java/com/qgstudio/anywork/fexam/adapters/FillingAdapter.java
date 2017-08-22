@@ -1,6 +1,7 @@
 package com.qgstudio.anywork.fexam.adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -123,6 +124,10 @@ public class FillingAdapter extends OptionAdapter {
         public FillingHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
+           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                edi_filling.setLetterSpacing(0.2f);
+            }
         }
     }
 

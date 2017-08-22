@@ -1,5 +1,7 @@
 package com.qgstudio.anywork.fexam.data;
 
+import android.content.Context;
+
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
 import com.qgstudio.anywork.data.model.Question;
@@ -117,4 +119,44 @@ public class ExamRepository extends BasePresenterImpl<ExamView> implements ExamP
         mView.destroySelf();
     }
 
+    @Override
+    public void detachView() {
+        super.detachView();
+        mView = new ExamView() {
+            @Override
+            public void addQuestions(List<Question> questions) {
+
+            }
+
+            @Override
+            public void startGradeAty(double socre, List<StudentAnswerResult> analysis) {
+
+            }
+
+            @Override
+            public void destroySelf() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+
+            @Override
+            public void showLoading() {
+
+            }
+
+            @Override
+            public void hideLoading() {
+
+            }
+
+            @Override
+            public void showToast(String s) {
+
+            }
+        };
+    }
 }

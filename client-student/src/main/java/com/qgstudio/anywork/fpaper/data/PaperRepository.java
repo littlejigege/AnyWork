@@ -144,4 +144,55 @@ public class PaperRepository extends BasePresenterImpl<PaperFragView> implements
         mView.showLoading();
     }
 
+    @Override
+    public void detachView() {
+        super.detachView();
+        mView = new PaperFragView() {
+
+            @Override
+            public void addPracticePapers(List<Testpaper> testpapers) {
+
+            }
+
+            @Override
+            public void addExaminationPapers(List<Testpaper> testpapers) {
+
+            }
+
+            @Override
+            public void showImageError() {
+
+            }
+
+            @Override
+            public void hideImageError() {
+
+            }
+
+            @Override
+            public void showImageBlank() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+
+            @Override
+            public void showLoading() {
+
+            }
+
+            @Override
+            public void hideLoading() {
+
+            }
+
+            @Override
+            public void showToast(String s) {
+
+            }
+        };
+    }
 }

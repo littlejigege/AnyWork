@@ -53,11 +53,12 @@ public class GradeActivity extends MVPBaseActivity<GradeContract.View, GradePres
         double socre = intent.getDoubleExtra("socre", 0);
         List<StudentAnswerResult> results = GsonUtil.GsonToList
                                         (intent.getStringExtra("results"), StudentAnswerResult[].class);
-        initToolbar();
+        initToolbar("你的客观题成绩是： "+socre+" 分");
         initRecyclerView(results);
     }
 
-    private void initToolbar() {
+    private void initToolbar(String title) {
+        toolbar.setTitle(title);
         toolbar.setNavigationIcon(R.mipmap.back);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

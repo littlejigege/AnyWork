@@ -1,5 +1,7 @@
 package com.qgstudio.anywork.fmain.data;
 
+import android.content.Context;
+
 import com.qgstudio.anywork.data.ResponseResult;
 import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.RetrofitSubscriber;
@@ -196,5 +198,64 @@ public class OrganizationRepository extends BasePresenterImpl<OrganizationFragVi
         mView.showLoading();
     }
 
+    @Override
+    public void detachView() {
+        super.detachView();
+        mView = new OrganizationFragView() {
+            @Override
+            public void addOrganization(Organization organization) {
 
+            }
+
+            @Override
+            public void addOrganizations(List<Organization> organizations) {
+
+            }
+
+            @Override
+            public void removeOrganization(int position) {
+
+            }
+
+            @Override
+            public void startPaperAty(int organizatonId) {
+
+            }
+
+            @Override
+            public void updateItemJoinStatus(int position, boolean isJoin) {
+
+            }
+
+            @Override
+            public void sendUpdateBroadCast() {
+
+            }
+
+            @Override
+            public void destroySelf() {
+
+            }
+
+            @Override
+            public Context getContext() {
+                return null;
+            }
+
+            @Override
+            public void showLoading() {
+
+            }
+
+            @Override
+            public void hideLoading() {
+
+            }
+
+            @Override
+            public void showToast(String s) {
+
+            }
+        };
+    }
 }

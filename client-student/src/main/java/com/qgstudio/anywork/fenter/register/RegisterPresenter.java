@@ -7,6 +7,8 @@ import com.qgstudio.anywork.data.RetrofitClient;
 import com.qgstudio.anywork.data.model.User;
 import com.qgstudio.anywork.mvp.BasePresenterImpl;
 
+import java.util.HashMap;
+
 import rx.Observer;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -47,7 +49,13 @@ class RegisterPresenter extends BasePresenterImpl<RegisterContract.View> impleme
             registerApi = RetrofitClient.RETROFIT_CLIENT.getRetrofit().create(RegisterApi.class);
         }
 
-        final User user = new User(-1, name, account, password, phone, 0);
+        HashMap<String, String> user = new HashMap<>();
+        user.put("email", account);
+        user.put("password", password);
+        user.put("userName", name);
+        user.put("phone", phone);
+        user.put("mark", "0");
+        user.put("valcode", "0");
 
         registerApi.register(user)
                 .subscribeOn(Schedulers.io())

@@ -26,6 +26,7 @@
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:layout_marginRight="16dp"
-        tools:text="答案"/>
+        tools:text="答案"
+        android:textSize="18sp"/>
 
 </LinearLayout>

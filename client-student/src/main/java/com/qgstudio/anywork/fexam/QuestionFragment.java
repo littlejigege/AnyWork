@@ -1,6 +1,7 @@
 package com.qgstudio.anywork.fexam;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -70,6 +71,12 @@ public class QuestionFragment extends BaseFragment {
     @Override
     public void initView() {
         mUnbinder = ButterKnife.bind(this, mRoot);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mTVType.setLetterSpacing(0.2f);
+            mTVContent.setLetterSpacing(0.1f);
+            mTVAnswere.setLetterSpacing(0.1f);
+        }
 
         //设置题目类型
         mTVType.setText(mTypeString[mQuestion.getType() - 1]);
