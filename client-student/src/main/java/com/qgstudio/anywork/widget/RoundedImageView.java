@@ -1,4 +1,4 @@
-package com.qgstudio.anywork.ui;
+package com.qgstudio.anywork.widget;
 
 import android.content.Context;
 import android.graphics.Bitmap;
