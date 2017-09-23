@@ -1,0 +1,165 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:2:1-48:12
+	package
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:3:5-35
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+	android:versionCode
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:4:5-28
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:7:5-67
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:7:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:9:22-76
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:11:5-81
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:11:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:13:5-80
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:13:22-77
+uses-permission#android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:15:5-84
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:15:22-81
+application
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:17:5-46:19
+MERGED from [com.android.support:design:25.3.1] C:\Users\zydx\.android\build-cache\7192f6c71e667b349cd6496b3c8e939d761160eb\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\zydx\.android\build-cache\0e6b17b3fdd461eb81815cc19412247710c08047\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\zydx\.android\build-cache\19de435ca67b3377c5e95d15b7a649068d6c3dce\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\zydx\.android\build-cache\e20e9bb4b53620eaec419112ce7fb3fd4c3506e2\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:transition:25.3.1] C:\Users\zydx\.android\build-cache\5539287a906dac587b863eff2dc89e883bdcf79c\output\AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:cardview-v7:25.3.1] C:\Users\zydx\.android\build-cache\258b6b400607a4df1c6927f1376c005304168f03\output\AndroidManifest.xml:26:5-20
+MERGED from [de.hdodenhof:circleimageview:2.0.0] C:\Users\zydx\.android\build-cache\5a699a1a419577aea9d1a18455da1eb24b59aca3\output\AndroidManifest.xml:9:5-20
+MERGED from [com.victor:lib:1.0.4] C:\Users\zydx\.android\build-cache\702c651f6266d526033787e3828a06b915c53df2\output\AndroidManifest.xml:11:5-14:19
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\zydx\.android\build-cache\6c81eef4047f3a0fec3a602e2c0601d58cdaa97d\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\zydx\.android\build-cache\a6e7d0c7bb009d86a573860a7a9d7f272b4b15b9\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\zydx\.android\build-cache\4b3844454a5bf4be065df6f440b1db7c049d2516\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\zydx\.android\build-cache\5b240ef402f70181660e965528784229b1019743\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\zydx\.android\build-cache\b591f9de3cc64ab8f2d989dc1d0ea6e3100b8b45\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\zydx\.android\build-cache\4bc65458a4de2550c92214acb7b79f64ee486719\output\AndroidManifest.xml:29:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\zydx\.android\build-cache\a1342e4536a02849bef7af15701480c143cd1243\output\AndroidManifest.xml:9:5-20
+	android:label
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:21:9-41
+	android:supportsRtl
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:22:9-35
+	android:allowBackup
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:19:9-35
+	android:icon
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:20:9-41
+	android:theme
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:23:9-45
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:18:9-28
+activity#com.qgstudio.anywork.enter.EnterActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:24:9-25:50
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:25:13-48
+activity#com.qgstudio.anywork.StartActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:26:9-34:20
+	android:theme
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:28:13-48
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:27:13-42
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:29:13-33:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:30:17-69
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:30:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:32:17-77
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:32:27-74
+activity#com.qgstudio.anywork.grade.GradeActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:35:9-57
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:35:19-54
+activity#com.qgstudio.anywork.main.HomeActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:36:9-55
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:36:19-52
+activity#com.qgstudio.anywork.exam.ExamActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:37:9-55
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:37:19-52
+activity#com.qgstudio.anywork.paper.PaperActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:38:9-57
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:38:19-54
+activity#com.qgstudio.anywork.user.UserActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:39:9-55
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:39:19-52
+activity#com.qgstudio.anywork.main.SearchingActivity
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:40:9-59
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:40:19-57
+receiver#com.qgstudio.anywork.common.NetworkStatusReceiver
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:41:9-45:20
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:41:19-63
+intent-filter#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:42:13-44:29
+action#android.net.conn.CONNECTIVITY_CHANGE
+ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:43:17-79
+	android:name
+		ADDED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml:43:25-76
+uses-sdk
+INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:design:25.3.1] C:\Users\zydx\.android\build-cache\7192f6c71e667b349cd6496b3c8e939d761160eb\output\AndroidManifest.xml:21:5-23:62
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\zydx\.android\build-cache\0e6b17b3fdd461eb81815cc19412247710c08047\output\AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\zydx\.android\build-cache\19de435ca67b3377c5e95d15b7a649068d6c3dce\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\zydx\.android\build-cache\e20e9bb4b53620eaec419112ce7fb3fd4c3506e2\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:transition:25.3.1] C:\Users\zydx\.android\build-cache\5539287a906dac587b863eff2dc89e883bdcf79c\output\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\zydx\.android\build-cache\3577e14c6448eebbc123d529ac86d88e54462032\output\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:cardview-v7:25.3.1] C:\Users\zydx\.android\build-cache\258b6b400607a4df1c6927f1376c005304168f03\output\AndroidManifest.xml:20:5-43
+MERGED from [com.jakewharton:butterknife:8.5.1] C:\Users\zydx\.android\build-cache\4287c3970cdedba1fcee31e790a81d881c70a3b5\output\AndroidManifest.xml:5:5-43
+MERGED from [io.reactivex:rxandroid:1.0.1] C:\Users\zydx\.android\build-cache\c22313a0982149d3c2b437871995e66741f996b4\output\AndroidManifest.xml:19:5-43
+MERGED from [de.hdodenhof:circleimageview:2.0.0] C:\Users\zydx\.android\build-cache\5a699a1a419577aea9d1a18455da1eb24b59aca3\output\AndroidManifest.xml:5:5-7:41
+MERGED from [com.victor:lib:1.0.4] C:\Users\zydx\.android\build-cache\702c651f6266d526033787e3828a06b915c53df2\output\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\zydx\.android\build-cache\6c81eef4047f3a0fec3a602e2c0601d58cdaa97d\output\AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\zydx\.android\build-cache\a6e7d0c7bb009d86a573860a7a9d7f272b4b15b9\output\AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\zydx\.android\build-cache\4b3844454a5bf4be065df6f440b1db7c049d2516\output\AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\zydx\.android\build-cache\5b240ef402f70181660e965528784229b1019743\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\zydx\.android\build-cache\b591f9de3cc64ab8f2d989dc1d0ea6e3100b8b45\output\AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\zydx\.android\build-cache\4bc65458a4de2550c92214acb7b79f64ee486719\output\AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\zydx\.android\build-cache\a1342e4536a02849bef7af15701480c143cd1243\output\AndroidManifest.xml:5:5-7:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:design:25.3.1] C:\Users\zydx\.android\build-cache\7192f6c71e667b349cd6496b3c8e939d761160eb\output\AndroidManifest.xml:23:9-59
+	android:targetSdkVersion
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\zydx\Desktop\git\AnyWork\client-student\src\main\AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:design:25.3.1] C:\Users\zydx\.android\build-cache\7192f6c71e667b349cd6496b3c8e939d761160eb\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:appcompat-v7:25.3.1] C:\Users\zydx\.android\build-cache\0e6b17b3fdd461eb81815cc19412247710c08047\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] C:\Users\zydx\.android\build-cache\19de435ca67b3377c5e95d15b7a649068d6c3dce\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] C:\Users\zydx\.android\build-cache\e20e9bb4b53620eaec419112ce7fb3fd4c3506e2\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:transition:25.3.1] C:\Users\zydx\.android\build-cache\5539287a906dac587b863eff2dc89e883bdcf79c\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:recyclerview-v7:25.3.1] C:\Users\zydx\.android\build-cache\3577e14c6448eebbc123d529ac86d88e54462032\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:cardview-v7:25.3.1] C:\Users\zydx\.android\build-cache\258b6b400607a4df1c6927f1376c005304168f03\output\AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-v4:25.3.1] C:\Users\zydx\.android\build-cache\6c81eef4047f3a0fec3a602e2c0601d58cdaa97d\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] C:\Users\zydx\.android\build-cache\a6e7d0c7bb009d86a573860a7a9d7f272b4b15b9\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] C:\Users\zydx\.android\build-cache\4b3844454a5bf4be065df6f440b1db7c049d2516\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] C:\Users\zydx\.android\build-cache\5b240ef402f70181660e965528784229b1019743\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] C:\Users\zydx\.android\build-cache\b591f9de3cc64ab8f2d989dc1d0ea6e3100b8b45\output\AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-compat:25.3.1] C:\Users\zydx\.android\build-cache\4bc65458a4de2550c92214acb7b79f64ee486719\output\AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:design:25.3.1] C:\Users\zydx\.android\build-cache\7192f6c71e667b349cd6496b3c8e939d761160eb\output\AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:design:25.3.1] C:\Users\zydx\.android\build-cache\7192f6c71e667b349cd6496b3c8e939d761160eb\output\AndroidManifest.xml:26:9-47

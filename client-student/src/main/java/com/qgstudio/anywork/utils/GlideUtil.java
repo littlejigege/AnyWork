@@ -23,12 +23,12 @@ public class GlideUtil {
                 .into(img);
     }
 
-    public static void setPictureWithOutCache(ImageView img, int id) {
+    public static void setPictureWithOutCache(ImageView img, int id, int def) {
         Glide.with(App.getInstance())
-                .load(ApiStores.API_DEFAULT_URL+"picture/"+id+".jpg")
+                .load(ApiStores.API_DEFAULT_URL + "picture/" + id + ".jpg")
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .error(R.drawable.ic_icon)
+                .error(def == -1 ? R.drawable.ic_icon : def)
                 .fitCenter()
                 .crossFade(500)
                 .into(img);

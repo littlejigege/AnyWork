@@ -12,7 +12,8 @@ public class LogUtil {
     private LogUtil() {
     }
 
-    public static boolean flag = BuildConfig.DEBUG;
+//    public static boolean flag = BuildConfig.DEBUG;
+    public static boolean flag = true;
 
     public static void e(String tag, String msg) {
         if (flag) {
@@ -45,19 +46,19 @@ public class LogUtil {
     }
 
     public static void e2(String className, String methodName, String msg) {
-        e(className, "[" + methodName + "] " + msg);
+        e(className, "[" + methodName + "]：" + msg);
     }
 
     public static void i2(String className, String methodName, String msg) {
-        i(className, "[" + methodName + "] " + msg);
+        i(className, "[" + methodName + "]：" + msg);
     }
 
     public static void d2(String className, String methodName, String msg) {
-        d(className, "[" + methodName + "] " + msg);
+        d(className, "[" + methodName + "]：" + msg);
     }
 
     public static void w2(String className, String methodName, String msg) {
-        w(className, "[" + methodName + "] " + msg);
+        w(className, "[" + methodName + "]：" + msg);
     }
 
     public static void v2(String className, String methodName, String msg) {

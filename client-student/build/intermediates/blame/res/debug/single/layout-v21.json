@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "C:\\Users\\zydx\\Desktop\\git\\AnyWork\\client-student\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\zydx\\.android\\build-cache\\0e6b17b3fdd461eb81815cc19412247710c08047\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "C:\\Users\\zydx\\Desktop\\git\\AnyWork\\client-student\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\zydx\\.android\\build-cache\\0e6b17b3fdd461eb81815cc19412247710c08047\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    },
+    {
+        "merged": "C:\\Users\\zydx\\Desktop\\git\\AnyWork\\client-student\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\zydx\\.android\\build-cache\\0e6b17b3fdd461eb81815cc19412247710c08047\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "C:\\Users\\zydx\\Desktop\\git\\AnyWork\\client-student\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\zydx\\.android\\build-cache\\0e6b17b3fdd461eb81815cc19412247710c08047\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    }
+]
