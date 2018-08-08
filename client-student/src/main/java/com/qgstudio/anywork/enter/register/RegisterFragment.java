@@ -4,6 +4,7 @@ package com.qgstudio.anywork.enter.register;
 import android.widget.EditText;
 
 import com.qgstudio.anywork.R;
+import com.qgstudio.anywork.dialog.LoadingDialog;
 import com.qgstudio.anywork.mvp.MVPBaseFragment;
 import com.qgstudio.anywork.utils.ToastUtil;
 
@@ -30,6 +31,8 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
     @BindView(R.id.password) EditText password;
 
     @BindView(R.id.password2) EditText password2;
+
+    LoadingDialog loadingDialog;
 
     @OnClick(R.id.register)
     public void register() {
@@ -91,5 +94,18 @@ public class RegisterFragment extends MVPBaseFragment<RegisterContract.View, Reg
     public void showSuccess() {
         ToastUtil.showToast("注册完成");
         mActivity.onBackPressed();
+    }
+
+    @Override
+    public void showLoad() {
+        if (loadingDialog == null) {
+            loadingDialog = new LoadingDialog();
+        }
+        loadingDialog.show(getFragmentManager(), "");
+    }
+
+    @Override
+    public void stopLoad() {
+        loadingDialog.dismiss();
     }
 }

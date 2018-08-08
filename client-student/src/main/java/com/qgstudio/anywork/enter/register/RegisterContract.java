@@ -14,6 +14,10 @@ public class RegisterContract {
         void showError(String errorInfo);
 
         void showSuccess();
+
+        void showLoad();
+
+        void stopLoad();
     }
 
     interface  Presenter extends BasePresenter<View> {
